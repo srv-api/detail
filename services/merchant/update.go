@@ -1,27 +1,19 @@
 package product
 
 import (
-	"regexp"
-	"strings"
-
 	dto "github.com/srv-api/merchant/dto"
 )
 
-func (b *merchantService) Update(req dto.UpdateMerchantRequest) (dto.UpdateMerchantResponse, error) {
-	merchantSlug := generateMerchantSlug(req.MerchantName)
+func (b *merchantService) Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error) {
 
-	request := dto.UpdateMerchantRequest{
+	request := dto.UpdateUserDetailRequest{
 		ID:           req.ID,
-		MerchantName: req.MerchantName,
-		MerchantSlug: merchantSlug,
-		IDNumber:     req.IDNumber,
-		Description:  req.Description,
-		Address:      req.Address,
-		Country:      req.Country,
-		CurrencyID:   req.CurrencyID,
-		City:         req.City,
-		Zip:          req.Zip,
-		Phone:        req.Phone,
+		Longitude:    req.Longitude,
+		Latitude:     req.Latitude,
+		Radius:       req.Radius,
+		MinAge:       req.MinAge,
+		MaxAge:       req.MaxAge,
+		GenderTarget: req.GenderTarget,
 		UpdatedBy:    req.UpdatedBy,
 	}
 
@@ -30,32 +22,16 @@ func (b *merchantService) Update(req dto.UpdateMerchantRequest) (dto.UpdateMerch
 		return product, err
 	}
 
-	response := dto.UpdateMerchantResponse{
-		ID:           req.ID,
-		MerchantName: request.MerchantName,
-		MerchantSlug: request.MerchantSlug,
-		IDNumber:     request.IDNumber,
-		Description:  request.Description,
-		Address:      request.Address,
-		Country:      request.Country,
-		CurrencyID:   request.CurrencyID,
-		City:         request.City,
-		Zip:          request.Zip,
-		Phone:        request.Phone,
+	response := dto.UpdateUserDetailResponse{
+		ID:           request.ID,
+		Longitude:    request.Longitude,
+		Latitude:     request.Latitude,
+		Radius:       request.Radius,
+		MinAge:       request.MinAge,
+		MaxAge:       request.MaxAge,
+		GenderTarget: request.GenderTarget,
 		UpdatedBy:    request.UpdatedBy,
 	}
 
 	return response, nil
-}
-
-func generateMerchantSlug(name string) string {
-	slug := strings.ToLower(strings.TrimSpace(name))
-
-	reg := regexp.MustCompile(`[^a-z0-9]+`)
-	slug = reg.ReplaceAllString(slug, "-")
-
-	regDash := regexp.MustCompile(`-+`)
-	slug = regDash.ReplaceAllString(slug, "-")
-
-	return strings.Trim(slug, "-")
 }

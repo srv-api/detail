@@ -6,20 +6,16 @@ import (
 	"gorm.io/gorm"
 )
 
-type MerchantDetail struct {
+type UserDetail struct {
 	ID           string         `gorm:"primary_key" json:"id"`
 	UserID       string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantName string         `gorm:"type:varchar(50)" json:"merchant_name"`
-	MerchantSlug string         `gorm:"merchant_slug" json:"merchant_slug"`
-	IDNumber     string         `gorm:"type:varchar(16)" json:"id_number"`
-	Address      string         `gorm:"address" json:"address"`
-	Country      string         `gorm:"country" json:"country"`
-	City         string         `gorm:"city" json:"city"`
-	Zip          string         `gorm:"zip" json:"zip"`
-	Phone        string         `gorm:"phone" json:"phone"`
-	CurrencyID   int            `gorm:"currency_id" json:"currency_id"`
-	Description  string         `gorm:"description" json:"description"`
-	UpdatedBy    string         `gorm:"update_by" json:"update_by"`
+	Longitude    float64        `gorm:"type:decimal(10,8);index" json:"longitude"`
+	Latitude     float64        `gorm:"type:decimal(10,8);index" json:"latitude"`
+	Radius       int            `json:"radius"`
+	MaxAge       int            `gorm:"max_age" json:"max_age"`
+	MinAge       int            `gorm:"min_age" json:"min_age"`
+	GenderTarget string         `gorm:"type:varchar(5)" json:"gender_target"`
+	UpdatedBy    string         `gorm:"column:updated_by"`
 	CreatedAt    time.Time      `json:"created_at"`
 	UpdatedAt    time.Time      `json:"updated_at"`
 	DeletedAt    gorm.DeletedAt `gorm:"index" json:"deleted_at"`

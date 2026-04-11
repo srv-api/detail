@@ -16,7 +16,7 @@ import (
 func (s *productService) Upload(req dto.ProductUploadRequest) (dto.ProductUploadResponse, error) {
 
 	// Validasi MerchantDetail
-	var merchantDetail entity.MerchantDetail
+	var merchantDetail entity.UserDetail
 	err := s.Repo.CheckMerchantDetail(req.MerchantID, &merchantDetail)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {

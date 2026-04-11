@@ -23,12 +23,12 @@ func (r *dashboardRepository) Get(req dto.GetDashboardRequest) (dto.GetDashboard
 	isSubscribed = count > 0
 	response.IsSubscribed = isSubscribed
 
-	var merchant entity.MerchantDetail
+	var merchant entity.UserDetail
 	if err := r.DB.Where("id = ?", req.MerchantID).First(&merchant).Error; err != nil {
 		return response, err
 	}
 
-	merchantName := merchant.MerchantName
+	merchantName := merchant.ID
 	if len(merchantName) > 25 {
 		merchantName = merchantName[:25] + "..."
 	}

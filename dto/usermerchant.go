@@ -60,7 +60,7 @@ type UserMerchantResponse struct {
 	UpdatedAt     time.Time            `json:"updated_at"`
 	DeletedAt     *time.Time           `json:"deleted_at,omitempty"`
 	Verified      UserMerchantVerified `json:"verified"`
-	Merchant      GetMerchantResponse  `json:"merchant"`
+	UserDetail    UserDetailResponse   `json:"user_detail"`
 }
 
 type UserMerchantByIdResponse struct {
@@ -84,7 +84,7 @@ type UserMerchantByIdResponse struct {
 	UpdatedAt     time.Time                `json:"updated_at"`
 	DeletedAt     *time.Time               `json:"deleted_at,omitempty"`
 	Verified      UserMerchantVerifiedByID `json:"verified"`
-	Merchant      GetMerchantResponse      `json:"merchant"`
+	UserDetail    UserDetailResponse       `json:"user_detail"`
 }
 
 type UserMerchantVerified struct {
@@ -157,7 +157,7 @@ type GetUserMerchantResponse struct {
 	LastAttempt   time.Time            `json:"last_attempt"`
 	Description   string               `json:"description"`
 	Verified      UserMerchantVerified `json:"verified"`
-	Merchant      GetMerchantResponse  `json:"merchant"`
+	UserDetail    UserDetailResponse   `json:"user_detail"`
 	CreatedBy     string               `json:"created_by"`
 	UpdatedBy     string               `json:"updated_by"`
 	DeletedBy     string               `json:"deleted_by"`

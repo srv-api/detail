@@ -115,14 +115,16 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 				Otp:            u.Verified.Otp,
 				ExpiredAt:      u.Verified.ExpiredAt,
 			},
-			Merchant: dto.GetMerchantResponse{
-				MerchantName: u.Merchant.MerchantName,
-				Address:      u.Merchant.Address,
-				Country:      u.Merchant.Country,
-				City:         u.Merchant.City,
-				Zip:          u.Merchant.Zip,
-				CurrencyID:   u.Merchant.CurrencyID,
-				Phone:        u.Merchant.Phone,
+			UserDetail: dto.UserDetailResponse{
+				ID:           u.Merchant.ID,
+				UserID:       u.Merchant.UserID,
+				Latitude:     u.Merchant.Latitude,
+				Longitude:    u.Merchant.Longitude,
+				Radius:       u.Merchant.Radius,
+				MinAge:       u.Merchant.MinAge,
+				MaxAge:       u.Merchant.MaxAge,
+				GenderTarget: u.Merchant.GenderTarget,
+				UpdatedAt:    u.Merchant.UpdatedAt,
 			},
 		})
 	}

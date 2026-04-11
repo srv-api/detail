@@ -17,7 +17,7 @@ type DomainRepository interface {
 	Update(req dto.ProductUpdateRequest) (dto.ProductUpdateResponse, error)
 	SaveFile(req dto.ProductUploadRequest) (dto.ProductUploadResponse, error)
 	GetPicture(req dto.GetProductUploadRequest) (*dto.GetProductUploadResponse, error)
-	CheckMerchantDetail(merchantID string, merchantDetail *entity.MerchantDetail) error
+	CheckMerchantDetail(merchantID string, merchantDetail *entity.UserDetail) error
 }
 
 type productRepository struct {

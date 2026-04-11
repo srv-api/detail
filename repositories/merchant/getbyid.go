@@ -5,8 +5,8 @@ import (
 	"github.com/srv-api/merchant/entity"
 )
 
-func (b *merchantRepository) GetById(req dto.GetByIdRequest) (*dto.GetMerchantResponse, error) {
-	tr := entity.MerchantDetail{
+func (b *merchantRepository) GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error) {
+	tr := entity.UserDetail{
 		ID: req.ID,
 	}
 
@@ -14,17 +14,15 @@ func (b *merchantRepository) GetById(req dto.GetByIdRequest) (*dto.GetMerchantRe
 		return nil, err
 	}
 
-	response := &dto.GetMerchantResponse{
+	response := &dto.UserDetailRequest{
 		ID:           tr.ID,
-		MerchantName: tr.MerchantName,
-		MerchantSlug: tr.MerchantSlug,
-		Description:  tr.Description,
-		Address:      tr.Address,
-		City:         tr.City,
-		Country:      tr.Country,
-		Zip:          tr.Zip,
-		Phone:        tr.Phone,
-		UpdatedBy:    tr.UpdatedBy,
+		UserID:       tr.UserID,
+		Latitude:     tr.Latitude,
+		Longitude:    tr.Longitude,
+		Radius:       tr.Radius,
+		MinAge:       tr.MinAge,
+		MaxAge:       tr.MaxAge,
+		GenderTarget: tr.GenderTarget,
 	}
 
 	return response, nil

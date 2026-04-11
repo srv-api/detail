@@ -115,16 +115,14 @@ func generateSecurePart() (string, error) {
 	return string(securePart), nil
 }
 
-func (r *productRepository) CheckMerchantDetail(merchantID string, merchantDetail *entity.MerchantDetail) error {
+func (r *productRepository) CheckMerchantDetail(merchantID string, merchantDetail *entity.UserDetail) error {
 	err := r.DB.Where("id = ?", merchantID).First(merchantDetail).Error
 	if err != nil {
 		return err
 	}
 
 	// Periksa apakah semua kolom penting sudah terisi
-	if merchantDetail.MerchantName == "" || merchantDetail.Address == "" ||
-		merchantDetail.Country == "" || merchantDetail.City == "" ||
-		merchantDetail.Zip == "" || merchantDetail.Phone == "" {
+	if merchantDetail.Latitude == 0 || merchantDetail.Latitude == 0 {
 		return res.ErrorBuilder(&res.ErrorConstant.MerchantNoProvide, nil)
 	}
 

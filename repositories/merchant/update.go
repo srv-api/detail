@@ -5,61 +5,52 @@ import (
 	"github.com/srv-api/merchant/entity"
 )
 
-func (b *merchantRepository) Update(req dto.UpdateMerchantRequest) (dto.UpdateMerchantResponse, error) {
-	tr := dto.GetByIdRequest{
+func (b *merchantRepository) Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error) {
+	tr := dto.GetUserDetailByIdRequest{
 		ID: req.ID,
 	}
 
-	request := entity.MerchantDetail{
+	request := entity.UserDetail{
 		ID:           tr.ID,
-		MerchantName: req.MerchantName,
-		MerchantSlug: req.MerchantSlug,
-		IDNumber:     req.IDNumber,
-		Description:  req.Description,
-		Address:      req.Address,
-		Country:      req.Country,
-		CurrencyID:   req.CurrencyID,
-		City:         req.City,
-		Zip:          req.Zip,
-		Phone:        req.Phone,
+		UserID:       req.UserID,
+		Latitude:     req.Latitude,
+		Longitude:    req.Longitude,
+		Radius:       req.Radius,
+		MinAge:       req.MinAge,
+		MaxAge:       req.MaxAge,
+		GenderTarget: req.GenderTarget,
 		UpdatedBy:    req.UpdatedBy,
 	}
 
 	mer, err := b.GetById(tr)
 	if err != nil {
-		return dto.UpdateMerchantResponse{}, err
+		return dto.UpdateUserDetailResponse{}, err
 	}
 
-	err = b.DB.Where("ID = ?", req.ID).Updates(entity.MerchantDetail{
-		MerchantName: request.MerchantName,
-		MerchantSlug: request.MerchantSlug, // ✅ slug dari service
-		IDNumber:     request.IDNumber,
-		Description:  request.Description,
-		Address:      request.Address,
-		Country:      request.Country,
-		CurrencyID:   request.CurrencyID,
-		City:         request.City,
-		Zip:          request.Zip,
-		Phone:        request.Phone,
+	err = b.DB.Where("ID = ?", req.ID).Updates(entity.UserDetail{
+		UserID:       request.UserID,
+		Latitude:     request.Latitude,
+		Longitude:    request.Longitude,
+		Radius:       request.Radius,
+		MinAge:       request.MinAge,
+		MaxAge:       request.MaxAge,
+		GenderTarget: request.GenderTarget,
 		UpdatedBy:    request.UpdatedBy,
 	}).Error
 	if err != nil {
-		return dto.UpdateMerchantResponse{}, err
+		return dto.UpdateUserDetailResponse{}, err
 	}
 
-	response := dto.UpdateMerchantResponse{
-		MerchantName: request.MerchantName,
-		MerchantSlug: request.MerchantSlug,
-		IDNumber:     request.IDNumber,
-		Description:  request.Description,
-		Address:      request.Address,
-		Country:      request.Country,
-		CurrencyID:   request.CurrencyID,
-		City:         request.City,
-		Zip:          request.Zip,
-		Phone:        request.Phone,
-		UpdatedBy:    request.UpdatedBy,
+	response := dto.UpdateUserDetailResponse{
 		ID:           mer.ID,
+		UserID:       request.UserID,
+		Latitude:     request.Latitude,
+		Longitude:    request.Longitude,
+		Radius:       request.Radius,
+		MinAge:       request.MinAge,
+		MaxAge:       request.MaxAge,
+		GenderTarget: request.GenderTarget,
+		UpdatedBy:    request.UpdatedBy,
 	}
 
 	return response, nil

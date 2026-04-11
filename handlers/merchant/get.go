@@ -7,8 +7,8 @@ import (
 )
 
 func (b *domainHandler) Get(c echo.Context) error {
-	var req dto.GetMerchantRequest
-	var resp dto.GetMerchantResponse
+	var req dto.UserDetailRequest
+	var resp dto.UserDetailResponse
 
 	userId, ok := c.Get("UserId").(string)
 	if !ok {

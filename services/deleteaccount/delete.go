@@ -5,7 +5,7 @@ import (
 )
 
 func (b *deleteaccountService) Delete(req dto.DeleteDeleteAccountRequest) (dto.DeleteDeleteAccountResponse, error) {
-	transactionBody := dto.DeleteTableRequest{
+	transactionBody := dto.DeleteDeleteAccountRequest{
 		ID:        req.ID,
 		DeletedBy: req.DeletedBy,
 	}

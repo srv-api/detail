@@ -9,7 +9,7 @@ import (
 )
 
 func (b *domainHandler) Update(c echo.Context) error {
-	var req dto.UpdateMerchantRequest
+	var req dto.UpdateUserDetailRequest
 	updatedBy, ok := c.Get("UpdatedBy").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)

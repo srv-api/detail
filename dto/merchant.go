@@ -2,84 +2,68 @@ package dto
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
-type GetMerchantByIdRequest struct {
+type GetUserDetailByIdRequest struct {
 	ID string `query:"id" validate:"required, id"`
 }
 
-type GetMerchantRequest struct {
-	ID           string         `json:"id"`
-	UserID       string         `json:"user_id"`
-	IDNumber     string         `json:"id_number"`
-	MerchantID   string         `json:"merchant_id"`
-	MerchantSlug string         `json:"merchant_slug"`
-	MerchantName string         `json:"merchant_name"`
-	Address      string         `json:"address"`
-	Country      string         `json:"country"`
-	City         string         `json:"city"`
-	Zip          string         `json:"zip"`
-	Phone        string         `json:"phone"`
-	CurrencyID   string         `json:"currency_id"`
-	Description  string         `json:"description"`
-	UpdatedBy    string         `json:"update_by"`
-	CreatedAt    time.Time      `json:"created_at"`
-	UpdatedAt    time.Time      `json:"updated_at"`
-	DeletedAt    gorm.DeletedAt `json:"deleted_at"`
+type UpdateUserDetailRequest struct {
+	ID           string  `json:"id"`
+	UserID       string  `json:"user_id" validate:"required"`
+	Latitude     float64 `json:"latitude" validate:"required"`
+	Longitude    float64 `json:"longitude" validate:"required"`
+	Radius       int     `json:"radius"`
+	MinAge       int     `json:"min_age"`
+	MaxAge       int     `json:"max_age"`
+	GenderTarget string  `json:"gender_target"`
+	UpdatedBy    string  `json:"updated_by"`
 }
 
-type GetMerchantResponse struct {
-	ID           string         `json:"id"`
-	UserID       string         `json:"user_id"`
-	MerchantID   string         `json:"merchant_id"`
-	MerchantSlug string         `json:"merchant_slug"`
-	IDNumber     string         `json:"id_number"`
-	MerchantName string         `json:"merchant_name"`
-	Address      string         `json:"address"`
-	Country      string         `json:"country"`
-	City         string         `json:"city"`
-	Zip          string         `json:"zip"`
-	Phone        string         `json:"phone"`
-	CurrencyID   int            `json:"currency_id"`
-	Description  string         `json:"description"`
-	UpdatedBy    string         `json:"update_by"`
-	CreatedAt    time.Time      `json:"created_at"`
-	UpdatedAt    time.Time      `json:"updated_at"`
-	DeletedAt    gorm.DeletedAt `json:"deleted_at"`
+type UpdateUserDetailResponse struct {
+	ID           string  `json:"id"`
+	UserID       string  `json:"user_id" validate:"required"`
+	Latitude     float64 `json:"latitude" validate:"required"`
+	Longitude    float64 `json:"longitude" validate:"required"`
+	Radius       int     `json:"radius"`
+	MinAge       int     `json:"min_age"`
+	MaxAge       int     `json:"max_age"`
+	GenderTarget string  `json:"gender_target"`
+	UpdatedBy    string  `json:"updated_by"`
 }
 
-type UpdateMerchantRequest struct {
-	ID           string    `query:"id" validate:"required, id"`
-	UserID       string    `json:"user_id"`
-	MerchantName string    `json:"merchant_name"`
-	MerchantSlug string    `json:"merchant_slug"`
-	IDNumber     string    `json:"id_number"`
-	Address      string    `json:"address"`
-	Country      string    `json:"country"`
-	City         string    `json:"city"`
-	Zip          string    `json:"zip"`
-	Phone        string    `json:"phone"`
-	CurrencyID   int       `json:"currency_id"`
-	Description  string    `json:"description"`
-	UpdatedBy    string    `json:"update_by"`
-	UpdatedAt    time.Time `json:"updated_at"`
-}
-
-type UpdateMerchantResponse struct {
+type UserDetailRequest struct {
 	ID           string    `json:"id"`
 	UserID       string    `json:"user_id"`
-	MerchantName string    `json:"merchant_name"`
-	MerchantSlug string    `json:"merchant_slug"`
-	IDNumber     string    `json:"id_number"`
-	Address      string    `json:"address"`
-	Country      string    `json:"country"`
-	City         string    `json:"city"`
-	Zip          string    `json:"zip"`
-	Phone        string    `json:"phone"`
-	CurrencyID   int       `json:"currency_id"`
-	Description  string    `json:"description"`
-	UpdatedBy    string    `json:"update_by"`
+	Latitude     float64   `json:"latitude"`
+	Longitude    float64   `json:"longitude"`
+	Radius       int       `json:"radius"`
+	MinAge       int       `json:"min_age"`
+	MaxAge       int       `json:"max_age"`
+	GenderTarget string    `json:"gender_target"`
 	UpdatedAt    time.Time `json:"updated_at"`
+}
+
+type UserDetailResponse struct {
+	ID           string    `json:"id"`
+	UserID       string    `json:"user_id"`
+	Latitude     float64   `json:"latitude"`
+	Longitude    float64   `json:"longitude"`
+	Radius       int       `json:"radius"`
+	MinAge       int       `json:"min_age"`
+	MaxAge       int       `json:"max_age"`
+	GenderTarget string    `json:"gender_target"`
+	UpdatedAt    time.Time `json:"updated_at"`
+}
+
+type UpdateLocationRequest struct {
+	Latitude  float64 `json:"latitude" validate:"required"`
+	Longitude float64 `json:"longitude" validate:"required"`
+}
+
+type UpdatePreferenceRequest struct {
+	Radius       int    `json:"radius"`
+	MinAge       int    `json:"min_age"`
+	MaxAge       int    `json:"max_age"`
+	GenderTarget string `json:"gender_target"`
 }

@@ -5,31 +5,24 @@ import (
 	"github.com/srv-api/merchant/entity"
 )
 
-func (r *merchantRepository) Get(req dto.GetMerchantRequest) (dto.GetMerchantResponse, error) {
+func (r *merchantRepository) Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error) {
 
-	var data entity.MerchantDetail
+	var data entity.UserDetail
 
 	if err := r.DB.Where("user_id = ?", req.UserID).Find(&data).Error; err != nil {
-		return dto.GetMerchantResponse{}, err
+		return dto.UserDetailResponse{}, err
 	}
 
-	response := dto.GetMerchantResponse{
+	response := dto.UserDetailResponse{
 		ID:           data.ID,
 		UserID:       data.UserID,
-		MerchantName: data.MerchantName,
-		MerchantSlug: data.MerchantSlug,
-		IDNumber:     data.IDNumber,
-		Address:      data.Address,
-		City:         data.City,
-		Zip:          data.Zip,
-		Country:      data.Country,
-		Phone:        data.Phone,
-		CurrencyID:   data.CurrencyID,
-		Description:  data.Description,
-		UpdatedBy:    data.UpdatedBy,
-		CreatedAt:    data.CreatedAt,
+		Latitude:     data.Latitude,
+		Longitude:    data.Longitude,
+		Radius:       data.Radius,
+		MinAge:       data.MinAge,
+		MaxAge:       data.MaxAge,
+		GenderTarget: data.GenderTarget,
 		UpdatedAt:    data.UpdatedAt,
-		DeletedAt:    data.DeletedAt,
 	}
 
 	return response, nil
