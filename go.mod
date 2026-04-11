@@ -7,6 +7,7 @@ require (
 	github.com/labstack/echo/v4 v4.15.0
 	github.com/midtrans/midtrans-go v1.3.8
 	github.com/plutov/paypal/v4 v4.17.0
+	github.com/srv-api/auth v0.0.0-20260411121923-51e1017d1b10
 	github.com/srv-api/middlewares v0.0.0-20260118094353-3c21604ff12e
 	github.com/srv-api/pos v0.0.0-20260118100807-db80bf3152c2
 	github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5
@@ -38,7 +39,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
-	github.com/srv-api/auth v0.0.0-20260411121923-51e1017d1b10 // indirect
 	github.com/streadway/amqp v1.1.0 // indirect
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
