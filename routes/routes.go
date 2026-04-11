@@ -4,10 +4,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/srv-api/merchant/configs"
 
-	h_dashboard "github.com/srv-api/merchant/handlers/dashboard"
-	r_dashboard "github.com/srv-api/merchant/repositories/dashboard"
-	s_dashboard "github.com/srv-api/merchant/services/dashboard"
-
 	h_permission "github.com/srv-api/merchant/handlers/dashboard/permission"
 	r_permission "github.com/srv-api/merchant/repositories/dashboard/permission"
 	s_permission "github.com/srv-api/merchant/services/dashboard/permission"
@@ -27,10 +23,6 @@ import (
 	h_subscribe "github.com/srv-api/merchant/handlers/subscribe"
 	r_subscribe "github.com/srv-api/merchant/repositories/subscribe"
 	s_subscribe "github.com/srv-api/merchant/services/subscribe"
-
-	h_authenticator "github.com/srv-api/merchant/handlers/authenticator_request"
-	r_authenticator "github.com/srv-api/merchant/repositories/authenticator_request"
-	s_authenticator "github.com/srv-api/merchant/services/authenticator_request"
 
 	h_paymentmethod "github.com/srv-api/merchant/handlers/subscribe/paymentmethod"
 	r_paymentmethod "github.com/srv-api/merchant/repositories/subscribe/paymentmethod"
@@ -82,10 +74,6 @@ var (
 
 	JWT = middlewares.NewJWTService()
 
-	authenticatorR = r_authenticator.NewAuthenticatorRepository(DB)
-	authenticatorS = s_authenticator.NewAuthenticatorService(authenticatorR, JWT)
-	authenticatorH = h_authenticator.NewAuthenticatorHandler(authenticatorS)
-
 	merchantR = r_merchant.NewMerchantRepository(DB)
 	merchantS = s_merchant.NewMerchantService(merchantR, JWT)
 	merchantH = h_merchant.NewMerchantHandler(merchantS)
@@ -113,10 +101,6 @@ var (
 	roleuserpermissionR = r_role_user_permission.NewRoleUserPermissionRepository(DB)
 	roleuserpermissionS = s_role_user_permission.NewRoleUserPermissionService(roleuserpermissionR, JWT)
 	roleuserpermissionH = h_role_user_permission.NewRoleUserPermissionHandler(roleuserpermissionS)
-
-	dashboardR = r_dashboard.NewDashboardRepository(DB)
-	dashboardS = s_dashboard.NewDashboardService(dashboardR, JWT)
-	dashboardH = h_dashboard.NewDashboardHandler(dashboardS)
 
 	productR = r_product.NewProductRepository(DB)
 	productS = s_product.NewProductService(productR, JWT)
@@ -296,15 +280,7 @@ func New() *echo.Echo {
 		// deleteAccount.DELETE("/unit/:id", unitH.Delete)
 		// deleteAccount.DELETE("/unit/bulk-delete", unitH.BulkDelete)
 	}
-	authenticator := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		authenticator.POST("/authenticator/request", authenticatorH.Create)
-	}
-	dashboard := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		dashboard.GET("/dashboard/index", dashboardH.Get)
-		dashboard.GET("/dashboard/route", dashboardH.Get)
-	}
+
 	product := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		product.POST("/product/create", productH.Create)

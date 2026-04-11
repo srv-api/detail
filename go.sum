@@ -58,8 +58,6 @@ github.com/srv-api/auth v0.0.0-20260411121923-51e1017d1b10 h1:/w1eMorzOVS6Vjo5MX
 github.com/srv-api/auth v0.0.0-20260411121923-51e1017d1b10/go.mod h1:vSr7Mh8NizMVcJDzdcXBkQci7p/8eDyfFQJSVOFeqZA=
 github.com/srv-api/middlewares v0.0.0-20260118094353-3c21604ff12e h1:YrxdqVGmjDgR5VzHW2OJ1xVdq32Zpwe8vFng9TNoJOI=
 github.com/srv-api/middlewares v0.0.0-20260118094353-3c21604ff12e/go.mod h1:1Tb4LYh5RHtsaEbchi8RYeiyx5fTQwhsPBo0c+v7tYs=
-github.com/srv-api/pos v0.0.0-20260118100807-db80bf3152c2 h1:PfSrb1QkuRcFc/0/GQndpDDlu12Lbi+nXr3hlUnuHt8=
-github.com/srv-api/pos v0.0.0-20260118100807-db80bf3152c2/go.mod h1:+klg+2qRvqvV+KHnChBFbNuaBRlM2y+9NUkjcyBKnE4=
 github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5 h1:xxvDeslGXrZDLbzW262TijjM4NW62PTtpG8nzPAGG7g=
 github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5/go.mod h1:obMFBRpg8aD6uN8QHWa87IqT3YHArJGXLGemCKNcHpQ=
 github.com/srv-api/util v0.0.0-20260118105025-cdb334ac3c2f h1:9lrI7apxjlkDiwKyFoJq0uaCUYqpnIUGfhMX3aiUInM=
