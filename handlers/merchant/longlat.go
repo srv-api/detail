@@ -27,7 +27,7 @@ func (b *domainHandler) LongLat(c echo.Context) error {
 		})
 	}
 
-	result, err := b.serviceMerchant.Update(req)
+	result, err := b.serviceMerchant.LongLat(req)
 	if err != nil {
 		return res.Response(c, http.StatusBadRequest, res.ResponseModel{
 			Data:    nil,

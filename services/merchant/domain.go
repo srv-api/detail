@@ -10,6 +10,7 @@ import (
 type MerchantService interface {
 	Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
 	Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
+	LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 }
 
 type merchantService struct {
