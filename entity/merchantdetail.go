@@ -9,8 +9,8 @@ import (
 type UserDetail struct {
 	ID           string         `gorm:"primary_key" json:"id"`
 	UserID       string         `gorm:"type:varchar(36);index" json:"user_id"`
-	Longitude    float64        `gorm:"type:decimal(10,8);index" json:"longitude"`
-	Latitude     float64        `gorm:"type:decimal(10,8);index" json:"latitude"`
+	Longitude    float64        `gorm:"type:decimal(11,8);index" json:"longitude"`
+	Latitude     float64        `gorm:"type:decimal(11,8);index" json:"latitude"`
 	Radius       int            `json:"radius"`
 	MaxAge       int            `gorm:"max_age" json:"max_age"`
 	MinAge       int            `gorm:"min_age" json:"min_age"`
