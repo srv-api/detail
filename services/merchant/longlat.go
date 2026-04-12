@@ -8,8 +8,8 @@ func (b *merchantService) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUs
 
 	request := dto.UpdateUserDetailRequest{
 		ID:        req.ID,
-		Longitude: req.Longitude,
 		Latitude:  req.Latitude,
+		Longitude: req.Longitude,
 		UpdatedBy: req.UpdatedBy,
 	}
 
@@ -20,8 +20,8 @@ func (b *merchantService) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUs
 
 	response := dto.UpdateUserDetailResponse{
 		ID:        request.ID,
-		Longitude: request.Longitude,
 		Latitude:  request.Latitude,
+		Longitude: request.Longitude,
 		UpdatedBy: request.UpdatedBy,
 	}
 
