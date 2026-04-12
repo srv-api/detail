@@ -138,7 +138,7 @@ func New() *echo.Echo {
 
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
-	e.PUT("/user/update", merchantH.Update)
+	e.PUT("/user/update", merchantH.LongLat)
 
 	sub := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
