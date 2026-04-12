@@ -13,8 +13,6 @@ func (b *merchantRepository) Update(req dto.UpdateUserDetailRequest) (dto.Update
 	request := entity.UserDetail{
 		ID:           tr.ID,
 		UserID:       req.UserID,
-		Latitude:     req.Latitude,
-		Longitude:    req.Longitude,
 		Radius:       req.Radius,
 		MinAge:       req.MinAge,
 		MaxAge:       req.MaxAge,
@@ -29,8 +27,6 @@ func (b *merchantRepository) Update(req dto.UpdateUserDetailRequest) (dto.Update
 
 	err = b.DB.Where("ID = ?", req.ID).Updates(entity.UserDetail{
 		UserID:       request.UserID,
-		Latitude:     request.Latitude,
-		Longitude:    request.Longitude,
 		Radius:       request.Radius,
 		MinAge:       request.MinAge,
 		MaxAge:       request.MaxAge,
