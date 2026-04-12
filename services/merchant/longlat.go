@@ -13,7 +13,7 @@ func (b *merchantService) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUs
 		UpdatedBy: req.UpdatedBy,
 	}
 
-	product, err := b.Repo.Update(req)
+	product, err := b.Repo.LongLat(req)
 	if err != nil {
 		return product, err
 	}
