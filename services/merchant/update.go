@@ -8,6 +8,7 @@ func (b *merchantService) Update(req dto.UpdateUserDetailRequest) (dto.UpdateUse
 
 	request := dto.UpdateUserDetailRequest{
 		ID:           req.ID,
+		UserID:       req.UserID,
 		Longitude:    req.Longitude,
 		Latitude:     req.Latitude,
 		Radius:       req.Radius,
@@ -17,20 +18,17 @@ func (b *merchantService) Update(req dto.UpdateUserDetailRequest) (dto.UpdateUse
 		UpdatedBy:    req.UpdatedBy,
 	}
 
-	product, err := b.Repo.Update(req)
+	product, err := b.Repo.LongLat(req)
 	if err != nil {
 		return product, err
 	}
 
 	response := dto.UpdateUserDetailResponse{
-		ID:           request.ID,
-		Longitude:    request.Longitude,
-		Latitude:     request.Latitude,
-		Radius:       request.Radius,
-		MinAge:       request.MinAge,
-		MaxAge:       request.MaxAge,
-		GenderTarget: request.GenderTarget,
-		UpdatedBy:    request.UpdatedBy,
+		ID:        request.ID,
+		UserID:    req.UserID,
+		Longitude: request.Longitude,
+		Latitude:  request.Latitude,
+		UpdatedBy: request.UpdatedBy,
 	}
 
 	return response, nil

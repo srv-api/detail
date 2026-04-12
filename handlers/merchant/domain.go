@@ -9,6 +9,7 @@ import (
 type DomainHandler interface {
 	Get(c echo.Context) error
 	Update(c echo.Context) error
+	LongLat(c echo.Context) error
 }
 
 type domainHandler struct {
