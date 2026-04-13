@@ -37,7 +37,7 @@ type UserDetailRequest struct {
 	UserID       string    `json:"user_id"`
 	Latitude     float64   `json:"latitude" query:"latitude"`
 	Longitude    float64   `json:"longitude" query:"longitude"`
-	Radius       int       `json:"radius"`
+	Radius       int       `json:"radius" query:"radius"`
 	MinAge       int       `json:"min_age"`
 	MaxAge       int       `json:"max_age"`
 	GenderTarget string    `json:"gender_target"`
