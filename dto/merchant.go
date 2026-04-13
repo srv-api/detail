@@ -35,8 +35,8 @@ type UpdateUserDetailResponse struct {
 type UserDetailRequest struct {
 	ID           string    `json:"id"`
 	UserID       string    `json:"user_id"`
-	Latitude     float64   `json:"latitude"`
-	Longitude    float64   `json:"longitude"`
+	Latitude     float64   `json:"latitude" query:"latitude"`
+	Longitude    float64   `json:"longitude" query:"longitude"`
 	Radius       int       `json:"radius"`
 	MinAge       int       `json:"min_age"`
 	MaxAge       int       `json:"max_age"`
