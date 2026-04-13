@@ -46,16 +46,16 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
         ud.min_age,
         ud.max_age,
         ud.gender_target,
-        u.age,   -- langsung ambil kolom age
+        u.age,   
         (6371 * acos(
             cos(radians(?)) * cos(radians(ud.latitude)) * cos(radians(ud.longitude) - radians(?)) +
             sin(radians(?)) * sin(radians(ud.latitude))
         )) AS distance
     FROM user_details ud
-    JOIN users u ON u.id = ud.user_id
+    JOIN access_doors u ON u.id = ud.user_id
     WHERE ud.user_id != ?
         AND ud.latitude IS NOT NULL AND ud.longitude IS NOT NULL
-        AND u.age BETWEEN ? AND ?   -- filter umur langsung
+        AND u.age BETWEEN ? AND ?
     HAVING distance <= ?
     ORDER BY distance
 `
