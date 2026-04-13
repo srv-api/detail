@@ -4,7 +4,7 @@ import (
 	dto "github.com/srv-api/detail/dto"
 )
 
-func (b *userService) GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdResponse, error) {
+func (b *userService) GetById(req dto.GetByIdRequest) (*dto.UserDetailByIdResponse, error) {
 	transaction, err := b.Repo.GetById(req)
 	if err != nil {
 		return nil, err

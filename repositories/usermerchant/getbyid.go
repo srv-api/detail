@@ -7,7 +7,7 @@ import (
 	util "github.com/srv-api/util/s"
 )
 
-func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdResponse, error) {
+func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserDetailByIdResponse, error) {
 	var user entity.AccessDoor
 
 	// Ambil data user + relasi Verified dan Merchant (kalau perlu)
@@ -30,7 +30,7 @@ func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdR
 	decryptedEmail, _ := util.Decrypt(user.Email)
 
 	// ✅ Buat response DTO
-	response := &dto.UserMerchantByIdResponse{
+	response := &dto.UserDetailByIdResponse{
 		ID:            user.ID,
 		DetailID:      user.DetailID,
 		FullName:      user.FullName,
@@ -46,7 +46,7 @@ func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdR
 		UpdatedBy:     user.UpdatedBy,
 		DeletedBy:     user.DeletedBy,
 		CreatedAt:     user.CreatedAt,
-		Verified: dto.UserMerchantVerifiedByID{
+		Verified: dto.UserDetailVerifiedByID{
 			ID:             user.Verified.ID,
 			UserID:         user.Verified.UserID,
 			Token:          user.Verified.Token,

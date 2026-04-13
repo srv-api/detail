@@ -18,7 +18,7 @@ func (b *domainHandler) GetById(c echo.Context) error {
 
 	req.ID = idUint
 
-	transaction, err := b.serviceUserMerchant.GetById(req)
+	transaction, err := b.serviceUserDetail.GetById(req)
 	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.NotFound, err).Send(c)
 

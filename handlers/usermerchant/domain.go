@@ -16,11 +16,11 @@ type DomainHandler interface {
 }
 
 type domainHandler struct {
-	serviceUserMerchant s.UserMerchantService
+	serviceUserDetail s.UserDetailService
 }
 
-func NewUserMerchantHandler(service s.UserMerchantService) DomainHandler {
+func NewUserDetailHandler(service s.UserDetailService) DomainHandler {
 	return &domainHandler{
-		serviceUserMerchant: service,
+		serviceUserDetail: service,
 	}
 }

@@ -152,11 +152,11 @@ type ImportResultDTO struct {
 }
 
 type ExportFilter struct {
-	From           string `json:"from"`
-	To             string `json:"to"`
-	UserID         string `json:"user_id"`
-	Barcode        string `json:"barcode"`
-	DetailIDstring `json:"detail_id"`
+	From     string `json:"from"`
+	To       string `json:"to"`
+	UserID   string `json:"user_id"`
+	Barcode  string `json:"barcode"`
+	DetailID string `json:"detail_id"`
 }
 
 type BulkEditRequest struct {

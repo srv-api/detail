@@ -40,9 +40,9 @@ import (
 	r_user "github.com/srv-api/detail/repositories/user"
 	s_user "github.com/srv-api/detail/services/user"
 
-	h_usermerchant "github.com/srv-api/detail/handlers/usermerchant"
-	r_usermerchant "github.com/srv-api/detail/repositories/usermerchant"
-	s_usermerchant "github.com/srv-api/detail/services/usermerchant"
+	h_UserDetail "github.com/srv-api/detail/handlers/UserDetail"
+	r_UserDetail "github.com/srv-api/detail/repositories/UserDetail"
+	s_UserDetail "github.com/srv-api/detail/services/UserDetail"
 
 	h_product "github.com/srv-api/detail/handlers/product"
 	r_product "github.com/srv-api/detail/repositories/product"
@@ -125,9 +125,9 @@ var (
 	userS          = s_user.NewUserService(userR, JWT)
 	userH          = h_user.NewUserHandler(userS)
 
-	usermerchantR = r_usermerchant.NewUserMerchantRepository(DB)
-	usermerchantS = s_usermerchant.NewUserMerchantService(usermerchantR, JWT)
-	usermerchantH = h_usermerchant.NewUserMerchantHandler(usermerchantS)
+	UserDetailR = r_UserDetail.NewUserDetailRepository(DB)
+	UserDetailS = s_UserDetail.NewUserDetailService(UserDetailR, JWT)
+	UserDetailH = h_UserDetail.NewUserDetailHandler(UserDetailS)
 
 	pinR = r_pin.NewPinRepository(DB)
 	pinS = s_pin.NewPinService(pinR, JWT)
@@ -264,14 +264,14 @@ func New() *echo.Echo {
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
 	}
 
-	usermerchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	UserDetail := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
-		usermerchant.POST("/user_merchant/create", usermerchantH.Create)
-		usermerchant.GET("/user_merchant/pagination", usermerchantH.Get)
-		usermerchant.GET("/user_merchant/:id", usermerchantH.GetById)
-		usermerchant.PUT("/user_merchant/update/:id", usermerchantH.Update)
-		usermerchant.DELETE("/user_merchant/:id", usermerchantH.Delete)
-		usermerchant.DELETE("/user_merchant/bulk-delete", usermerchantH.BulkDelete)
+		UserDetail.POST("/user_merchant/create", UserDetailH.Create)
+		UserDetail.GET("/user_merchant/pagination", UserDetailH.Get)
+		UserDetail.GET("/user_merchant/:id", UserDetailH.GetById)
+		UserDetail.PUT("/user_merchant/update/:id", UserDetailH.Update)
+		UserDetail.DELETE("/user_merchant/:id", UserDetailH.Delete)
+		UserDetail.DELETE("/user_merchant/bulk-delete", UserDetailH.BulkDelete)
 	}
 
 	deleteAccount := e.Group("api/account", middlewares.AuthorizeJWT(JWT))

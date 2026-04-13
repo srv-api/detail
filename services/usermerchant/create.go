@@ -7,10 +7,10 @@ import (
 	util "github.com/srv-api/util/s"
 )
 
-func (s *userService) Create(req dto.UserMerchantRequest) (dto.UserMerchantResponse, error) {
+func (s *userService) Create(req dto.UserFullRequest) (dto.UserFullResponse, error) {
 	// Validate email
 	if !util.IsValidEmail(req.Email) {
-		return dto.UserMerchantResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMail, nil)
+		return dto.UserFullResponse{}, res.ErrorBuilder(&res.ErrorConstant.RegisterMail, nil)
 	}
 
 	req.Whatsapp = util.FormatWhatsappNumber(req.Whatsapp)
@@ -18,27 +18,27 @@ func (s *userService) Create(req dto.UserMerchantRequest) (dto.UserMerchantRespo
 	// Encrypt the email
 	encryptedEmail, err := util.Encrypt(req.Email)
 	if err != nil {
-		return dto.UserMerchantResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+		return dto.UserFullResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
 
 	// Encrypt the email
 	encryptedWhatsapp, err := util.Encrypt(req.Whatsapp)
 	if err != nil {
-		return dto.UserMerchantResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+		return dto.UserFullResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
 
 	// Proceed with the signup process
-	encryp := util.EncryptPasswordUserMerchant(&req)
+	encryp := util.EncryptPasswordUserDetail(&req)
 	if encryp != nil {
-		return dto.UserMerchantResponse{}, encryp
+		return dto.UserFullResponse{}, encryp
 	}
 
 	secureID, err := util.GenerateSecureID()
 	if err != nil {
-		return dto.UserMerchantResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
+		return dto.UserFullResponse{}, res.ErrorBuilder(&res.ErrorConstant.InternalServerError, err)
 	}
 
-	create := dto.UserMerchantRequest{
+	create := dto.UserFullRequest{
 		ID:           secureID,
 		AccessRoleID: req.AccessRoleID,
 		FullName:     req.FullName,
@@ -53,10 +53,10 @@ func (s *userService) Create(req dto.UserMerchantRequest) (dto.UserMerchantRespo
 
 	created, err := s.Repo.Create(create)
 	if err != nil {
-		return dto.UserMerchantResponse{}, err
+		return dto.UserDetailResponse{}, err
 	}
 
-	response := dto.UserMerchantResponse{
+	response := dto.UserDetailResponse{
 		AccessRoleID: created.AccessRoleID,
 		FullName:     created.FullName,
 		Whatsapp:     created.Whatsapp,

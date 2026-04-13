@@ -7,8 +7,8 @@ import (
 )
 
 func (h *domainHandler) Create(c echo.Context) error {
-	var req dto.UserMerchantRequest
-	var resp dto.UserMerchantResponse
+	var req dto.UserFullRequest
+	var resp dto.UserFullResponse
 
 	userid, ok := c.Get("UserId").(string)
 	if !ok {
@@ -34,7 +34,7 @@ func (h *domainHandler) Create(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
 
-	resp, err = h.serviceUserMerchant.Create(req)
+	resp, err = h.serviceUserDetail.Create(req)
 	if err != nil {
 		return res.ErrorResponse(err).Send(c)
 	}

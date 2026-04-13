@@ -8,7 +8,7 @@ import (
 	dto "github.com/srv-api/detail/dto"
 )
 
-func (r *userRepository) Create(req dto.UserMerchantRequest) (dto.UserMerchantResponse, error) {
+func (r *userRepository) Create(req dto.UserDetailRequest) (dto.UserDetailResponse, error) {
 
 	// Create the new user entry
 	create := entity.AccessDoor{
@@ -23,11 +23,11 @@ func (r *userRepository) Create(req dto.UserMerchantRequest) (dto.UserMerchantRe
 
 	// Save the new user to the database
 	if err := r.DB.Save(&create).Error; err != nil {
-		return dto.UserMerchantResponse{}, err
+		return dto.UserDetailResponse{}, err
 	}
 
 	// Build the response for the created user
-	response := dto.UserMerchantResponse{
+	response := dto.UserDetailResponse{
 		ID:           create.ID,
 		AccessRoleID: create.AccessRoleID,
 		FullName:     create.FullName,

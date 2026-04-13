@@ -5,9 +5,9 @@ import (
 	"github.com/srv-api/detail/dto"
 )
 
-func (b *userRepository) Update(req dto.UserMerchantUpdateRequest) (dto.UserMerchantUpdateResponse, error) {
+func (b *userRepository) Update(req dto.UserDetailUpdateRequest) (dto.UserDetailUpdateResponse, error) {
 	// Menyiapkan struktur update untuk produk
-	updateUserMerchant := entity.AccessDoor{
+	updateUserDetail := entity.AccessDoor{
 		FullName:     req.FullName,
 		UpdatedBy:    req.UpdatedBy,
 		Email:        req.Email,
@@ -21,29 +21,29 @@ func (b *userRepository) Update(req dto.UserMerchantUpdateRequest) (dto.UserMerc
 	}
 
 	// Cek apakah produk ada terlebih dahulu
-	var existingUserMerchant entity.AccessDoor
-	err := b.DB.Where("id = ?", req.ID).First(&existingUserMerchant).Error
+	var existingUserDetail entity.AccessDoor
+	err := b.DB.Where("id = ?", req.ID).First(&existingUserDetail).Error
 	if err != nil {
-		return dto.UserMerchantUpdateResponse{}, err
+		return dto.UserDetailUpdateResponse{}, err
 	}
 
 	// Update produk dengan nilai yang baru
-	err = b.DB.Model(&existingUserMerchant).Updates(updateUserMerchant).Error
+	err = b.DB.Model(&existingUserDetail).Updates(updateUserDetail).Error
 	if err != nil {
-		return dto.UserMerchantUpdateResponse{}, err
+		return dto.UserDetailUpdateResponse{}, err
 	}
 
 	// Menyiapkan response setelah pembaruan berhasil
-	response := dto.UserMerchantUpdateResponse{
-		FullName:     updateUserMerchant.FullName,
-		UpdatedBy:    updateUserMerchant.UpdatedBy,
-		Email:        updateUserMerchant.Email,
-		Whatsapp:     updateUserMerchant.Whatsapp,
-		Password:     updateUserMerchant.Password,
-		AccessRoleID: updateUserMerchant.AccessRoleID,
-		Verified: dto.UserMerchantVerifiedByID{
-			Verified:      updateUserMerchant.Verified.Verified,
-			StatusAccount: updateUserMerchant.Verified.StatusAccount,
+	response := dto.UserDetailUpdateResponse{
+		FullName:     updateUserDetail.FullName,
+		UpdatedBy:    updateUserDetail.UpdatedBy,
+		Email:        updateUserDetail.Email,
+		Whatsapp:     updateUserDetail.Whatsapp,
+		Password:     updateUserDetail.Password,
+		AccessRoleID: updateUserDetail.AccessRoleID,
+		Verified: dto.UserDetailVerifiedByID{
+			Verified:      updateUserDetail.Verified.Verified,
+			StatusAccount: updateUserDetail.Verified.StatusAccount,
 		},
 	}
 

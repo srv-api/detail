@@ -26,7 +26,7 @@ func (b *domainHandler) Get(c echo.Context) error {
 		return c.JSON(400, "Invalid request")
 	}
 
-	users := b.serviceUserMerchant.Get(c, paginationDTO)
+	users := b.serviceUserDetail.Get(c, paginationDTO)
 
 	return c.JSON(200, users)
 }

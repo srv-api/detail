@@ -21,7 +21,7 @@ func (b *domainHandler) Delete(c echo.Context) error {
 
 	req.ID = idUint
 
-	data, err := b.serviceUserMerchant.Delete(req)
+	data, err := b.serviceUserDetail.Delete(req)
 	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.NotFound, err).Send(c)
 	}

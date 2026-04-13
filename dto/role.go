@@ -44,8 +44,8 @@ type DeleteRoleResponse struct {
 }
 
 type GetRoleRequest struct {
-	UserID         string `json:"user_id"`
-	DetailIDstring `json:"detail_id"`
+	UserID   string `json:"user_id"`
+	DetailID string `json:"detail_id"`
 }
 
 type GetRoleResponse struct {

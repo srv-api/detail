@@ -28,7 +28,7 @@ func (b *domainHandler) BulkDelete(c echo.Context) error {
 	}
 
 	// Panggil service untuk menghapus produk
-	data, err := b.serviceUserMerchant.BulkDelete(req)
+	data, err := b.serviceUserDetail.BulkDelete(req)
 	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.NotFound, err).Send(c)
 	}

@@ -7,19 +7,19 @@ import (
 )
 
 type DomainRepository interface {
-	Create(req dto.UserMerchantRequest) (dto.UserMerchantResponse, error)
-	Get(req *dto.Pagination) (dto.UserMerchantPaginationResponse, int)
-	GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdResponse, error)
+	Create(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
+	Get(req *dto.Pagination) (dto.UserDetailPaginationResponse, int)
+	GetById(req dto.GetByIdRequest) (*dto.UserDetailByIdResponse, error)
 	Delete(req dto.DeleteRequest) (dto.DeleteResponse, error)
 	BulkDelete(req dto.BulkDeleteRequest) (int, error)
-	Update(req dto.UserMerchantUpdateRequest) (dto.UserMerchantUpdateResponse, error)
+	Update(req dto.UserDetailUpdateRequest) (dto.UserDetailUpdateResponse, error)
 }
 
 type userRepository struct {
 	DB *gorm.DB
 }
 
-func NewUserMerchantRepository(DB *gorm.DB) DomainRepository {
+func NewUserDetailRepository(DB *gorm.DB) DomainRepository {
 	return &userRepository{
 		DB: DB,
 	}

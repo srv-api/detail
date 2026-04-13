@@ -8,13 +8,13 @@ import (
 	r "github.com/srv-api/detail/repositories/usermerchant"
 )
 
-type UserMerchantService interface {
-	Create(req dto.UserMerchantRequest) (dto.UserMerchantResponse, error)
+type UserDetailService interface {
+	Create(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
 	Get(context echo.Context, req *dto.Pagination) dto.Response
-	GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdResponse, error)
+	GetById(req dto.GetByIdRequest) (*dto.UserDetailByIdResponse, error)
 	Delete(req dto.DeleteRequest) (dto.DeleteResponse, error)
 	BulkDelete(req dto.BulkDeleteRequest) (dto.BulkDeleteResponse, error)
-	Update(req dto.UserMerchantUpdateRequest) (dto.UserMerchantUpdateResponse, error)
+	Update(req dto.UserDetailUpdateRequest) (dto.UserDetailUpdateResponse, error)
 }
 
 type userService struct {
@@ -22,7 +22,7 @@ type userService struct {
 	jwt  m.JWTService
 }
 
-func NewUserMerchantService(Repo r.DomainRepository, jwtS m.JWTService) UserMerchantService {
+func NewUserDetailService(Repo r.DomainRepository, jwtS m.JWTService) UserDetailService {
 	return &userService{
 		Repo: Repo,
 		jwt:  jwtS,

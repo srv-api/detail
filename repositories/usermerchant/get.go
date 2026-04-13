@@ -12,7 +12,7 @@ import (
 	util "github.com/srv-api/util/s"
 )
 
-func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationResponse, int) {
+func (r *userRepository) Get(req *dto.Pagination) (dto.UserDetailPaginationResponse, int) {
 	var users []entity.AccessDoor
 	var totalRows int64
 	totalPages, fromRow, toRow := 0, 0, 0
@@ -41,7 +41,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 
 	// --- Hitung total baris data ---
 	if errCount := find.Model(&entity.AccessDoor{}).Count(&totalRows).Error; errCount != nil {
-		return dto.UserMerchantPaginationResponse{}, 0
+		return dto.UserDetailPaginationResponse{}, 0
 	}
 
 	// --- Ambil data user merchant ---
@@ -50,7 +50,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 		Offset(offset).
 		Order(req.Sort).
 		Find(&users).Error; err != nil {
-		return dto.UserMerchantPaginationResponse{}, 0
+		return dto.UserDetailPaginationResponse{}, 0
 	}
 
 	// --- Ambil semua role, buat map biar cepat lookup ---
@@ -78,7 +78,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 	}
 
 	// --- Mapping hasil data ---
-	var userResponses []dto.GetUserMerchantResponse
+	var userResponses []dto.GetUserDetailResponse
 	for _, u := range users {
 		decryptedWa, err := util.Decrypt(u.Whatsapp)
 		if err != nil {
@@ -99,13 +99,13 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 			accountStatus = "active"
 		}
 
-		userResponses = append(userResponses, dto.GetUserMerchantResponse{
+		userResponses = append(userResponses, dto.GetUserDetailResponse{
 			ID:       u.ID,
 			FullName: helpers.TruncateString(u.FullName, 47),
 			Whatsapp: decryptedWa,
 			Email:    decryptedEmail,
 			RoleName: roleMap[u.AccessRoleID], // ✅ ambil nama role dari map hasil query roles
-			Verified: dto.UserMerchantVerified{
+			Verified: dto.UserDetailVerified{
 				ID:             u.Verified.ID,
 				UserID:         u.Verified.UserID,
 				Token:          u.Verified.Token,
@@ -130,7 +130,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 	}
 
 	// --- Response pagination ---
-	response := dto.UserMerchantPaginationResponse{
+	response := dto.UserDetailPaginationResponse{
 		Limit:      req.Limit,
 		Page:       req.Page,
 		Sort:       req.Sort,

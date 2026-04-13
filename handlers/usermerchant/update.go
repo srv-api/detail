@@ -7,8 +7,8 @@ import (
 )
 
 func (b *domainHandler) Update(c echo.Context) error {
-	var req dto.UserMerchantUpdateRequest
-	var resp dto.UserMerchantUpdateResponse
+	var req dto.UserDetailUpdateRequest
+	var resp dto.UserDetailUpdateResponse
 
 	userid, ok := c.Get("UserId").(string)
 	if !ok {
@@ -34,7 +34,7 @@ func (b *domainHandler) Update(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
 
-	resp, err = b.serviceUserMerchant.Update(req)
+	resp, err = b.serviceUserDetail.Update(req)
 	if err != nil {
 		return res.ErrorResponse(err).Send(c)
 	}
