@@ -1,4 +1,4 @@
-package merchant
+package userdetail
 
 import (
 	dto "github.com/srv-api/merchant/dto"
@@ -8,17 +8,18 @@ import (
 
 type DomainRepository interface {
 	Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
+	Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error)
 	LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 	GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error)
 	Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 }
 
-type merchantRepository struct {
+type userdetailRepository struct {
 	DB *gorm.DB
 }
 
-func NewMerchantRepository(DB *gorm.DB) DomainRepository {
-	return &merchantRepository{
+func NewUserDetailRepository(DB *gorm.DB) DomainRepository {
+	return &userdetailRepository{
 		DB: DB,
 	}
 }

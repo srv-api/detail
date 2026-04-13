@@ -1,4 +1,4 @@
-package merchant
+package userdetail
 
 import (
 	"github.com/labstack/echo/v4"
@@ -17,7 +17,7 @@ func (b *domainHandler) Get(c echo.Context) error {
 
 	req.UserID = userId
 
-	resp, err := b.serviceMerchant.Get(req)
+	resp, err := b.serviceUserDetail.Get(req)
 	if err != nil {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}

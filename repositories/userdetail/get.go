@@ -1,11 +1,11 @@
-package merchant
+package userdetail
 
 import (
 	dto "github.com/srv-api/merchant/dto"
 	"github.com/srv-api/merchant/entity"
 )
 
-func (r *merchantRepository) Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error) {
+func (r *userdetailRepository) Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error) {
 
 	var data entity.UserDetail
 

@@ -48,9 +48,9 @@ import (
 	r_product "github.com/srv-api/merchant/repositories/product"
 	s_product "github.com/srv-api/merchant/services/product"
 
-	h_merchant "github.com/srv-api/merchant/handlers/merchant"
-	r_merchant "github.com/srv-api/merchant/repositories/merchant"
-	s_merchant "github.com/srv-api/merchant/services/merchant"
+	h_userdetail "github.com/srv-api/merchant/handlers/userdetail"
+	r_userdetail "github.com/srv-api/merchant/repositories/userdetail"
+	s_userdetail "github.com/srv-api/merchant/services/userdetail"
 
 	h_contentsetting "github.com/srv-api/merchant/handlers/dashboard/contentsetting"
 	r_contentsetting "github.com/srv-api/merchant/repositories/dashboard/contentsetting"
@@ -74,9 +74,9 @@ var (
 
 	JWT = middlewares.NewJWTService()
 
-	merchantR = r_merchant.NewMerchantRepository(DB)
-	merchantS = s_merchant.NewMerchantService(merchantR, JWT)
-	merchantH = h_merchant.NewMerchantHandler(merchantS)
+	userdetailR = r_userdetail.NewUserDetailRepository(DB)
+	userdetailS = s_userdetail.NewUserDetailService(userdetailR, JWT)
+	userdetailH = h_userdetail.NewUserDetailHandler(userdetailS)
 
 	contentsettingR = r_contentsetting.NewContentSettingRepository(DB)
 	contentsettingS = s_contentsetting.NewContentSettingService(contentsettingR, JWT)
@@ -138,7 +138,7 @@ func New() *echo.Echo {
 
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
-	e.PUT("/user/update", merchantH.LongLat)
+	e.PUT("/user/update", userdetailH.LongLat)
 
 	sub := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
@@ -166,8 +166,9 @@ func New() *echo.Echo {
 	}
 	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
-		merchant.PUT("/update", merchantH.Update)
-		merchant.GET("/get", merchantH.Get)
+		merchant.PUT("/update", userdetailH.Update)
+		merchant.GET("/get", userdetailH.Get)
+		merchant.GET("/explore", userdetailH.Explore)
 	}
 	contentsetting := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{

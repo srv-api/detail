@@ -1,4 +1,4 @@
-package merchant
+package userdetail
 
 import (
 	"net/http"
@@ -8,12 +8,8 @@ import (
 	res "github.com/srv-api/util/s/response"
 )
 
-func (b *domainHandler) Update(c echo.Context) error {
+func (b *domainHandler) LongLat(c echo.Context) error {
 	var req dto.UpdateUserDetailRequest
-	updatedBy, ok := c.Get("UpdatedBy").(string)
-	if !ok {
-		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
-	}
 
 	idUint, err := res.QueryParam(c, "id")
 	if err != nil {
@@ -21,7 +17,6 @@ func (b *domainHandler) Update(c echo.Context) error {
 	}
 
 	req.ID = idUint
-	req.UpdatedBy = updatedBy
 
 	err = c.Bind(&req)
 	if err != nil {
@@ -32,7 +27,7 @@ func (b *domainHandler) Update(c echo.Context) error {
 		})
 	}
 
-	result, err := b.serviceMerchant.Update(req)
+	result, err := b.serviceUserDetail.LongLat(req)
 	if err != nil {
 		return res.Response(c, http.StatusBadRequest, res.ResponseModel{
 			Data:    nil,

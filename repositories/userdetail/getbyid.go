@@ -1,11 +1,11 @@
-package merchant
+package userdetail
 
 import (
 	dto "github.com/srv-api/merchant/dto"
 	"github.com/srv-api/merchant/entity"
 )
 
-func (b *merchantRepository) GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error) {
+func (b *userdetailRepository) GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error) {
 	tr := entity.UserDetail{
 		ID: req.ID,
 	}
