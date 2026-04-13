@@ -35,30 +35,30 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 
 	// Query SQL dengan Haversine formula
 	query := `
-        SELECT 
-            ud.user_id,
-            u.full_name,
-            u.gender,
-            ud.latitude,
-            ud.longitude,
-            ud.bio,
-            ud.radius as user_radius,
-            ud.min_age,
-            ud.max_age,
-            ud.gender_target,
-            TIMESTAMPDIFF(YEAR, u.birthdate, CURDATE()) as age,
-            (6371 * acos(
-                cos(radians(?)) * cos(radians(ud.latitude)) * cos(radians(ud.longitude) - radians(?)) +
-                sin(radians(?)) * sin(radians(ud.latitude))
-            )) AS distance
-        FROM user_details ud
-        JOIN access_doors u ON u.id = ud.user_id
-        WHERE ud.user_id != ?
-            AND ud.latitude IS NOT NULL AND ud.longitude IS NOT NULL
-            AND TIMESTAMPDIFF(YEAR, u.birthdate, CURDATE()) BETWEEN ? AND ?
-        HAVING distance <= ?
-        ORDER BY distance
-    `
+    SELECT 
+        ud.user_id,
+        u.full_name,
+        u.gender,
+        ud.latitude,
+        ud.longitude,
+        ud.bio,
+        ud.radius as radius,
+        ud.min_age,
+        ud.max_age,
+        ud.gender_target,
+        u.age,   -- langsung ambil kolom age
+        (6371 * acos(
+            cos(radians(?)) * cos(radians(ud.latitude)) * cos(radians(ud.longitude) - radians(?)) +
+            sin(radians(?)) * sin(radians(ud.latitude))
+        )) AS distance
+    FROM user_details ud
+    JOIN users u ON u.id = ud.user_id
+    WHERE ud.user_id != ?
+        AND ud.latitude IS NOT NULL AND ud.longitude IS NOT NULL
+        AND u.age BETWEEN ? AND ?   -- filter umur langsung
+    HAVING distance <= ?
+    ORDER BY distance
+`
 
 	err := r.DB.Raw(query,
 		req.Latitude, req.Longitude, req.Latitude,
