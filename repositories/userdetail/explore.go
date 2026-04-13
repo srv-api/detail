@@ -52,7 +52,7 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
                 sin(radians(?)) * sin(radians(ud.latitude))
             )) AS distance
         FROM user_details ud
-        JOIN users u ON u.id = ud.user_id
+        JOIN access_doors u ON u.id = ud.user_id
         WHERE ud.user_id != ?
             AND ud.latitude IS NOT NULL AND ud.longitude IS NOT NULL
             AND TIMESTAMPDIFF(YEAR, u.birthdate, CURDATE()) BETWEEN ? AND ?
