@@ -9,7 +9,7 @@ import (
 type Tax struct {
 	ID            string         `gorm:"primary_key,omitempty" json:"id"`
 	UserID        string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID    string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID      string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	Tax           string         `gorm:"tax,omitempty" json:"tax"`
 	TaxPercentage uint           `gorm:"tax_percentage,omitempty" json:"tax_percentage"`
 	Status        int            `gorm:"status,omitempty" json:"status"`

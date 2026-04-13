@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *contentsettingRepository) Update(req dto.UpdateContentSettingRequest) error {

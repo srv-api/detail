@@ -31,7 +31,7 @@ type ChargeRequest struct {
 	CardToken   string `json:"card_token"` // Token kartu kredit yang didapatkan dari frontend
 	Channel     string `json:"channel"`    // Metode pembayaran yang digunakan, contoh: "credit_card"
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	CreatedBy   string `json:"created_by"`
 }
 
@@ -55,7 +55,7 @@ type VAPermataResponse struct {
 	StatusMessage     string `json:"status_message"`
 	TransactionID     string `json:"transaction_id"`
 	OrderID           string `json:"order_id"`
-	MerchantID        string `json:"merchant_id"`
+	DetailID          string `json:"detail_id"`
 	GrossAmount       string `json:"gross_amount"`
 	Currency          string `json:"currency"`
 	PaymentType       string `json:"payment_type"`
@@ -248,7 +248,7 @@ type MidtransCancelResponse struct {
 	StatusMessage     string `json:"status_message"`
 	TransactionID     string `json:"transaction_id"`
 	OrderID           string `json:"order_id"`
-	MerchantID        string `json:"merchant_id"`
+	DetailID          string `json:"detail_id"`
 	GrossAmount       string `json:"gross_amount"`
 	Currency          string `json:"currency"`
 	PaymentType       string `json:"payment_type"`

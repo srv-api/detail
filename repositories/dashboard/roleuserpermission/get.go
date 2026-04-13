@@ -1,7 +1,7 @@
 package roleuserpermission
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *RoleUserPermissionRepository) Get(req dto.RoleUserPermissionRequest) (dto.GetRoleUserPermissionResponse, error) {

@@ -3,7 +3,7 @@ package user
 import (
 	res "github.com/srv-api/util/s/response"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	util "github.com/srv-api/util/s"
 )
 
@@ -47,7 +47,7 @@ func (s *userService) Create(req dto.UserMerchantRequest) (dto.UserMerchantRespo
 		Password:     req.Password,
 		Description:  req.Description,
 		UserID:       req.UserID,
-		MerchantID:   req.MerchantID,
+		DetailID:     req.DetailID,
 		CreatedBy:    req.CreatedBy,
 	}
 
@@ -64,7 +64,7 @@ func (s *userService) Create(req dto.UserMerchantRequest) (dto.UserMerchantRespo
 		Password:     created.Password,
 		Description:  created.Description,
 		UserID:       created.UserID,
-		MerchantID:   created.MerchantID,
+		DetailID:     created.DetailID,
 		CreatedBy:    created.CreatedBy,
 	}
 

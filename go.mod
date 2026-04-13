@@ -1,4 +1,4 @@
-module github.com/srv-api/merchant
+module github.com/srv-api/detail
 
 go 1.25.1
 
@@ -17,7 +17,6 @@ require (
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
@@ -35,9 +34,9 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/olivere/elastic/v7 v7.0.32 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
+	github.com/srv-api/merchant v0.0.0-20260411114757-d06ec06fc758 // indirect
 	github.com/streadway/amqp v1.1.0 // indirect
 	github.com/teris-io/shortid v0.0.0-20220617161101-71ec9f2aa569 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

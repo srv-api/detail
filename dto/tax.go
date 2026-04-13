@@ -7,7 +7,7 @@ import (
 type TaxRequest struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	Tax           string    `json:"tax"`
 	TaxPercentage uint      `json:"tax_percentage"`
 	Status        int       `json:"status"`
@@ -21,7 +21,7 @@ type TaxRequest struct {
 type TaxResponse struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	Tax           string    `json:"tax"`
 	TaxPercentage uint      `json:"tax_percentage"`
 	Status        string    `json:"status"`
@@ -34,7 +34,7 @@ type TaxResponse struct {
 type TaxUpdateRequest struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	Tax           string    `json:"tax"`
 	TaxPercentage uint      `json:"tax_percentage"`
 	Status        int       `json:"status"`
@@ -48,7 +48,7 @@ type TaxUpdateRequest struct {
 type TaxUpdateResponse struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	Tax           string    `json:"tax"`
 	TaxPercentage uint      `json:"tax_percentage"`
 	Status        int       `json:"status"`

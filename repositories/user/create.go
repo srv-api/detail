@@ -6,19 +6,19 @@ import (
 	"strconv"
 
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *userRepository) Create(req dto.UserRequest) (dto.UserResponse, error) {
-	// Insert or update the auto_increment value based on merchant_id
+	// Insert or update the auto_increment value based on detail_id
 	var autoIncrement int
 	err := r.DB.Raw(`
-		INSERT INTO merchant_auto_increments (merchant_id, next_increment)
+		INSERT INTO merchant_auto_increments (detail_id, next_increment)
 		VALUES (?, 1)
-		ON CONFLICT (merchant_id) DO UPDATE
+		ON CONFLICT (detail_id) DO UPDATE
 		SET next_increment = merchant_auto_increments.next_increment + 1
 		RETURNING next_increment - 1;
-	`, req.MerchantID).Scan(&autoIncrement).Error
+	`, req.DetailID).Scan(&autoIncrement).Error
 
 	if err != nil {
 		return dto.UserResponse{}, err

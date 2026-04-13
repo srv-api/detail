@@ -23,7 +23,7 @@ type UserMerchantPaginationResponse struct {
 type UserMerchantRequest struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	FullName      string    `json:"full_name"`
 	Whatsapp      string    `json:"whatsapp"`
 	Email         string    `json:"email"`
@@ -42,7 +42,7 @@ type UserMerchantRequest struct {
 type UserMerchantResponse struct {
 	ID            string               `json:"id"`
 	UserID        string               `json:"user_id"`
-	MerchantID    string               `json:"merchant_id"`
+	DetailID      string               `json:"detail_id"`
 	FullName      string               `json:"full_name"`
 	Whatsapp      string               `json:"whatsapp"`
 	Email         string               `json:"email"`
@@ -66,7 +66,7 @@ type UserMerchantResponse struct {
 type UserMerchantByIdResponse struct {
 	ID            string                   `json:"id"`
 	UserID        string                   `json:"user_id"`
-	MerchantID    string                   `json:"merchant_id"`
+	DetailID      string                   `json:"detail_id"`
 	FullName      string                   `json:"full_name"`
 	Whatsapp      string                   `json:"whatsapp"`
 	Email         string                   `json:"email"`
@@ -112,7 +112,7 @@ type UserMerchantVerifiedByID struct {
 type UserMerchantUpdateRequest struct {
 	ID           string                   `json:"id"`
 	UserID       string                   `json:"user_id"`
-	MerchantID   string                   `json:"merchant_id"`
+	DetailID     string                   `json:"detail_id"`
 	FullName     string                   `json:"full_name"`
 	Email        string                   `json:"email"`
 	Whatsapp     string                   `json:"whatsapp"`
@@ -128,7 +128,7 @@ type UserMerchantUpdateRequest struct {
 type UserMerchantUpdateResponse struct {
 	ID           string                   `json:"id"`
 	UserID       string                   `json:"user_id"`
-	MerchantID   string                   `json:"merchant_id"`
+	DetailID     string                   `json:"detail_id"`
 	FullName     string                   `json:"full_name"`
 	Email        string                   `json:"email"`
 	Whatsapp     string                   `json:"whatsapp"`
@@ -144,7 +144,7 @@ type UserMerchantUpdateResponse struct {
 type GetUserMerchantResponse struct {
 	ID            string               `json:"id"`
 	UserID        string               `json:"user_id"`
-	MerchantID    string               `json:"merchant_id"`
+	DetailID      string               `json:"detail_id"`
 	FullName      string               `json:"full_name"`
 	Whatsapp      string               `json:"whatsapp"`
 	Email         string               `json:"email"`

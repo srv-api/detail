@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/labstack/echo/v4"
-	"github.com/srv-api/merchant/constant"
+	"github.com/srv-api/detail/constant"
 	res "github.com/srv-api/util/s/response"
 )
 

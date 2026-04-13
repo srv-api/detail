@@ -1,7 +1,7 @@
 package qris
 
 import (
-	s "github.com/srv-api/merchant/services/transactionmethode/qris"
+	s "github.com/srv-api/detail/services/transactionmethode/qris"
 
 	"github.com/labstack/echo/v4"
 )

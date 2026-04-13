@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/srv-api/auth/entity"
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 )
 
 func (b *userRepository) Update(req dto.UserMerchantUpdateRequest) (dto.UserMerchantUpdateResponse, error) {

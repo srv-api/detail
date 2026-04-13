@@ -7,7 +7,7 @@ type RoleUserPermissionRequest struct {
 	RoleUserID   uint   `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 }
 
@@ -16,7 +16,7 @@ type RoleUserPermissionResponse struct {
 	RoleUserID   uint   `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 }
 
@@ -25,7 +25,7 @@ type RoleUserPermissionUpdateRequest struct {
 	RoleUserID   uint   `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 	UpdatedBy    string `json:"updated_by"`
 }
@@ -35,7 +35,7 @@ type RoleUserPermissionUpdateResponse struct {
 	RoleUserID   uint   `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 	UpdatedBy    string `json:"updated_by"`
 }
@@ -59,7 +59,7 @@ type GetRoleUserPermissionByIdRequest struct {
 	RoleUserID   uint      `json:"role_id"`
 	PermissionID uint      `json:"permission_id"`
 	UserID       string    `json:"user_id"`
-	MerchantID   string    `json:"merchant_id"`
+	DetailID     string    `json:"detail_id"`
 	CreatedBy    string    `json:"created_by"`
 	UpdatedBy    string    `json:"updated_by"`
 	DeletedBy    string    `json:"deleted_by"`

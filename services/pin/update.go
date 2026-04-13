@@ -1,14 +1,14 @@
 package pin
 
 import (
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 )
 
 func (b *pinService) Update(req dto.PinUpdateRequest) (dto.PinUpdateResponse, error) {
 	request := dto.PinUpdateRequest{
 		Pin:         req.Pin,
 		UserID:      req.UserID,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 		UpdatedBy:   req.UpdatedBy,
 		Description: req.Description,
 		Status:      req.Status,
@@ -22,7 +22,7 @@ func (b *pinService) Update(req dto.PinUpdateRequest) (dto.PinUpdateResponse, er
 	response := dto.PinUpdateResponse{
 		Pin:         request.Pin,
 		UserID:      request.UserID,
-		MerchantID:  request.MerchantID,
+		DetailID:    request.DetailID,
 		UpdatedBy:   request.UpdatedBy,
 		Description: request.Description,
 		Status:      request.Status,

@@ -9,7 +9,7 @@ type RoleUserRequest struct {
 	RoleID       string `json:"role_id"`
 	PermissionID []uint `json:"permission_id"` // ← wajib array
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 }
 
@@ -20,7 +20,7 @@ type RoleUserResponse struct {
 	PermissionID []uint           `json:"permission_id"` // ← wajib ADA
 	Permissions  []PermissionItem `json:"permissions"`   // label, icon, to
 	UserID       string           `json:"user_id"`
-	MerchantID   string           `json:"merchant_id"`
+	DetailID     string           `json:"detail_id"`
 	CreatedBy    string           `json:"created_by"`
 }
 
@@ -29,7 +29,7 @@ type RoleUserUpdateRequest struct {
 	RoleID       string `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 	UpdatedBy    string `json:"updated_by"`
 }
@@ -39,7 +39,7 @@ type RoleUserUpdateResponse struct {
 	RoleID       string `json:"role_id"`
 	PermissionID uint   `json:"permission_id"`
 	UserID       string `json:"user_id"`
-	MerchantID   string `json:"merchant_id"`
+	DetailID     string `json:"detail_id"`
 	CreatedBy    string `json:"created_by"`
 	UpdatedBy    string `json:"updated_by"`
 }
@@ -61,7 +61,7 @@ type GetRoleUserResponse struct {
 type GetRoleUserByIdRequest struct {
 	ID           uint      `json:"id"`
 	UserID       string    `json:"user_id"`
-	MerchantID   string    `json:"merchant_id"`
+	DetailID     string    `json:"detail_id"`
 	RoleID       string    `json:"role_id"`
 	PermissionID uint      `json:"permission_id"`
 	CreatedBy    string    `json:"created_by"`

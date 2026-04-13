@@ -1,8 +1,8 @@
 package paymentmethod
 
 import (
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *paymentmethodRepository) Update(req dto.PaymentMethodUpdateRequest) (dto.PaymentMethodUpdateResponse, error) {
@@ -12,7 +12,7 @@ func (b *paymentmethodRepository) Update(req dto.PaymentMethodUpdateRequest) (dt
 		Status:        req.Status, // Pastikan status boolean diterima dengan benar
 		UpdatedBy:     req.UpdatedBy,
 		UserID:        req.UserID,
-		MerchantID:    req.MerchantID,
+		DetailID:      req.DetailID,
 	}
 
 	// Cek apakah produk ada terlebih dahulu
@@ -34,7 +34,7 @@ func (b *paymentmethodRepository) Update(req dto.PaymentMethodUpdateRequest) (dt
 		Status:        updatePayment.Status,
 		UpdatedBy:     updatePayment.UpdatedBy,
 		UserID:        updatePayment.UserID,
-		MerchantID:    updatePayment.MerchantID,
+		DetailID:      updatePayment.DetailID,
 	}
 
 	return response, nil

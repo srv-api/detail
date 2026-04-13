@@ -1,7 +1,7 @@
 package userdetail
 
 import (
-	s "github.com/srv-api/merchant/services/userdetail"
+	s "github.com/srv-api/detail/services/userdetail"
 
 	"github.com/labstack/echo/v4"
 )

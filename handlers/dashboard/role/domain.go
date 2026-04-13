@@ -1,7 +1,7 @@
 package role
 
 import (
-	s "github.com/srv-api/merchant/services/dashboard/role"
+	s "github.com/srv-api/detail/services/dashboard/role"
 
 	"github.com/labstack/echo/v4"
 )

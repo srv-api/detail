@@ -9,7 +9,7 @@ import (
 type Category struct {
 	ID           string         `gorm:"primary_key,omitempty" json:"id"`
 	UserID       string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID   string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID     string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	CategoryName string         `gorm:"category_name,omitempty" json:"category_name"`
 	Status       int            `gorm:"status" json:"status"`
 	Description  string         `gorm:"description" json:"description"`

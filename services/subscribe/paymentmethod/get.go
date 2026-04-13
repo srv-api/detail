@@ -1,7 +1,7 @@
 package paymentmethod
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *paymentmethodService) Get(req dto.PaymentMethodRequest) ([]dto.PaymentMethodResponse, error) {

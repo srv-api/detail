@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *paymentmethodService) GetPicture(req dto.GetPaymentploadRequest) (*dto.GetPaymentUploadResponse, error) {

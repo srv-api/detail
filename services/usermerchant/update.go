@@ -1,6 +1,6 @@
 package user
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *userService) Update(req dto.UserMerchantUpdateRequest) (dto.UserMerchantUpdateResponse, error) {
 	request := dto.UserMerchantUpdateRequest{

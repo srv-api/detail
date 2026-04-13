@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *historyRepository) FindByOrderID(orderID string) (*entity.Subscribe, error) {

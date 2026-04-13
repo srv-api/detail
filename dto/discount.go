@@ -7,7 +7,7 @@ import (
 type DiscountRequest struct {
 	ID                 string    `json:"id"`
 	UserID             string    `json:"user_id"`
-	MerchantID         string    `json:"merchant_id"`
+	DetailID           string    `json:"detail_id"`
 	DiscountName       string    `json:"discount_name"`
 	DiscountPercentage uint      `json:"discount_percentage"`
 	Status             int       `json:"status"`
@@ -21,7 +21,7 @@ type DiscountRequest struct {
 type DiscountResponse struct {
 	ID                 string    `json:"id"`
 	UserID             string    `json:"user_id"`
-	MerchantID         string    `json:"merchant_id"`
+	DetailID           string    `json:"detail_id"`
 	DiscountName       string    `json:"discount_name"`
 	DiscountPercentage uint      `json:"discount_percentage"`
 	Status             string    `json:"status"`
@@ -34,7 +34,7 @@ type DiscountResponse struct {
 type DiscountUpdateRequest struct {
 	ID                 string    `json:"id"`
 	UserID             string    `json:"user_id"`
-	MerchantID         string    `json:"merchant_id"`
+	DetailID           string    `json:"detail_id"`
 	DiscountName       string    `json:"discount_name"`
 	DiscountPercentage uint      `json:"discount_percentage"`
 	Status             int       `json:"status"`
@@ -48,7 +48,7 @@ type DiscountUpdateRequest struct {
 type DiscountUpdateResponse struct {
 	ID                 string    `json:"id"`
 	UserID             string    `json:"user_id"`
-	MerchantID         string    `json:"merchant_id"`
+	DetailID           string    `json:"detail_id"`
 	DiscountName       string    `json:"discount_name"`
 	DiscountPercentage uint      `json:"discount_percentage"`
 	Status             int       `json:"status"`

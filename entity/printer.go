@@ -9,7 +9,7 @@ import (
 type Printer struct {
 	ID          string         `gorm:"id" json:"id"`
 	UserID      string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID  string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID    string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	PrinterName string         `gorm:"type:varchar(50)" json:"printer_name"`
 	Description string         `gorm:"description" json:"description"`
 	CreatedBy   string         `gorm:"created_by" json:"created_by"`
@@ -20,6 +20,6 @@ type Printer struct {
 }
 
 type PrinterAutoIncrement struct {
-	MerchantID    string `gorm:"primary_key"`
+	DetailID      string `gorm:"primary_key"`
 	NextIncrement int    `gorm:"not null;default:1"`
 }

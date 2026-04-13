@@ -1,7 +1,7 @@
 package history
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *historyService) GetById(req dto.GetHistory) (*dto.VAResponse, error) {

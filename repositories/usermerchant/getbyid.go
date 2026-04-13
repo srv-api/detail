@@ -2,8 +2,8 @@ package user
 
 import (
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
-	mentity "github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	mentity "github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 )
 
@@ -32,7 +32,7 @@ func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserMerchantByIdR
 	// ✅ Buat response DTO
 	response := &dto.UserMerchantByIdResponse{
 		ID:            user.ID,
-		MerchantID:    user.MerchantID,
+		DetailID:      user.DetailID,
 		FullName:      user.FullName,
 		Whatsapp:      decryptedWa,
 		Email:         decryptedEmail,

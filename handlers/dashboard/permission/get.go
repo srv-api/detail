@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 

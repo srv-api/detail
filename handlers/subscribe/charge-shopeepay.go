@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 
 	"github.com/labstack/echo/v4"
 )

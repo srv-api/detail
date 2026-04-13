@@ -10,7 +10,7 @@ import (
 type ContentSetting struct {
 	ID           string          `gorm:"primaryKey" json:"id"`
 	UserID       string          `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID   string          `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID     string          `gorm:"type:varchar(36);index" json:"detail_id"`
 	TopHeader    json.RawMessage `gorm:"type:jsonb" json:"top_header"`
 	ButtonHeader json.RawMessage `gorm:"type:jsonb" json:"button_header"`
 	Feature      json.RawMessage `gorm:"type:jsonb" json:"feature"`

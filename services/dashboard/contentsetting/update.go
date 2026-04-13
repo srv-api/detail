@@ -3,7 +3,7 @@ package contentsetting
 import (
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *contentsettingService) Update(req dto.UpdateContentSettingRequest) (dto.UpdateContentSettingResponse, error) {
@@ -15,7 +15,7 @@ func (s *contentsettingService) Update(req dto.UpdateContentSettingRequest) (dto
 	return dto.UpdateContentSettingResponse{
 		ID:           req.ID,
 		UserID:       req.UserID,
-		MerchantID:   req.MerchantID,
+		DetailID:     req.DetailID,
 		TopHeader:    req.TopHeader,
 		ButtonHeader: req.ButtonHeader,
 		Feature:      req.Feature,

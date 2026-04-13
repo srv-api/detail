@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *userRepository) Create(req dto.UserMerchantRequest) (dto.UserMerchantResponse, error) {
@@ -18,7 +18,7 @@ func (r *userRepository) Create(req dto.UserMerchantRequest) (dto.UserMerchantRe
 		Whatsapp:     req.Whatsapp,
 		Email:        req.Email,
 		Password:     req.Password,
-		MerchantID:   req.MerchantID,
+		DetailID:     req.DetailID,
 	}
 
 	// Save the new user to the database
@@ -34,14 +34,14 @@ func (r *userRepository) Create(req dto.UserMerchantRequest) (dto.UserMerchantRe
 		Whatsapp:     create.Whatsapp,
 		Email:        create.Email,
 		Password:     create.Password,
-		MerchantID:   create.MerchantID,
+		DetailID:     create.DetailID,
 	}
 
 	return response, nil
 }
 
 // Function to generate the user ID
-func generateUserMerchantID(prefix string, autoIncrement int) (string, error) {
+func generateUserDetailID(prefix string, autoIncrement int) (string, error) {
 	// Format auto-increment value as a 5-digit string
 	autoIncStr := fmt.Sprintf("%05d", autoIncrement)
 

@@ -1,7 +1,7 @@
 package deleteaccount
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *deleteaccountService) GetById(req dto.GetDeleteAccountByIdRequest) (*dto.DeleteAccountResponse, error) {

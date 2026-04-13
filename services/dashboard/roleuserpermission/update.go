@@ -1,6 +1,6 @@
 package roleuserpermission
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *roleuserpermissionService) Update(req dto.RoleUserPermissionUpdateRequest) (dto.RoleUserPermissionUpdateResponse, error) {
 	request := dto.RoleUserPermissionUpdateRequest{

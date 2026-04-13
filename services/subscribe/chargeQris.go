@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *subscribeService) ChargeQris(req dto.ChargeRequest) (*dto.QrisResponse, error) {

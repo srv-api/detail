@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 )
 
 // func (s *subscribeService) CreatePaypalOrder(req dto.PaypalCreateRequest) (*dto.PaypalOrderResponse, error) {

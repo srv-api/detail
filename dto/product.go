@@ -8,7 +8,7 @@ import (
 type ProductRequest struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	ProductName string `json:"product_name"`
 	Description string `json:"description"`
 	Price       int    `json:"price"`
@@ -35,7 +35,7 @@ type BulkEditAvail struct {
 type ProductResponse struct {
 	ID          string    `json:"id"`
 	UserID      string    `json:"user_id"`
-	MerchantID  string    `json:"merchant_id"`
+	DetailID    string    `json:"detail_id"`
 	ProductName string    `json:"product_name"`
 	Description string    `json:"description"`
 	Price       int       `json:"price"`
@@ -76,7 +76,7 @@ type ProductUpdateRequest struct {
 	Status      int    `json:"status"`
 	UpdatedBy   string `json:"updated_by"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Description string `json:"description"`
 }
 
@@ -87,7 +87,7 @@ type ProductUploadRequest struct {
 	UpdatedBy   string `json:"updated_by"`
 	ProductID   string `json:"product_id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Destination string `json:"destination"`
 }
 
@@ -111,7 +111,7 @@ type ProductUpdateResponse struct {
 	Status      int    `json:"status"`
 	UpdatedBy   string `json:"updated_by"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Description string `json:"description"`
 }
 
@@ -152,11 +152,11 @@ type ImportResultDTO struct {
 }
 
 type ExportFilter struct {
-	From       string `json:"from"`
-	To         string `json:"to"`
-	UserID     string `json:"user_id"`
-	Barcode    string `json:"barcode"`
-	MerchantID string `json:"merchant_id"`
+	From           string `json:"from"`
+	To             string `json:"to"`
+	UserID         string `json:"user_id"`
+	Barcode        string `json:"barcode"`
+	DetailIDstring `json:"detail_id"`
 }
 
 type BulkEditRequest struct {

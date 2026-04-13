@@ -2,7 +2,7 @@ package userdetail
 
 import (
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error) {

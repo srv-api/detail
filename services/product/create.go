@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	"golang.org/x/crypto/blake2b"
 	"gorm.io/gorm"
 )
@@ -15,10 +15,10 @@ import (
 func (s *productService) Create(req dto.ProductRequest) (dto.ProductResponse, error) {
 	// Validasi MerchantDetail
 	var merchantDetail entity.UserDetail
-	err := s.Repo.CheckMerchantDetail(req.MerchantID, &merchantDetail)
+	err := s.Repo.CheckMerchantDetail(req.DetailID, &merchantDetail)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return dto.ProductResponse{}, fmt.Errorf("merchant detail not found for merchant_id: %s", req.MerchantID)
+			return dto.ProductResponse{}, fmt.Errorf("merchant detail not found for detail_id: %s", req.DetailID)
 		}
 		return dto.ProductResponse{}, err
 	}
@@ -32,7 +32,7 @@ func (s *productService) Create(req dto.ProductRequest) (dto.ProductResponse, er
 		Price:       req.Price,
 		Status:      req.Status,
 		UserID:      req.UserID,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 		CreatedBy:   req.CreatedBy,
 	}
 
@@ -59,7 +59,7 @@ func (s *productService) Create(req dto.ProductRequest) (dto.ProductResponse, er
 		Description: created.Description,
 		Price:       created.Price,
 		Status:      statusString,
-		MerchantID:  created.MerchantID,
+		DetailID:    created.DetailID,
 		CreatedBy:   created.CreatedBy,
 	}
 

@@ -3,11 +3,11 @@ package dto
 import "time"
 
 type RoleRequest struct {
-	ID         string `json:"id"`
-	Role       string `json:"role`
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
-	CreatedBy  string `json:"created_by"`
+	ID        string `json:"id"`
+	Role      string `json:"role`
+	UserID    string `json:"user_id"`
+	DetailID  string `json:"detail_id"`
+	CreatedBy string `json:"created_by"`
 }
 
 type RoleResponse struct {
@@ -16,21 +16,21 @@ type RoleResponse struct {
 }
 
 type RoleUpdateRequest struct {
-	ID         string `json:"id"`
-	Role       string `json:"role"`
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
-	CreatedBy  string `json:"created_by"`
-	UpdatedBy  string `json:"updated_by"`
+	ID        string `json:"id"`
+	Role      string `json:"role"`
+	UserID    string `json:"user_id"`
+	DetailID  string `json:"detail_id"`
+	CreatedBy string `json:"created_by"`
+	UpdatedBy string `json:"updated_by"`
 }
 
 type RoleUpdateResponse struct {
-	ID         string `json:"id"`
-	Role       string `json:"role"`
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
-	CreatedBy  string `json:"created_by"`
-	UpdatedBy  string `json:"updated_by"`
+	ID        string `json:"id"`
+	Role      string `json:"role"`
+	UserID    string `json:"user_id"`
+	DetailID  string `json:"detail_id"`
+	CreatedBy string `json:"created_by"`
+	UpdatedBy string `json:"updated_by"`
 }
 
 type DeleteRoleRequest struct {
@@ -44,8 +44,8 @@ type DeleteRoleResponse struct {
 }
 
 type GetRoleRequest struct {
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
+	UserID         string `json:"user_id"`
+	DetailIDstring `json:"detail_id"`
 }
 
 type GetRoleResponse struct {
@@ -53,12 +53,12 @@ type GetRoleResponse struct {
 }
 
 type GetRoleByIdRequest struct {
-	ID         string    `json:"id"`
-	UserID     string    `json:"user_id"`
-	MerchantID string    `json:"merchant_id"`
-	Role       string    `json:"role"`
-	CreatedBy  string    `json:"created_by"`
-	UpdatedBy  string    `json:"updated_by"`
-	DeletedBy  string    `json:"deleted_by"`
-	CreatedAt  time.Time `json:"created_at"`
+	ID        string    `json:"id"`
+	UserID    string    `json:"user_id"`
+	DetailID  string    `json:"detail_id"`
+	Role      string    `json:"role"`
+	CreatedBy string    `json:"created_by"`
+	UpdatedBy string    `json:"updated_by"`
+	DeletedBy string    `json:"deleted_by"`
+	CreatedAt time.Time `json:"created_at"`
 }

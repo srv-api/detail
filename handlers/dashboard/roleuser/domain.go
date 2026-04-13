@@ -1,7 +1,7 @@
 package roleuser
 
 import (
-	s "github.com/srv-api/merchant/services/dashboard/roleuser"
+	s "github.com/srv-api/detail/services/dashboard/roleuser"
 
 	"github.com/labstack/echo/v4"
 )

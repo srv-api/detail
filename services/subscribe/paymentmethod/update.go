@@ -1,6 +1,6 @@
 package paymentmethod
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *paymentmethodService) Update(req dto.PaymentMethodUpdateRequest) (dto.PaymentMethodUpdateResponse, error) {
 	request := dto.PaymentMethodUpdateRequest{

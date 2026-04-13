@@ -2,7 +2,7 @@ package pin
 
 import (
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 
@@ -25,12 +25,12 @@ func (b *domainHandler) Update(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
 
-	merchantId, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
-	req.MerchantID = merchantId
+	req.DetailID = DetailID
 	req.ID = idUint
 	req.UpdatedBy = updatedBy
 	req.UserID = userid

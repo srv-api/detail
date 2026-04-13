@@ -1,7 +1,7 @@
 package permission
 
 import (
-	s "github.com/srv-api/merchant/services/dashboard/permission"
+	s "github.com/srv-api/detail/services/dashboard/permission"
 
 	"github.com/labstack/echo/v4"
 )

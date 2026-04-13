@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 
@@ -23,7 +23,7 @@ func (h *domainHandler) UploadImage(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
-	merchantId, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
@@ -47,11 +47,11 @@ func (h *domainHandler) UploadImage(c echo.Context) error {
 
 	// Prepare request object
 	req := dto.ProductUploadRequest{
-		ID:         idUint,
-		UserID:     userID,
-		UpdatedBy:  updatedBy,
-		File:       file,
-		MerchantID: merchantId,
+		ID:        idUint,
+		UserID:    userID,
+		UpdatedBy: updatedBy,
+		File:      file,
+		DetailID:  DetailID,
 	}
 
 	// Call service to process the upload

@@ -5,18 +5,18 @@ import (
 	"fmt"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"golang.org/x/crypto/blake2b"
 )
 
 func (s *deleteaccountService) Create(req dto.DeleteAccountRequest) (dto.DeleteAccountResponse, error) {
 
 	create := dto.DeleteAccountRequest{
-		Email:      req.Email,
-		Reason:     req.Reason,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
+		Email:     req.Email,
+		Reason:    req.Reason,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	created, err := s.Repo.Create(create)
@@ -25,12 +25,12 @@ func (s *deleteaccountService) Create(req dto.DeleteAccountRequest) (dto.DeleteA
 	}
 
 	response := dto.DeleteAccountResponse{
-		ID:         created.ID,
-		UserID:     created.UserID,
-		Email:      created.Email,
-		Reason:     created.Reason,
-		MerchantID: created.MerchantID,
-		CreatedBy:  created.CreatedBy,
+		ID:        created.ID,
+		UserID:    created.UserID,
+		Email:     created.Email,
+		Reason:    created.Reason,
+		DetailID:  created.DetailID,
+		CreatedBy: created.CreatedBy,
 	}
 
 	return response, nil

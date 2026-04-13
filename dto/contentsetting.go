@@ -9,7 +9,7 @@ type GetByContentSettingIdRequest struct {
 type ContentSettingRequest struct {
 	ID          string `gorm:"primary_key,omitempty" json:"id"`
 	UserID      string `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID  string `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID    string `gorm:"type:varchar(36);index" json:"detail_id"`
 	Logo        string `gorm:"logo,omitempty" json:"logo"`
 	Title       string `gorm:"title,omitempty" json:"title"`
 	Description string `gorm:"description" json:"description"`
@@ -29,7 +29,7 @@ type ContentSettingResponse struct {
 type UpdateContentSettingRequest struct {
 	ID           string         `json:"id"`
 	UserID       string         `json:"user_id"`
-	MerchantID   string         `json:"merchant_id"`
+	DetailID     string         `json:"detail_id"`
 	TopHeader    []TopHeader    `json:"top_header"`
 	ButtonHeader []ButtonHeader `json:"button_header"`
 	Feature      []Feature      `json:"feature"`
@@ -41,7 +41,7 @@ type UpdateContentSettingRequest struct {
 type UpdateContentSettingResponse struct {
 	ID           string         `json:"id"`
 	UserID       string         `json:"user_id"`
-	MerchantID   string         `json:"merchant_id"`
+	DetailID     string         `json:"detail_id"`
 	TopHeader    []TopHeader    `json:"top_header"`
 	ButtonHeader []ButtonHeader `json:"button_header"`
 	Feature      []Feature      `json:"feature"`

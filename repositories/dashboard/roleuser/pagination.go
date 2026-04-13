@@ -5,7 +5,7 @@ import (
 	"math"
 	"strings"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *RoleUserRepository) Pagination(req *dto.Pagination) (RepositoryResult, int) {
@@ -20,7 +20,7 @@ func (r *RoleUserRepository) Pagination(req *dto.Pagination) (RepositoryResult, 
 			ru.id,
 			ru.role_id,
 			ru.user_id,
-			ru.merchant_id,
+			ru.detail_id,
 			ru.created_by,
 			ru.permission_id,
 			roles.role AS role_name,

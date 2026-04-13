@@ -5,11 +5,11 @@ type CapturePaypalOrderRequest struct {
 }
 
 type PaypalCreateRequest struct {
-	Amount     string `json:"amount" validate:"required"`
-	Currency   string `json:"currency" validate:"required"`
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
-	CreatedBy  string `json:"created_by"`
+	Amount    string `json:"amount" validate:"required"`
+	Currency  string `json:"currency" validate:"required"`
+	UserID    string `json:"user_id"`
+	DetailID  string `json:"detail_id"`
+	CreatedBy string `json:"created_by"`
 }
 
 type PaypalOrderResponse struct {

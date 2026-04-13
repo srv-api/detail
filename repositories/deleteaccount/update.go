@@ -1,18 +1,18 @@
 package deleteaccount
 
 import (
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *deleteaccountRepository) Update(req dto.DeleteAccountUpdateRequest) (dto.DeleteAccountUpdateResponse, error) {
 	// Menyiapkan struktur update untuk produk
 	updateTable := entity.DeleteAccount{
-		Email:      req.Email,
-		Reason:     req.Reason,
-		UpdatedBy:  req.UpdatedBy,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
+		Email:     req.Email,
+		Reason:    req.Reason,
+		UpdatedBy: req.UpdatedBy,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
 	}
 
 	// Cek apakah produk ada terlebih dahulu
@@ -30,11 +30,11 @@ func (b *deleteaccountRepository) Update(req dto.DeleteAccountUpdateRequest) (dt
 
 	// Menyiapkan response setelah pembaruan berhasil
 	response := dto.DeleteAccountUpdateResponse{
-		Email:      updateTable.Email,
-		Reason:     updateTable.Reason,
-		UpdatedBy:  updateTable.UpdatedBy,
-		UserID:     updateTable.UserID,
-		MerchantID: updateTable.MerchantID,
+		Email:     updateTable.Email,
+		Reason:    updateTable.Reason,
+		UpdatedBy: updateTable.UpdatedBy,
+		UserID:    updateTable.UserID,
+		DetailID:  updateTable.DetailID,
 	}
 
 	return response, nil

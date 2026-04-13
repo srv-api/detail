@@ -7,9 +7,9 @@ import (
 	"github.com/midtrans/midtrans-go"
 
 	"github.com/midtrans/midtrans-go/snap"
-	"github.com/srv-api/merchant/constant"
+	"github.com/srv-api/detail/constant"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	util "github.com/srv-api/util/s"
 )
 

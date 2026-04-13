@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 
@@ -18,7 +18,7 @@ func (h *domainHandler) Update(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, errors.New("missing id")).Send(c)
 	}
 
-	// ✅ Ambil UserID, UpdatedBy, MerchantID dari context (biasanya dari JWT middleware)
+	// ✅ Ambil UserID, UpdatedBy, DetailIDdari context (biasanya dari JWT middleware)
 	userID, ok := c.Get("UserId").(string)
 	if !ok || userID == "" {
 		return res.ErrorBuilder(&res.ErrorConstant.Unauthorized, errors.New("invalid user")).Send(c)
@@ -29,8 +29,8 @@ func (h *domainHandler) Update(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.Unauthorized, errors.New("invalid updater")).Send(c)
 	}
 
-	merchantID, ok := c.Get("MerchantId").(string)
-	if !ok || merchantID == "" {
+	DetailID, ok := c.Get("DetailID").(string)
+	if !ok || DetailID == "" {
 		return res.ErrorBuilder(&res.ErrorConstant.Unauthorized, errors.New("invalid merchant")).Send(c)
 	}
 
@@ -46,7 +46,7 @@ func (h *domainHandler) Update(c echo.Context) error {
 	// ✅ Set field tambahan dari context
 	req.ID = id
 	req.UserID = userID
-	req.MerchantID = merchantID
+	req.DetailID = DetailID
 	req.UpdatedBy = updatedBy
 
 	// ✅ Panggil service

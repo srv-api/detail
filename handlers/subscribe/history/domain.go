@@ -1,7 +1,7 @@
 package history
 
 import (
-	s "github.com/srv-api/merchant/services/subscribe/history"
+	s "github.com/srv-api/detail/services/subscribe/history"
 
 	"github.com/labstack/echo/v4"
 )

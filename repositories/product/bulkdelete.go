@@ -1,7 +1,7 @@
 package product
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"github.com/srv-api/product/entity"
 )
 

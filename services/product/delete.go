@@ -1,7 +1,7 @@
 package product
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *productService) Delete(req dto.DeleteRequest) (dto.DeleteResponse, error) {

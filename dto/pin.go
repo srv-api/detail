@@ -3,7 +3,7 @@ package dto
 type PinRequest struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Pin         string `json:"pin"`
 	CreatedBy   string `json:"created_by"`
 	Description string `json:"description"`
@@ -13,7 +13,7 @@ type PinRequest struct {
 type PinResponse struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Pin         string `json:"pin"`
 	CreatedBy   string `json:"created_by"`
 	Description string `json:"description"`
@@ -37,7 +37,7 @@ type DeletePinResponse struct {
 type PinUpdateRequest struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Pin         string `json:"pin"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`
@@ -47,7 +47,7 @@ type PinUpdateRequest struct {
 type PinUpdateResponse struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	Pin         string `json:"pin"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`
@@ -66,10 +66,10 @@ type BulkDeletePinResponse struct {
 }
 
 type VerifyPinRequest struct {
-	UserID     string `json:"user_id" validate:"required"`
-	PIN        string `json:"pin" validate:"required"`
-	MerchantID string `json:"merchant_id"`
-	CreatedBy  string `json:"created_by"`
+	UserID    string `json:"user_id" validate:"required"`
+	PIN       string `json:"pin" validate:"required"`
+	DetailID  string `json:"detail_id"`
+	CreatedBy string `json:"created_by"`
 }
 
 type VerifyPinResponse struct {

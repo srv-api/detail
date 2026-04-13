@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (h *domainHandler) ChargeGpay(c echo.Context) error {

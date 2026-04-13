@@ -1,7 +1,7 @@
 package roleuserpermission
 
 import (
-	s "github.com/srv-api/merchant/services/dashboard/roleuserpermission"
+	s "github.com/srv-api/detail/services/dashboard/roleuserpermission"
 
 	"github.com/labstack/echo/v4"
 )

@@ -1,8 +1,8 @@
 package paymentmethod
 
 import (
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *paymentmethodRepository) Get(req dto.PaymentMethodRequest) ([]dto.PaymentMethodResponse, error) {
@@ -26,7 +26,7 @@ func (r *paymentmethodRepository) Get(req dto.PaymentMethodRequest) ([]dto.Payme
 		result = append(result, dto.PaymentMethodResponse{
 			ID:            pm.ID,
 			UserID:        pm.UserID,
-			MerchantID:    pm.MerchantID,
+			DetailID:      pm.DetailID,
 			PaymentMethod: pm.PaymentMethod,
 			Status:        pm.Status,
 			CreatedBy:     pm.CreatedBy,

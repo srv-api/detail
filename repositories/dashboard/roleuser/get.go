@@ -3,7 +3,7 @@ package roleuser
 import (
 	"encoding/json"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *RoleUserRepository) Get(req dto.RoleUserRequest) (dto.GetRoleUserResponse, error) {
@@ -13,7 +13,7 @@ func (r *RoleUserRepository) Get(req dto.RoleUserRequest) (dto.GetRoleUserRespon
 		RoleName     string
 		PermissionID []byte
 		UserID       string
-		MerchantID   string
+		DetailID     string
 		CreatedBy    string
 
 		// Permission Items
@@ -30,7 +30,7 @@ func (r *RoleUserRepository) Get(req dto.RoleUserRequest) (dto.GetRoleUserRespon
 			r.role AS role_name,
 			ru.permission_id,
 			ru.user_id,
-			ru.merchant_id,
+			ru.detail_id,
 			p.id AS perm_id,
 			p.label,
 			p.icon,
@@ -42,7 +42,7 @@ func (r *RoleUserRepository) Get(req dto.RoleUserRequest) (dto.GetRoleUserRespon
 				ON ru.permission_id::jsonb @> ('[' || p.id || ']')::jsonb
 		`).
 		Where("ru.user_id = ?", req.UserID).
-		Where("ru.merchant_id = ?", req.MerchantID).
+		Where("ru.detail_id = ?", req.DetailID).
 		Scan(&rows).Error
 
 	if err != nil {
@@ -63,7 +63,7 @@ func (r *RoleUserRepository) Get(req dto.RoleUserRequest) (dto.GetRoleUserRespon
 				RoleID:      row.RoleID,
 				RoleName:    row.RoleName, // ← Tambahkan
 				UserID:      row.UserID,
-				MerchantID:  row.MerchantID,
+				DetailID:    row.DetailID,
 				CreatedBy:   row.CreatedBy,
 				Permissions: []dto.PermissionItem{},
 			}

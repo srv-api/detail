@@ -1,7 +1,7 @@
 package contentsetting
 
 import (
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *contentsettingRepository) GetById(id string) (*entity.ContentSetting, error) {

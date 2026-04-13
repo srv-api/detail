@@ -1,8 +1,8 @@
 package paymentmethod
 
 import (
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *paymentmethodRepository) GetPicture(req dto.GetPaymentploadRequest) (*dto.GetPaymentUploadResponse, error) {

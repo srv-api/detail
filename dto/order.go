@@ -6,7 +6,7 @@ type FCMRequest struct {
 	Name        string        `json:"name"`
 	ID          uint          `json:"id"`
 	UserID      string        `json:"user_id"`
-	MerchantID  string        `json:"merchant_id"`
+	DetailID    string        `json:"detail_id"`
 	Product     []ProductItem `json:"product"`
 	ProductJSON string        `json:"-" gorm:"column:product"`
 	OrderName   string        `json:"order_name"`
@@ -32,7 +32,7 @@ type TokenResponse struct {
 type OrderRequest struct {
 	ID          uint          `json:"id"`
 	UserID      string        `json:"user_id"`
-	MerchantID  string        `json:"merchant_id"`
+	DetailID    string        `json:"detail_id"`
 	Product     []ProductItem `json:"product"`
 	ProductJSON string        `json:"-" gorm:"column:product"`
 	OrderName   string        `json:"order_name"`
@@ -50,7 +50,7 @@ type ProductItem struct {
 type OrderResponse struct {
 	ID          uint          `json:"id"`
 	UserID      string        `json:"user_id"`
-	MerchantID  string        `json:"merchant_id"`
+	DetailID    string        `json:"detail_id"`
 	OrderName   string        `json:"order_name"`
 	CreatedBy   string        `json:"created_by"`
 	Description string        `json:"description"`
@@ -61,7 +61,7 @@ type OrderResponse struct {
 type OrderUpdateRequest struct {
 	ID          uint   `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	OrderName   string `json:"order_name"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`
@@ -71,7 +71,7 @@ type OrderUpdateRequest struct {
 type OrderUpdateResponse struct {
 	ID          uint   `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	OrderName   string `json:"order_name"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`

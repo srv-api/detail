@@ -1,19 +1,19 @@
 package permission
 
 import (
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *PermissionRepository) Update(req dto.PermissionUpdateRequest) (dto.PermissionUpdateResponse, error) {
 	// Menyiapkan struktur update untuk produk
 	updatePermission := entity.Permission{
-		Label:      req.Label,
-		Icon:       req.Icon, // Pastikan status boolean diterima dengan benar
-		UpdatedBy:  req.UpdatedBy,
-		UserID:     req.UserID,
-		To:         req.To,
-		MerchantID: req.MerchantID,
+		Label:     req.Label,
+		Icon:      req.Icon, // Pastikan status boolean diterima dengan benar
+		UpdatedBy: req.UpdatedBy,
+		UserID:    req.UserID,
+		To:        req.To,
+		DetailID:  req.DetailID,
 	}
 
 	// Cek apakah produk ada terlebih dahulu
@@ -31,12 +31,12 @@ func (b *PermissionRepository) Update(req dto.PermissionUpdateRequest) (dto.Perm
 
 	// Menyiapkan response setelah pembaruan berhasil
 	response := dto.PermissionUpdateResponse{
-		Label:      updatePermission.Label,
-		Icon:       updatePermission.Icon,
-		UpdatedBy:  updatePermission.UpdatedBy,
-		UserID:     updatePermission.UserID,
-		MerchantID: updatePermission.MerchantID,
-		To:         updatePermission.To,
+		Label:     updatePermission.Label,
+		Icon:      updatePermission.Icon,
+		UpdatedBy: updatePermission.UpdatedBy,
+		UserID:    updatePermission.UserID,
+		DetailID:  updatePermission.DetailID,
+		To:        updatePermission.To,
 	}
 
 	return response, nil

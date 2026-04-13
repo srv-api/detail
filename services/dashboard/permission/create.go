@@ -5,19 +5,19 @@ import (
 	"fmt"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"golang.org/x/crypto/blake2b"
 )
 
 func (s *permissionService) Create(req dto.PermissionRequest) (dto.PermissionResponse, error) {
 
 	create := dto.PermissionRequest{
-		Label:      req.Label,
-		Icon:       req.Icon,
-		To:         req.To,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
+		Label:     req.Label,
+		Icon:      req.Icon,
+		To:        req.To,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	created, err := s.Repo.Create(create)

@@ -1,16 +1,16 @@
 package role
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *roleService) Create(req dto.RoleRequest) (dto.RoleResponse, error) {
 
 	create := dto.RoleRequest{
-		Role:       req.Role,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
+		Role:      req.Role,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	created, err := s.Repo.Create(create)

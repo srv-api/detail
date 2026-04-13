@@ -2,7 +2,7 @@ package subscribe
 
 import (
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	"golang.org/x/crypto/blake2b"
 )
 
@@ -18,12 +18,12 @@ func (s *paymentmethodService) Create(req dto.PaymentMethodRequest) (dto.Payment
 
 	if req.FilePath != "" && req.FileName != "" {
 		image := entity.UploadedPayment{
-			UserID:     req.UserID,
-			MerchantID: req.MerchantID,
-			PaymentID:  created.ID,
-			FileName:   req.FileName,
-			FilePath:   req.FilePath,
-			CreatedBy:  req.CreatedBy,
+			UserID:    req.UserID,
+			DetailID:  req.DetailID,
+			PaymentID: created.ID,
+			FileName:  req.FileName,
+			FilePath:  req.FilePath,
+			CreatedBy: req.CreatedBy,
 		}
 		if err := s.Repo.SaveImage(image); err != nil {
 			return dto.PaymentMethodResponse{}, err
@@ -33,7 +33,7 @@ func (s *paymentmethodService) Create(req dto.PaymentMethodRequest) (dto.Payment
 	resp := dto.PaymentMethodResponse{
 		ID:            created.ID,
 		UserID:        created.UserID,
-		MerchantID:    created.MerchantID,
+		DetailID:      created.DetailID,
 		PaymentMethod: created.PaymentMethod,
 		Status:        created.Status,
 		CreatedBy:     created.CreatedBy,

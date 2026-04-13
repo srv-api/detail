@@ -1,7 +1,7 @@
 package userdetail
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *merchantService) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error) {

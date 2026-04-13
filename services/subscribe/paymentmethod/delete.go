@@ -1,7 +1,7 @@
 package paymentmethod
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *paymentmethodService) Delete(req dto.DeletePaymentRequest) (dto.DeletePaymentResponse, error) {

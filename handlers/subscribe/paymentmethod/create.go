@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 )
 
@@ -21,7 +21,7 @@ func (h *domainHandler) Create(c echo.Context) error {
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
-	merchantID, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
@@ -56,7 +56,7 @@ func (h *domainHandler) Create(c echo.Context) error {
 
 	req := dto.PaymentMethodRequest{
 		UserID:        userID,
-		MerchantID:    merchantID,
+		DetailID:      DetailID,
 		CreatedBy:     createdBy,
 		PaymentMethod: paymentMethod,
 		Status:        status,

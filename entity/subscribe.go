@@ -8,7 +8,7 @@ import (
 
 type Subscribe struct {
 	ID              string         `gorm:"primary_key,omitempty" json:"id"`
-	MerchantID      string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID        string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	UserID          string         `gorm:"type:varchar(36);index" json:"user_id"`
 	OrderID         string         `gorm:"order_id,omitempty" json:"order_id"`
 	TransactionID   string         `gorm:"transaction_id,omitempty" json:"transaction_id"`

@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *userRepository) GetById(req dto.GetByIdRequest) (*dto.UserResponse, error) {

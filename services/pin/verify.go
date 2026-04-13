@@ -3,7 +3,7 @@ package pin
 import (
 	"errors"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"golang.org/x/crypto/bcrypt"
 )
 

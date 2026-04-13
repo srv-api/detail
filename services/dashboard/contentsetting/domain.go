@@ -1,10 +1,10 @@
 package contentsetting
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	m "github.com/srv-api/middlewares/middlewares"
 
-	r "github.com/srv-api/merchant/repositories/dashboard/contentsetting"
+	r "github.com/srv-api/detail/repositories/dashboard/contentsetting"
 )
 
 type ContentSettingService interface {

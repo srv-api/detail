@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"github.com/srv-api/product/entity"
 )
 
@@ -35,7 +35,7 @@ func (b *productRepository) GetById(req dto.GetByIdRequest) (*dto.ProductRespons
 	response := &dto.ProductResponse{
 		ID:          tr.ID,
 		UserID:      tr.UserID,
-		MerchantID:  tr.MerchantID,
+		DetailID:    tr.DetailID,
 		ProductName: tr.ProductName,
 		Price:       tr.Price,
 		Status:      statusString,

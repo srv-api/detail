@@ -3,7 +3,7 @@ package subscribe
 import (
 	"errors"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *subscribeService) ChargeCimb(req dto.ChargeRequest) (*dto.VAResponse, error) {

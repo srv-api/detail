@@ -1,7 +1,7 @@
 package pin
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	util "github.com/srv-api/util/s"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -15,11 +15,11 @@ func (s *pinService) Create(req dto.PinRequest) (dto.PinResponse, error) {
 
 	// Proses pembuatan data Pin
 	create := dto.PinRequest{
-		ID:         util.GenerateRandomString(),
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		Pin:        string(hashedPin),
-		CreatedBy:  req.CreatedBy,
+		ID:        util.GenerateRandomString(),
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		Pin:       string(hashedPin),
+		CreatedBy: req.CreatedBy,
 	}
 
 	created, err := s.Repo.Create(create)
@@ -28,11 +28,11 @@ func (s *pinService) Create(req dto.PinRequest) (dto.PinResponse, error) {
 	}
 
 	response := dto.PinResponse{
-		ID:         created.ID,
-		MerchantID: created.MerchantID,
-		Pin:        "",
-		UserID:     created.UserID,
-		CreatedBy:  created.CreatedBy,
+		ID:        created.ID,
+		DetailID:  created.DetailID,
+		Pin:       "",
+		UserID:    created.UserID,
+		CreatedBy: created.CreatedBy,
 	}
 
 	return response, nil

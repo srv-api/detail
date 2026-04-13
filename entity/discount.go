@@ -9,7 +9,7 @@ import (
 type Discount struct {
 	ID                 string         `gorm:"primary_key,omitempty" json:"id"`
 	UserID             string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID         string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID           string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	DiscountName       string         `gorm:"discount_name,omitempty" json:"discount_name"`
 	DiscountPercentage uint           `gorm:"discount_percentage,omitempty" json:"discount_percentage"`
 	Status             int            `gorm:"status,omitempty" json:"status"`

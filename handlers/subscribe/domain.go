@@ -1,7 +1,7 @@
 package subscribe
 
 import (
-	s "github.com/srv-api/merchant/services/subscribe"
+	s "github.com/srv-api/detail/services/subscribe"
 
 	"github.com/labstack/echo/v4"
 )

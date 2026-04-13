@@ -2,7 +2,7 @@ package subscribe
 
 import (
 	"github.com/plutov/paypal/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"gorm.io/gorm"
 )
 

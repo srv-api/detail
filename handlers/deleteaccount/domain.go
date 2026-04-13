@@ -1,7 +1,7 @@
 package deleteaccount
 
 import (
-	s "github.com/srv-api/merchant/services/deleteaccount"
+	s "github.com/srv-api/detail/services/deleteaccount"
 
 	"github.com/labstack/echo/v4"
 )

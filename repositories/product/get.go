@@ -5,7 +5,7 @@ import (
 	"math"
 	"strings"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"github.com/srv-api/product/entity"
 	"github.com/srv-api/product/helpers"
 )
@@ -21,7 +21,7 @@ func (r *productRepository) Get(req *dto.Pagination) (RepositoryResult, int) {
 
 	// Ambil data sesuai limit, offset, dan urutan
 	find := r.DB.Preload("Image").
-		Where("merchant_id = ?", req.MerchantID).
+		Where("detail_id = ?", req.DetailID).
 		Limit(req.Limit).
 		Offset(offset).
 		Order(req.Sort)
@@ -54,7 +54,7 @@ func (r *productRepository) Get(req *dto.Pagination) (RepositoryResult, int) {
 	req.Rows = products
 
 	// Hitung total data
-	if errCount := r.DB.Model(&entity.Product{}).Where("merchant_id = ?", req.MerchantID).Count(&totalRows).Error; errCount != nil {
+	if errCount := r.DB.Model(&entity.Product{}).Where("detail_id = ?", req.DetailID).Count(&totalRows).Error; errCount != nil {
 		return RepositoryResult{Error: errCount}, totalPages
 	}
 

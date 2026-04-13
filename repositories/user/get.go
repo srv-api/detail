@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/helpers"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/helpers"
 	util "github.com/srv-api/util/s"
 )
 

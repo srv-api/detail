@@ -5,9 +5,9 @@ import (
 	"math"
 	"strings"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
-	"github.com/srv-api/merchant/helpers"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
+	"github.com/srv-api/detail/helpers"
 )
 
 func (r *RoleRepository) Pagination(req *dto.Pagination) (RepositoryResult, int) {

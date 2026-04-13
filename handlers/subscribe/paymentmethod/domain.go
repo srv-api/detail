@@ -1,7 +1,7 @@
 package paymentmethod
 
 import (
-	s "github.com/srv-api/merchant/services/subscribe/paymentmethod"
+	s "github.com/srv-api/detail/services/subscribe/paymentmethod"
 
 	"github.com/labstack/echo/v4"
 )

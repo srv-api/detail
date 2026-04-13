@@ -1,7 +1,7 @@
 package role
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *roleService) Delete(req dto.DeleteRoleRequest) (dto.DeleteRoleResponse, error) {

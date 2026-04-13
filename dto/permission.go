@@ -5,16 +5,16 @@ import (
 )
 
 type PermissionRequest struct {
-	ID         uint      `json:"id"`
-	UserID     string    `json:"user_id"`
-	MerchantID string    `json:"merchant_id"`
-	Label      string    `json:"label"`
-	Icon       string    `json:"icon"`
-	To         string    `json:"to"`
-	CreatedBy  string    `json:"created_by"`
-	UpdatedBy  string    `json:"updated_by"`
-	DeletedBy  string    `json:"deleted_by"`
-	CreatedAt  time.Time `json:"created_at"`
+	ID        uint      `json:"id"`
+	UserID    string    `json:"user_id"`
+	DetailID  string    `json:"detail_id"`
+	Label     string    `json:"label"`
+	Icon      string    `json:"icon"`
+	To        string    `json:"to"`
+	CreatedBy string    `json:"created_by"`
+	UpdatedBy string    `json:"updated_by"`
+	DeletedBy string    `json:"deleted_by"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type PermissionResponse struct {
@@ -24,16 +24,16 @@ type PermissionResponse struct {
 }
 
 type GetPermissionByIdRequest struct {
-	ID         uint      `json:"id"`
-	UserID     string    `json:"user_id"`
-	MerchantID string    `json:"merchant_id"`
-	Label      string    `json:"label"`
-	Icon       string    `json:"icon"`
-	To         string    `json:"to"`
-	CreatedBy  string    `json:"created_by"`
-	UpdatedBy  string    `json:"updated_by"`
-	DeletedBy  string    `json:"deleted_by"`
-	CreatedAt  time.Time `json:"created_at"`
+	ID        uint      `json:"id"`
+	UserID    string    `json:"user_id"`
+	DetailID  string    `json:"detail_id"`
+	Label     string    `json:"label"`
+	Icon      string    `json:"icon"`
+	To        string    `json:"to"`
+	CreatedBy string    `json:"created_by"`
+	UpdatedBy string    `json:"updated_by"`
+	DeletedBy string    `json:"deleted_by"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type DeletePermissionRequest struct {
@@ -58,24 +58,24 @@ type PermissionItem struct {
 }
 
 type PermissionUpdateRequest struct {
-	ID         string `json:"id"`
-	Label      string `json:"label"`
-	Icon       string `json:"icon"`
-	To         string `json:"to"`
-	UserID     string `json:"user_id"`
-	MerchantID string `json:"merchant_id"`
-	UpdatedBy  string `json:"updated_by"`
+	ID        string `json:"id"`
+	Label     string `json:"label"`
+	Icon      string `json:"icon"`
+	To        string `json:"to"`
+	UserID    string `json:"user_id"`
+	DetailID  string `json:"detail_id"`
+	UpdatedBy string `json:"updated_by"`
 }
 
 type PermissionUpdateResponse struct {
-	ID         string    `json:"id"`
-	UserID     string    `json:"user_id"`
-	MerchantID string    `json:"merchant_id"`
-	Label      string    `json:"label"`
-	Icon       string    `json:"icon"`
-	To         string    `json:"to"`
-	CreatedBy  string    `json:"created_by"`
-	UpdatedBy  string    `json:"updated_by"`
-	DeletedBy  string    `json:"deleted_by"`
-	CreatedAt  time.Time `json:"created_at"`
+	ID        string    `json:"id"`
+	UserID    string    `json:"user_id"`
+	DetailID  string    `json:"detail_id"`
+	Label     string    `json:"label"`
+	Icon      string    `json:"icon"`
+	To        string    `json:"to"`
+	CreatedBy string    `json:"created_by"`
+	UpdatedBy string    `json:"updated_by"`
+	DeletedBy string    `json:"deleted_by"`
+	CreatedAt time.Time `json:"created_at"`
 }

@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/plutov/paypal/v4"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/entity"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"

@@ -1,10 +1,10 @@
 package paymentmethod
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	m "github.com/srv-api/middlewares/middlewares"
 
-	r "github.com/srv-api/merchant/repositories/subscribe/paymentmethod"
+	r "github.com/srv-api/detail/repositories/subscribe/paymentmethod"
 )
 
 type PaymentMethodService interface {

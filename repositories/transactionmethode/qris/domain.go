@@ -1,7 +1,7 @@
 package qris
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 
 	"gorm.io/gorm"
 )

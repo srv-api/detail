@@ -4,18 +4,18 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	"gorm.io/gorm"
 )
 
 func (b *productService) Update(req dto.ProductUpdateRequest) (dto.ProductUpdateResponse, error) {
 	// Validasi MerchantDetail
 	var merchantDetail entity.UserDetail
-	err := b.Repo.CheckMerchantDetail(req.MerchantID, &merchantDetail)
+	err := b.Repo.CheckMerchantDetail(req.DetailID, &merchantDetail)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return dto.ProductUpdateResponse{}, fmt.Errorf("merchant detail not found for merchant_id: %s", req.MerchantID)
+			return dto.ProductUpdateResponse{}, fmt.Errorf("merchant detail not found for detail_id: %s", req.DetailID)
 		}
 		return dto.ProductUpdateResponse{}, err
 	}
@@ -27,7 +27,7 @@ func (b *productService) Update(req dto.ProductUpdateRequest) (dto.ProductUpdate
 		UpdatedBy:   req.UpdatedBy,
 		UserID:      req.UserID,
 		Description: req.Description,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 	}
 
 	product, err := b.Repo.Update(req)
@@ -42,7 +42,7 @@ func (b *productService) Update(req dto.ProductUpdateRequest) (dto.ProductUpdate
 		UpdatedBy:   request.UpdatedBy,
 		UserID:      request.UserID,
 		Description: request.Description,
-		MerchantID:  request.MerchantID,
+		DetailID:    request.DetailID,
 	}
 
 	return response, nil

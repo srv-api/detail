@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	"gorm.io/gorm"
 )
 
@@ -17,10 +17,10 @@ func (s *productService) Upload(req dto.ProductUploadRequest) (dto.ProductUpload
 
 	// Validasi MerchantDetail
 	var merchantDetail entity.UserDetail
-	err := s.Repo.CheckMerchantDetail(req.MerchantID, &merchantDetail)
+	err := s.Repo.CheckMerchantDetail(req.DetailID, &merchantDetail)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return dto.ProductUploadResponse{}, fmt.Errorf("merchant detail not found for merchant_id: %s", req.MerchantID)
+			return dto.ProductUploadResponse{}, fmt.Errorf("merchant detail not found for detail_id: %s", req.DetailID)
 		}
 		return dto.ProductUploadResponse{}, err
 	}

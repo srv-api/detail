@@ -1,8 +1,8 @@
 package roleuser
 
 import (
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *RoleUserRepository) Update(req dto.RoleUserUpdateRequest) (dto.RoleUserUpdateResponse, error) {

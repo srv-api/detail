@@ -1,7 +1,7 @@
 package product
 
 import (
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 	"github.com/srv-api/product/entity"
 )
 
@@ -14,7 +14,7 @@ func (b *productRepository) Update(req dto.ProductUpdateRequest) (dto.ProductUpd
 		UpdatedBy:   req.UpdatedBy,
 		UserID:      req.UserID,
 		Description: req.Description,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 	}
 
 	// Cek apakah produk ada terlebih dahulu
@@ -37,7 +37,7 @@ func (b *productRepository) Update(req dto.ProductUpdateRequest) (dto.ProductUpd
 		Status:      updateProduct.Status,
 		UpdatedBy:   updateProduct.UpdatedBy,
 		UserID:      updateProduct.UserID,
-		MerchantID:  updateProduct.MerchantID,
+		DetailID:    updateProduct.DetailID,
 		Description: updateProduct.Description,
 	}
 

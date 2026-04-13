@@ -1,7 +1,7 @@
 package pin
 
 import (
-	s "github.com/srv-api/merchant/services/pin"
+	s "github.com/srv-api/detail/services/pin"
 
 	"github.com/labstack/echo/v4"
 )

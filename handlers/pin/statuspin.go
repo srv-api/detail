@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 	"gorm.io/gorm"
 )
@@ -22,13 +22,13 @@ func (h *domainHandler) GetPinStatus(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
-	merchantId, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
 	req.UserID = userid
-	req.MerchantID = merchantId
+	req.DetailID = DetailID
 	req.CreatedBy = createdBy
 
 	status, err := h.servicePin.GetPinStatus(req)

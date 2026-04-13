@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
-	mentity "github.com/srv-api/merchant/entity"
-	"github.com/srv-api/merchant/helpers"
+	dto "github.com/srv-api/detail/dto"
+	mentity "github.com/srv-api/detail/entity"
+	"github.com/srv-api/detail/helpers"
 	util "github.com/srv-api/util/s"
 )
 
@@ -23,7 +23,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserMerchantPaginationRes
 	find := r.DB.
 		Preload("Verified").
 		Preload("Merchant").
-		Where("merchant_id = ?", req.MerchantID)
+		Where("detail_id = ?", req.DetailID)
 
 	// --- Tambahkan filter search jika ada ---
 	if req.Searchs != nil {

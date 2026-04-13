@@ -1,6 +1,6 @@
 package role
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *roleService) Update(req dto.RoleUpdateRequest) (dto.RoleUpdateResponse, error) {
 	request := dto.RoleUpdateRequest{

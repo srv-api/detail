@@ -11,11 +11,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 	"gorm.io/gorm"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *subscribeRepository) ChargeQris(req dto.ChargeRequest) (*dto.QrisResponse, error) {
@@ -85,7 +85,7 @@ func (r *subscribeRepository) ChargeQris(req dto.ChargeRequest) (*dto.QrisRespon
 	tx := entity.Subscribe{
 		ID:              util.GenerateRandomString(),
 		UserID:          req.UserID,
-		MerchantID:      req.MerchantID,
+		DetailID:        req.DetailID,
 		CreatedBy:       req.CreatedBy,
 		OrderID:         parsed.OrderID,
 		TransactionID:   parsed.TransactionID,

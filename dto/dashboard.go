@@ -8,7 +8,7 @@ import (
 
 type GetDashboardRequest struct {
 	ID                    string `param:"id" validate:"required"`
-	MerchantID            string `json:"merchant_id"`
+	DetailID              string `json:"detail_id"`
 	CreatedBy             string `json:"created_by"`
 	TotalWebOrder         int64  `json:"total_order_web"`
 	TotalProductsActive   int64  `json:"total_products_active"`

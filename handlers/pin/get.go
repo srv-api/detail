@@ -2,7 +2,7 @@ package pin
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/srv-api/merchant/helpers"
+	"github.com/srv-api/detail/helpers"
 	res "github.com/srv-api/util/s/response"
 )
 
@@ -14,11 +14,11 @@ func (b *domainHandler) Get(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
-	merchantId, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
-	paginationDTO.MerchantID = merchantId
+	paginationDTO.DetailID = DetailID
 	paginationDTO.UserID = userid
 
 	if err := c.Bind(&paginationDTO); err != nil {

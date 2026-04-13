@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 	"gorm.io/gorm"
 )
@@ -90,7 +90,7 @@ func (r *subscribeRepository) ChargeGopay(req dto.ChargeRequest) (*dto.GopayResp
 	tx := entity.Subscribe{
 		ID:              util.GenerateRandomString(),
 		UserID:          req.UserID,
-		MerchantID:      req.MerchantID,
+		DetailID:        req.DetailID,
 		CreatedBy:       req.CreatedBy,
 		OrderID:         parsed.OrderID,
 		TransactionID:   parsed.TransactionID,

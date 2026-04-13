@@ -5,22 +5,22 @@ import (
 	"fmt"
 	"strconv"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	product "github.com/srv-api/product/entity"
 	res "github.com/srv-api/util/s/response"
 )
 
 func (r *productRepository) Create(req dto.ProductRequest) (dto.ProductResponse, error) {
-	// Insert or update the auto_increment value based on merchant_id
+	// Insert or update the auto_increment value based on detail_id
 	var autoIncrement int
 	err := r.DB.Raw(`
-		INSERT INTO merchant_auto_increments (merchant_id, next_increment)
+		INSERT INTO merchant_auto_increments (detail_id, next_increment)
 		VALUES (?, 1)
-		ON CONFLICT (merchant_id) DO UPDATE
+		ON CONFLICT (detail_id) DO UPDATE
 		SET next_increment = merchant_auto_increments.next_increment + 1
 		RETURNING next_increment - 1;
-	`, req.MerchantID).Scan(&autoIncrement).Error
+	`, req.DetailID).Scan(&autoIncrement).Error
 
 	if err != nil {
 		return dto.ProductResponse{}, err
@@ -40,7 +40,7 @@ func (r *productRepository) Create(req dto.ProductRequest) (dto.ProductResponse,
 		Price:       req.Price,
 		Status:      req.Status,
 		UserID:      req.UserID,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 		CreatedBy:   req.CreatedBy,
 		Description: req.Description,
 	}
@@ -70,7 +70,7 @@ func (r *productRepository) Create(req dto.ProductRequest) (dto.ProductResponse,
 	response := dto.ProductResponse{
 		ID:          create.ID,
 		UserID:      create.UserID,
-		MerchantID:  create.MerchantID,
+		DetailID:    create.DetailID,
 		ProductName: create.ProductName,
 		Description: create.Description,
 		Price:       create.Price,
@@ -115,8 +115,8 @@ func generateSecurePart() (string, error) {
 	return string(securePart), nil
 }
 
-func (r *productRepository) CheckMerchantDetail(merchantID string, merchantDetail *entity.UserDetail) error {
-	err := r.DB.Where("id = ?", merchantID).First(merchantDetail).Error
+func (r *productRepository) CheckMerchantDetail(DetailIDstring, merchantDetail *entity.UserDetail) error {
+	err := r.DB.Where("id = ?", DetailID).First(merchantDetail).Error
 	if err != nil {
 		return err
 	}

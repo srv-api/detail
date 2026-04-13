@@ -1,8 +1,8 @@
 package qris
 
 import (
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 )
 
@@ -10,13 +10,13 @@ func (r *qrisRepository) Create(req dto.CoQrisRequest) (dto.CoQrisResponse, erro
 
 	// Create the new qris entry
 	create := entity.Qris{
-		ID:         util.GenerateRandomString(),
-		QrisName:   req.QrisName,
-		Link:       req.Link,
-		Status:     req.Status,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
+		ID:        util.GenerateRandomString(),
+		QrisName:  req.QrisName,
+		Link:      req.Link,
+		Status:    req.Status,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	// Save the new qris to the database
@@ -28,13 +28,13 @@ func (r *qrisRepository) Create(req dto.CoQrisRequest) (dto.CoQrisResponse, erro
 
 	// Build the response for the created qris
 	response := dto.CoQrisResponse{
-		ID:         create.ID,
-		QrisName:   create.QrisName,
-		Link:       create.Link,
-		UserID:     create.UserID,
-		MerchantID: create.MerchantID,
-		Status:     create.Status,
-		CreatedBy:  create.CreatedBy,
+		ID:        create.ID,
+		QrisName:  create.QrisName,
+		Link:      create.Link,
+		UserID:    create.UserID,
+		DetailID:  create.DetailID,
+		Status:    create.Status,
+		CreatedBy: create.CreatedBy,
 	}
 
 	return response, nil

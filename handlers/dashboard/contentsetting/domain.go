@@ -1,7 +1,7 @@
 package contentsetting
 
 import (
-	s "github.com/srv-api/merchant/services/dashboard/contentsetting"
+	s "github.com/srv-api/detail/services/dashboard/contentsetting"
 
 	"github.com/labstack/echo/v4"
 )

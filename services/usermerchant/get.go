@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo/v4"
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *userService) Get(context echo.Context, req *dto.Pagination) dto.Response {

@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/labstack/echo/v4"
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 )
 
 func GeneratePaginationRequest(context echo.Context) *dto.Pagination {

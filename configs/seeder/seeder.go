@@ -1,8 +1,8 @@
 package seeder
 
 import (
-	"github.com/srv-api/merchant/configs"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/configs"
+	"github.com/srv-api/detail/entity"
 )
 
 func Role() {

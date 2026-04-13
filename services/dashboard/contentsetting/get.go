@@ -1,7 +1,7 @@
 package contentsetting
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *contentsettingService) Get(req dto.ContentSettingRequest) (dto.ContentSettingResponse, error) {

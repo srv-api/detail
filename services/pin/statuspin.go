@@ -3,7 +3,7 @@ package pin
 import (
 	"errors"
 
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 	"gorm.io/gorm"
 )
 

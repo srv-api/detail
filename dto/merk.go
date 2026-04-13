@@ -3,7 +3,7 @@ package dto
 type MerkRequest struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	MerkName    string `json:"merk_name"`
 	CreatedBy   string `json:"created_by"`
 	Description string `json:"description"`
@@ -13,7 +13,7 @@ type MerkRequest struct {
 type MerkResponse struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	MerkName    string `json:"merk_name"`
 	CreatedBy   string `json:"created_by"`
 	Description string `json:"description"`
@@ -37,7 +37,7 @@ type DeleteResponse struct {
 type MerkUpdateRequest struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	MerkName    string `json:"merk_name"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`
@@ -47,7 +47,7 @@ type MerkUpdateRequest struct {
 type MerkUpdateResponse struct {
 	ID          string `json:"id"`
 	UserID      string `json:"user_id"`
-	MerchantID  string `json:"merchant_id"`
+	DetailID    string `json:"detail_id"`
 	MerkName    string `json:"merk_name"`
 	UpdatedBy   string `json:"updated_by"`
 	Description string `json:"description"`

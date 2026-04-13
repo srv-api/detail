@@ -1,7 +1,7 @@
 package roleuserpermission
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *roleuserpermissionService) BulkDelete(req dto.BulkDeleteRequest) (dto.BulkDeleteResponse, error) {

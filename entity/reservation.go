@@ -9,7 +9,7 @@ import (
 type Reservation struct {
 	ID          uint           `gorm:"primary_key,omitempty" json:"id"`
 	UserID      string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID  string         `gorm:"type:varchar(36);index" json:"merchant_id"`
+	DetailID    string         `gorm:"type:varchar(36);index" json:"detail_id"`
 	Table       []byte         `gorm:"type:json" json:"table"`
 	Name        string         `gorm:"name,omitempty" json:"name"`
 	Whatsapp    string         `gorm:"whatsapp,omitempty" json:"whatsapp"`

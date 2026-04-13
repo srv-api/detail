@@ -9,8 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 	"gorm.io/gorm"
 )
@@ -82,7 +82,7 @@ func (r *subscribeRepository) ChargeBri(req dto.ChargeRequest) (*dto.VAResponse,
 
 	tx := entity.Subscribe{
 		ID:              util.GenerateRandomString(),
-		MerchantID:      req.MerchantID,
+		DetailID:        req.DetailID,
 		UserID:          req.UserID,
 		CreatedBy:       req.CreatedBy,
 		OrderID:         parsed.OrderID,

@@ -9,7 +9,7 @@ import (
 type Merk struct {
 	ID          string         `gorm:"primary_key,omitempty" json:"id"`
 	UserID      string         `gorm:"type:varchar(36);index" json:"user_id"`
-	MerchantID  string         `gorm:"type:varchar(36);index;not null" json:"merchant_id"`
+	DetailID    string         `gorm:"type:varchar(36);index;not null" json:"detail_id"`
 	MerkName    string         `gorm:"merk_name,omitempty" json:"merk_name"`
 	Status      int            `gorm:"status" json:"status"`
 	Description string         `gorm:"description" json:"description"`

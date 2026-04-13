@@ -1,7 +1,7 @@
 package product
 
 import (
-	s "github.com/srv-api/merchant/services/product"
+	s "github.com/srv-api/detail/services/product"
 
 	"github.com/labstack/echo/v4"
 )

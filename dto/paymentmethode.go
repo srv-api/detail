@@ -7,7 +7,7 @@ import (
 type PaymentMethodRequest struct {
 	ID            uint      `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	PaymentMethod string    `json:"payment_method"`
 	PaymentLabel  string    `json:"payment_label"`
 	Category      string    `json:"category"`
@@ -23,7 +23,7 @@ type PaymentMethodRequest struct {
 type PaymentMethodResponse struct {
 	ID            uint             `json:"id"`
 	UserID        string           `json:"user_id"`
-	MerchantID    string           `json:"merchant_id"`
+	DetailID      string           `json:"detail_id"`
 	PaymentMethod string           `json:"payment_method"`
 	Category      string           `json:"category"`
 	PaymentLabel  string           `json:"payment_label"`
@@ -45,7 +45,7 @@ type UploadedPayment struct {
 type PaymentMethodUpdateRequest struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	PaymentMethod string    `json:"payment_method"`
 	PaymentLabel  string    `json:"payment_label"`
 	Category      string    `json:"category"`
@@ -59,7 +59,7 @@ type PaymentMethodUpdateRequest struct {
 type PaymentMethodUpdateResponse struct {
 	ID            string    `json:"id"`
 	UserID        string    `json:"user_id"`
-	MerchantID    string    `json:"merchant_id"`
+	DetailID      string    `json:"detail_id"`
 	PaymentMethod string    `json:"payment_method"`
 	PaymentLabel  string    `json:"payment_label"`
 	Category      string    `json:"category"`

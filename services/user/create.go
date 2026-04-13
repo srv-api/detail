@@ -3,7 +3,7 @@ package user
 import (
 	"fmt"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *userService) Create(req dto.UserRequest) (dto.UserResponse, error) {
@@ -16,7 +16,7 @@ func (s *userService) Create(req dto.UserRequest) (dto.UserResponse, error) {
 		Description: req.Description,
 		Status:      req.Status,
 		UserID:      req.UserID,
-		MerchantID:  req.MerchantID,
+		DetailID:    req.DetailID,
 		CreatedBy:   req.CreatedBy,
 	}
 
@@ -42,7 +42,7 @@ func (s *userService) Create(req dto.UserRequest) (dto.UserResponse, error) {
 		FullName:    created.FullName,
 		Description: created.Description,
 		Status:      statusString,
-		MerchantID:  created.MerchantID,
+		DetailID:    created.DetailID,
 		CreatedBy:   created.CreatedBy,
 	}
 

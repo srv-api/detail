@@ -1,14 +1,14 @@
 package deleteaccount
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *deleteaccountService) Update(req dto.DeleteAccountUpdateRequest) (dto.DeleteAccountUpdateResponse, error) {
 	request := dto.DeleteAccountUpdateRequest{
-		Email:      req.Email,
-		Reason:     req.Reason,
-		UpdatedBy:  req.UpdatedBy,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
+		Email:     req.Email,
+		Reason:    req.Reason,
+		UpdatedBy: req.UpdatedBy,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
 	}
 
 	deleteaccount, err := b.Repo.Update(req)
@@ -17,11 +17,11 @@ func (b *deleteaccountService) Update(req dto.DeleteAccountUpdateRequest) (dto.D
 	}
 
 	response := dto.DeleteAccountUpdateResponse{
-		Email:      request.Email,
-		Reason:     request.Reason,
-		UpdatedBy:  request.UpdatedBy,
-		UserID:     request.UserID,
-		MerchantID: request.MerchantID,
+		Email:     request.Email,
+		Reason:    request.Reason,
+		UpdatedBy: request.UpdatedBy,
+		UserID:    request.UserID,
+		DetailID:  request.DetailID,
 	}
 
 	return response, nil

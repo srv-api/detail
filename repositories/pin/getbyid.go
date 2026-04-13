@@ -1,8 +1,8 @@
 package pin
 
 import (
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (b *pinRepository) GetById(req dto.GetByIdPinRequest) (*dto.PinResponse, error) {

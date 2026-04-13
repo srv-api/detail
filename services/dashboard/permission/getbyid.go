@@ -1,7 +1,7 @@
 package permission
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *permissionService) GetById(req dto.GetPermissionByIdRequest) (*dto.PermissionResponse, error) {

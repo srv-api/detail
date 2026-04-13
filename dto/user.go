@@ -23,7 +23,7 @@ type UserPaginationResponse struct {
 type UserRequest struct {
 	ID          string    `json:"id"`
 	UserID      string    `json:"user_id"`
-	MerchantID  string    `json:"merchant_id"`
+	DetailID    string    `json:"detail_id"`
 	FullName    string    `json:"full_name"`
 	User        string    `json:"user"`
 	Status      int       `json:"status"`
@@ -37,7 +37,7 @@ type UserRequest struct {
 type UserResponse struct {
 	ID            string             `json:"id"`
 	UserID        string             `json:"user_id"`
-	MerchantID    string             `json:"merchant_id"`
+	DetailID      string             `json:"detail_id"`
 	FullName      string             `json:"full_name"`
 	Whatsapp      string             `json:"whatsapp"`
 	Email         string             `json:"email"`
@@ -70,7 +70,7 @@ type UserVerified struct {
 type UserUpdateRequest struct {
 	ID          string    `json:"id"`
 	UserID      string    `json:"user_id"`
-	MerchantID  string    `json:"merchant_id"`
+	DetailID    string    `json:"detail_id"`
 	FullName    string    `json:"full_name"`
 	Email       string    `json:"email"`
 	Status      bool      `json:"status"`
@@ -84,7 +84,7 @@ type UserUpdateRequest struct {
 type UserUpdateResponse struct {
 	ID          string    `json:"id"`
 	UserID      string    `json:"user_id"`
-	MerchantID  string    `json:"merchant_id"`
+	DetailID    string    `json:"detail_id"`
 	FullName    string    `json:"full_name"`
 	Status      bool      `json:"status"`
 	Description string    `json:"description"`

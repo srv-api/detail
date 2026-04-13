@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	"github.com/srv-api/product/entity"
 )
 
@@ -38,12 +38,12 @@ func (r *productRepository) SaveFile(req dto.ProductUploadRequest) (dto.ProductU
 
 	// Prepare metadata for database
 	fileRecord := entity.UploadedFile{
-		FileName:   filepath.Base(req.Destination),
-		FilePath:   req.Destination,
-		MerchantID: req.MerchantID,
-		UserID:     req.UserID,
-		ProductID:  req.ID,
-		CreatedBy:  req.CreatedBy,
+		FileName:  filepath.Base(req.Destination),
+		FilePath:  req.Destination,
+		DetailID:  req.DetailID,
+		UserID:    req.UserID,
+		ProductID: req.ID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	// Save metadata to database

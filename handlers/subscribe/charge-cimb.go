@@ -3,7 +3,7 @@ package subscribe
 import (
 	"net/http"
 
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	res "github.com/srv-api/util/s/response"
 
 	"github.com/labstack/echo/v4"
@@ -19,12 +19,12 @@ func (h *domainHandler) ChargeCimb(c echo.Context) error {
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
-	merchantId, ok := c.Get("MerchantId").(string)
+	DetailID, ok := c.Get("DetailID").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
 
-	req.MerchantID = merchantId
+	req.DetailID = DetailID
 	req.UserID = userid
 	req.CreatedBy = createdBy
 

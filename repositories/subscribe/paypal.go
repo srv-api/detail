@@ -7,8 +7,8 @@ import (
 	"time"
 
 	paypal "github.com/plutov/paypal/v4"
-	"github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	"github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 	util "github.com/srv-api/util/s"
 )
 
@@ -57,7 +57,7 @@ func (r *subscribeRepository) CreatePaypalOrder(req dto.PaypalCreateRequest) (*p
 	tx := entity.Subscribe{
 		ID:              util.GenerateRandomString(),
 		UserID:          req.UserID,
-		MerchantID:      req.MerchantID,
+		DetailID:        req.DetailID,
 		CreatedBy:       req.CreatedBy,
 		OrderID:         order.ID,
 		GrossAmount:     grossAmount,

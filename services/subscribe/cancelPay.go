@@ -3,7 +3,7 @@ package subscribe
 import (
 	"encoding/json"
 
-	"github.com/srv-api/merchant/dto"
+	"github.com/srv-api/detail/dto"
 )
 
 func (s *subscribeService) CancelPay(req dto.GetorderID) (map[string]interface{}, int, error) {

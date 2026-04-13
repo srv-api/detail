@@ -1,6 +1,6 @@
 package permission
 
-import "github.com/srv-api/merchant/dto"
+import "github.com/srv-api/detail/dto"
 
 func (b *permissionService) Update(req dto.PermissionUpdateRequest) (dto.PermissionUpdateResponse, error) {
 	request := dto.PermissionUpdateRequest{

@@ -1,7 +1,7 @@
 package roleuser
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (s *roleuserService) Create(req dto.RoleUserRequest) (dto.RoleUserResponse, error) {
@@ -10,7 +10,7 @@ func (s *roleuserService) Create(req dto.RoleUserRequest) (dto.RoleUserResponse,
 		RoleID:       req.RoleID,
 		UserID:       req.UserID,
 		PermissionID: req.PermissionID,
-		MerchantID:   req.MerchantID,
+		DetailID:     req.DetailID,
 		CreatedBy:    req.CreatedBy,
 	}
 
@@ -23,7 +23,7 @@ func (s *roleuserService) Create(req dto.RoleUserRequest) (dto.RoleUserResponse,
 		RoleID:       created.RoleID,
 		UserID:       created.UserID,
 		PermissionID: created.PermissionID,
-		MerchantID:   created.MerchantID,
+		DetailID:     created.DetailID,
 		CreatedBy:    created.CreatedBy,
 	}
 

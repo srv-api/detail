@@ -4,20 +4,20 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *PermissionRepository) Create(req dto.PermissionRequest) (dto.PermissionResponse, error) {
 
 	// Create the new Permission entry
 	create := entity.Permission{
-		Label:      req.Label,
-		Icon:       req.Icon,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
-		To:         req.To,
+		Label:     req.Label,
+		Icon:      req.Icon,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
+		To:        req.To,
 	}
 
 	// Save the new Permission to the database

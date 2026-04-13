@@ -1,8 +1,8 @@
 package product
 
 import (
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 
 	"gorm.io/gorm"
 )
@@ -17,7 +17,7 @@ type DomainRepository interface {
 	Update(req dto.ProductUpdateRequest) (dto.ProductUpdateResponse, error)
 	SaveFile(req dto.ProductUploadRequest) (dto.ProductUploadResponse, error)
 	GetPicture(req dto.GetProductUploadRequest) (*dto.GetProductUploadResponse, error)
-	CheckMerchantDetail(merchantID string, merchantDetail *entity.UserDetail) error
+	CheckMerchantDetail(DetailIDstring, merchantDetail *entity.UserDetail) error
 }
 
 type productRepository struct {

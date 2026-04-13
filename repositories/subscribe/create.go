@@ -4,8 +4,8 @@ import (
 	"time"
 
 	auth "github.com/srv-api/auth/entity"
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *subscribeRepository) Create(req dto.SubscribeRequest) (dto.SubscribeResponse, error) {

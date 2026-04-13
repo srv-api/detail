@@ -4,20 +4,20 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	dto "github.com/srv-api/merchant/dto"
-	"github.com/srv-api/merchant/entity"
+	dto "github.com/srv-api/detail/dto"
+	"github.com/srv-api/detail/entity"
 )
 
 func (r *deleteaccountRepository) Create(req dto.DeleteAccountRequest) (dto.DeleteAccountResponse, error) {
-	// Insert or update the auto_increment value based on merchant_id
+	// Insert or update the auto_increment value based on detail_id
 	var autoIncrement int
 	err := r.DB.Raw(`
-		INSERT INTO merchant_auto_increments (merchant_id, next_increment)
+		INSERT INTO merchant_auto_increments (detail_id, next_increment)
 		VALUES (?, 1)
-		ON CONFLICT (merchant_id) DO UPDATE
+		ON CONFLICT (detail_id) DO UPDATE
 		SET next_increment = merchant_auto_increments.next_increment + 1
 		RETURNING next_increment - 1;
-	`, req.MerchantID).Scan(&autoIncrement).Error
+	`, req.DetailID).Scan(&autoIncrement).Error
 
 	if err != nil {
 		return dto.DeleteAccountResponse{}, err
@@ -25,12 +25,12 @@ func (r *deleteaccountRepository) Create(req dto.DeleteAccountRequest) (dto.Dele
 
 	// Create the new deleteaccount entry
 	create := entity.DeleteAccount{
-		ID:         req.ID,
-		Email:      req.Email,
-		Reason:     req.Reason,
-		UserID:     req.UserID,
-		MerchantID: req.MerchantID,
-		CreatedBy:  req.CreatedBy,
+		ID:        req.ID,
+		Email:     req.Email,
+		Reason:    req.Reason,
+		UserID:    req.UserID,
+		DetailID:  req.DetailID,
+		CreatedBy: req.CreatedBy,
 	}
 
 	// Save the new deleteaccount to the database
@@ -40,12 +40,12 @@ func (r *deleteaccountRepository) Create(req dto.DeleteAccountRequest) (dto.Dele
 
 	// Build the response for the created deleteaccount
 	response := dto.DeleteAccountResponse{
-		ID:         create.ID,
-		UserID:     create.UserID,
-		MerchantID: create.MerchantID,
-		Email:      create.Email,
-		Reason:     create.Reason,
-		CreatedBy:  create.CreatedBy,
+		ID:        create.ID,
+		UserID:    create.UserID,
+		DetailID:  create.DetailID,
+		Email:     create.Email,
+		Reason:    create.Reason,
+		CreatedBy: create.CreatedBy,
 	}
 
 	return response, nil

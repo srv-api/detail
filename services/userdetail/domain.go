@@ -1,10 +1,10 @@
 package userdetail
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 	m "github.com/srv-api/middlewares/middlewares"
 
-	r "github.com/srv-api/merchant/repositories/userdetail"
+	r "github.com/srv-api/detail/repositories/userdetail"
 )
 
 type UserDetailService interface {

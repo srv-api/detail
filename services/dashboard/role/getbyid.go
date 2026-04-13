@@ -1,7 +1,7 @@
 package role
 
 import (
-	dto "github.com/srv-api/merchant/dto"
+	dto "github.com/srv-api/detail/dto"
 )
 
 func (b *roleService) GetById(req dto.GetRoleByIdRequest) (*dto.RoleResponse, error) {
