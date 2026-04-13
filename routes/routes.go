@@ -40,10 +40,6 @@ import (
 	r_user "github.com/srv-api/detail/repositories/user"
 	s_user "github.com/srv-api/detail/services/user"
 
-	h_UserDetail "github.com/srv-api/detail/handlers/UserDetail"
-	r_UserDetail "github.com/srv-api/detail/repositories/UserDetail"
-	s_UserDetail "github.com/srv-api/detail/services/UserDetail"
-
 	h_product "github.com/srv-api/detail/handlers/product"
 	r_product "github.com/srv-api/detail/repositories/product"
 	s_product "github.com/srv-api/detail/services/product"
@@ -124,10 +120,6 @@ var (
 	userR          = r_user.NewUserRepository(DB)
 	userS          = s_user.NewUserService(userR, JWT)
 	userH          = h_user.NewUserHandler(userS)
-
-	UserDetailR = r_UserDetail.NewUserDetailRepository(DB)
-	UserDetailS = s_UserDetail.NewUserDetailService(UserDetailR, JWT)
-	UserDetailH = h_UserDetail.NewUserDetailHandler(UserDetailS)
 
 	pinR = r_pin.NewPinRepository(DB)
 	pinS = s_pin.NewPinService(pinR, JWT)
@@ -262,16 +254,6 @@ func New() *echo.Echo {
 		user.PUT("/user/update/:id", userH.Update)
 		user.DELETE("/user/:id", userH.Delete)
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
-	}
-
-	UserDetail := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		UserDetail.POST("/user_merchant/create", UserDetailH.Create)
-		UserDetail.GET("/user_merchant/pagination", UserDetailH.Get)
-		UserDetail.GET("/user_merchant/:id", UserDetailH.GetById)
-		UserDetail.PUT("/user_merchant/update/:id", UserDetailH.Update)
-		UserDetail.DELETE("/user_merchant/:id", UserDetailH.Delete)
-		UserDetail.DELETE("/user_merchant/bulk-delete", UserDetailH.BulkDelete)
 	}
 
 	deleteAccount := e.Group("api/account", middlewares.AuthorizeJWT(JWT))

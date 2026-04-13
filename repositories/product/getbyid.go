@@ -35,7 +35,7 @@ func (b *productRepository) GetById(req dto.GetByIdRequest) (*dto.ProductRespons
 	response := &dto.ProductResponse{
 		ID:          tr.ID,
 		UserID:      tr.UserID,
-		DetailID:    tr.DetailID,
+		DetailID:    tr.MerchantID,
 		ProductName: tr.ProductName,
 		Price:       tr.Price,
 		Status:      statusString,

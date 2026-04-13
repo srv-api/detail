@@ -40,7 +40,7 @@ func (r *productRepository) Create(req dto.ProductRequest) (dto.ProductResponse,
 		Price:       req.Price,
 		Status:      req.Status,
 		UserID:      req.UserID,
-		DetailID:    req.DetailID,
+		MerchantID:  req.DetailID,
 		CreatedBy:   req.CreatedBy,
 		Description: req.Description,
 	}
@@ -70,7 +70,7 @@ func (r *productRepository) Create(req dto.ProductRequest) (dto.ProductResponse,
 	response := dto.ProductResponse{
 		ID:          create.ID,
 		UserID:      create.UserID,
-		DetailID:    create.DetailID,
+		DetailID:    create.MerchantID,
 		ProductName: create.ProductName,
 		Description: create.Description,
 		Price:       create.Price,
@@ -115,7 +115,7 @@ func generateSecurePart() (string, error) {
 	return string(securePart), nil
 }
 
-func (r *productRepository) CheckMerchantDetail(DetailIDstring, merchantDetail *entity.UserDetail) error {
+func (r *productRepository) CheckMerchantDetail(DetailID string, merchantDetail *entity.UserDetail) error {
 	err := r.DB.Where("id = ?", DetailID).First(merchantDetail).Error
 	if err != nil {
 		return err
@@ -123,7 +123,7 @@ func (r *productRepository) CheckMerchantDetail(DetailIDstring, merchantDetail *
 
 	// Periksa apakah semua kolom penting sudah terisi
 	if merchantDetail.Latitude == 0 || merchantDetail.Latitude == 0 {
-		return res.ErrorBuilder(&res.ErrorConstant.MerchantNoProvide, nil)
+		return res.ErrorBuilder(&res.ErrorConstant.DetailNoProvide, nil)
 	}
 
 	return nil

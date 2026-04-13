@@ -14,7 +14,7 @@ func (b *productRepository) Update(req dto.ProductUpdateRequest) (dto.ProductUpd
 		UpdatedBy:   req.UpdatedBy,
 		UserID:      req.UserID,
 		Description: req.Description,
-		DetailID:    req.DetailID,
+		MerchantID:  req.DetailID,
 	}
 
 	// Cek apakah produk ada terlebih dahulu
@@ -37,7 +37,7 @@ func (b *productRepository) Update(req dto.ProductUpdateRequest) (dto.ProductUpd
 		Status:      updateProduct.Status,
 		UpdatedBy:   updateProduct.UpdatedBy,
 		UserID:      updateProduct.UserID,
-		DetailID:    updateProduct.DetailID,
+		DetailID:    updateProduct.MerchantID,
 		Description: updateProduct.Description,
 	}
 
