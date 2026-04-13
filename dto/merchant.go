@@ -61,9 +61,9 @@ type ExploreResponse struct {
 }
 
 type ExploreUserResponse struct {
-	ID           string  `json:"id"`
 	UserID       string  `json:"user_id"`
 	FullName     string  `json:"full_name"`
+	Gender       string  `json:"gender"`
 	Latitude     float64 `json:"latitude"`
 	Longitude    float64 `json:"longitude"`
 	Distance     float64 `json:"distance"`
