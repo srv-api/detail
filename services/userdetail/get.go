@@ -1,4 +1,4 @@
-package product
+package userdetail
 
 import (
 	dto "github.com/srv-api/merchant/dto"

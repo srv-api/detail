@@ -1,11 +1,11 @@
-package merchant
+package userdetail
 
 import (
 	dto "github.com/srv-api/merchant/dto"
 	"github.com/srv-api/merchant/entity"
 )
 
-func (b *merchantRepository) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error) {
+func (b *userdetailRepository) LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error) {
 	tr := dto.GetUserDetailByIdRequest{
 		ID: req.ID,
 	}
