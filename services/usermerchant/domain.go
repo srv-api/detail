@@ -9,7 +9,7 @@ import (
 )
 
 type UserDetailService interface {
-	Create(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
+	Create(req dto.UserFullRequest) (dto.UserFullResponse, error)
 	Get(context echo.Context, req *dto.Pagination) dto.Response
 	GetById(req dto.GetByIdRequest) (*dto.UserDetailByIdResponse, error)
 	Delete(req dto.DeleteRequest) (dto.DeleteResponse, error)
