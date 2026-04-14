@@ -45,15 +45,16 @@ type UserDetailRequest struct {
 }
 
 type UserDetailResponse struct {
-	ID           string    `json:"id"`
-	UserID       string    `json:"user_id"`
-	Latitude     float64   `json:"latitude"`
-	Longitude    float64   `json:"longitude"`
-	Radius       int       `json:"radius"`
-	MinAge       int       `json:"min_age"`
-	MaxAge       int       `json:"max_age"`
-	GenderTarget string    `json:"gender_target"`
-	UpdatedAt    time.Time `json:"updated_at"`
+	ID             string    `json:"id"`
+	UserID         string    `json:"user_id"`
+	Latitude       float64   `json:"latitude"`
+	Longitude      float64   `json:"longitude"`
+	Radius         int       `json:"radius"`
+	MinAge         int       `json:"min_age"`
+	MaxAge         int       `json:"max_age"`
+	GenderTarget   string    `json:"gender_target"`
+	ProfilePicture string    `json:"profile_picture"`
+	UpdatedAt      time.Time `json:"updated_at"`
 }
 
 type ExploreResponse struct {
