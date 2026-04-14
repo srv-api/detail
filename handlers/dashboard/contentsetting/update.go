@@ -29,7 +29,7 @@ func (h *domainHandler) Update(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.Unauthorized, errors.New("invalid updater")).Send(c)
 	}
 
-	DetailID, ok := c.Get("DetailID").(string)
+	DetailID, ok := c.Get("DetailId").(string)
 	if !ok || DetailID == "" {
 		return res.ErrorBuilder(&res.ErrorConstant.Unauthorized, errors.New("invalid merchant")).Send(c)
 	}

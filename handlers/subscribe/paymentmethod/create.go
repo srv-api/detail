@@ -21,7 +21,7 @@ func (h *domainHandler) Create(c echo.Context) error {
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
-	DetailID, ok := c.Get("DetailID").(string)
+	DetailID, ok := c.Get("DetailId").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
 	}
