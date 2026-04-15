@@ -46,6 +46,18 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 					sin(radians(current.latitude)) * sin(radians(ud.latitude))
 				))
 			)) <= current.radius
+			-- Exclude users who have been liked by current user (table: likes)
+			AND NOT EXISTS (
+				SELECT 1 FROM likes l 
+				WHERE l.user_id = current.user_id 
+					AND l.target_user_id = ud.user_id
+			)
+			-- Exclude users who have matched with current user (table: matches)
+			AND NOT EXISTS (
+				SELECT 1 FROM matches m 
+				WHERE (m.user1_id = current.user_id AND m.user2_id = ud.user_id)
+					OR (m.user1_id = ud.user_id AND m.user2_id = current.user_id)
+			)
 		ORDER BY distance
 	`
 
