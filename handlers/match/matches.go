@@ -17,7 +17,8 @@ func NewMatchHandler(s service.MatchService) *MatchHandler {
 }
 
 func (h *MatchHandler) GetMatches(c echo.Context) error {
-	userIDInterface := c.Get("user_id")
+	userIDInterface := c.Get("UserId")
+
 	if userIDInterface == nil {
 		return c.JSON(http.StatusUnauthorized, map[string]interface{}{
 			"message": "unauthorized",
