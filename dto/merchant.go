@@ -62,19 +62,27 @@ type ExploreResponse struct {
 }
 
 type ExploreUserResponse struct {
-	UserID         string  `json:"user_id"`
-	FullName       string  `json:"full_name"`
-	Gender         string  `json:"gender"`
-	Latitude       float64 `json:"latitude"`
-	Longitude      float64 `json:"longitude"`
-	Distance       float64 `json:"distance"`
-	Bio            string  `json:"bio"`
-	Radius         int     `json:"radius"`
-	MinAge         int     `json:"min_age"`
-	MaxAge         int     `json:"max_age"`
-	Age            int     `json:"age"`
-	GenderTarget   string  `json:"gender_target"`
-	ProfilePicture string  `json:"profile_picture"`
+	ProfilePicture     string  `json:"profile_picture"`
+	UserID             string  `json:"user_id"`
+	FullName           string  `json:"full_name"`
+	Gender             string  `json:"gender"`
+	Latitude           float64 `json:"latitude"`
+	Longitude          float64 `json:"longitude"`
+	Distance           float64 `json:"distance"`
+	Bio                string  `json:"bio"`
+	Radius             int     `json:"radius"`
+	MinAge             int     `json:"min_age"`
+	MaxAge             int     `json:"max_age"`
+	Age                int     `json:"age"`
+	GenderTarget       string  `json:"gender_target"`
+	IsLikedByMe        bool    `json:"is_liked_by_me"`
+	HasLikedMe         bool    `json:"has_liked_me"`
+	IsPremium          bool    `json:"is_premium"`
+	IsBoosted          bool    `json:"is_boosted"`
+	RemainingSwipe     int     `json:"remaining_swipe"`
+	RemainingSuperLike int     `json:"remaining_super_like"`
+	LastActive         string  `json:"last_active"`
+	MatchPercentage    int     `json:"match_percentage"`
 }
 
 type UpdateLocationRequest struct {

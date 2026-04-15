@@ -20,29 +20,9 @@ import (
 	r_role_user_permission "github.com/srv-api/detail/repositories/dashboard/roleuserpermission"
 	s_role_user_permission "github.com/srv-api/detail/services/dashboard/roleuserpermission"
 
-	h_subscribe "github.com/srv-api/detail/handlers/subscribe"
-	r_subscribe "github.com/srv-api/detail/repositories/subscribe"
-	s_subscribe "github.com/srv-api/detail/services/subscribe"
-
-	h_paymentmethod "github.com/srv-api/detail/handlers/subscribe/paymentmethod"
-	r_paymentmethod "github.com/srv-api/detail/repositories/subscribe/paymentmethod"
-	s_paymentmethod "github.com/srv-api/detail/services/subscribe/paymentmethod"
-
-	h_transactionmethode "github.com/srv-api/detail/handlers/transactionmethode/qris"
-	r_transactionmethode "github.com/srv-api/detail/repositories/transactionmethode/qris"
-	s_transactionmethode "github.com/srv-api/detail/services/transactionmethode/qris"
-
-	h_history "github.com/srv-api/detail/handlers/subscribe/history"
-	r_history "github.com/srv-api/detail/repositories/subscribe/history"
-	s_history "github.com/srv-api/detail/services/subscribe/history"
-
 	h_user "github.com/srv-api/detail/handlers/user"
 	r_user "github.com/srv-api/detail/repositories/user"
 	s_user "github.com/srv-api/detail/services/user"
-
-	h_product "github.com/srv-api/detail/handlers/product"
-	r_product "github.com/srv-api/detail/repositories/product"
-	s_product "github.com/srv-api/detail/services/product"
 
 	h_userdetail "github.com/srv-api/detail/handlers/userdetail"
 	r_userdetail "github.com/srv-api/detail/repositories/userdetail"
@@ -59,6 +39,10 @@ import (
 	h_pin "github.com/srv-api/detail/handlers/pin"
 	r_pin "github.com/srv-api/detail/repositories/pin"
 	s_pin "github.com/srv-api/detail/services/pin"
+
+	handler "github.com/srv-api/detail/handlers/like"
+	repository "github.com/srv-api/detail/repositories/like"
+	service "github.com/srv-api/detail/services/like"
 
 	"github.com/srv-api/middlewares/middlewares"
 )
@@ -78,10 +62,6 @@ var (
 	contentsettingS = s_contentsetting.NewContentSettingService(contentsettingR, JWT)
 	contentsettingH = h_contentsetting.NewContentSettingHandler(contentsettingS)
 
-	subscribeR = r_subscribe.NewSubscribeRepository(DB, pp)
-	subscribeS = s_subscribe.NewSubscribeService(subscribeR, JWT)
-	subscribeH = h_subscribe.NewSubscribeHandler(subscribeS)
-
 	permissionR = r_permission.NewPermissionRepository(DB)
 	permissionS = s_permission.NewPermissionService(permissionR, JWT)
 	permissionH = h_permission.NewPermissionHandler(permissionS)
@@ -98,32 +78,21 @@ var (
 	roleuserpermissionS = s_role_user_permission.NewRoleUserPermissionService(roleuserpermissionR, JWT)
 	roleuserpermissionH = h_role_user_permission.NewRoleUserPermissionHandler(roleuserpermissionS)
 
-	productR = r_product.NewProductRepository(DB)
-	productS = s_product.NewProductService(productR, JWT)
-	productH = h_product.NewProductHandler(productS)
-
-	paymentmethodR = r_paymentmethod.NewPaymentRepository(DB)
-	paymentmethodS = s_paymentmethod.NewPaymentMethodService(paymentmethodR, JWT)
-	paymentmethodH = h_paymentmethod.NewPaymentHandler(paymentmethodS)
-
-	transactionmethodeR = r_transactionmethode.NewQrisRepository(DB)
-	transactionmethodeS = s_transactionmethode.NewQrisService(transactionmethodeR, JWT)
-	transactionmethodeH = h_transactionmethode.NewQrisHandler(transactionmethodeS)
-
-	historyR = r_history.NewHistoryRepository(DB)
-	historyS = s_history.NewHistoryService(historyR, JWT)
-	historyH = h_history.NewHistoryHandler(historyS)
-
 	deleteaccountR = r_deleteaccount.NewDeleteAccountRepository(DB)
 	deleteaccountS = s_deleteaccount.NewDeleteAccountService(deleteaccountR, JWT)
 	deleteaccountH = h_deleteaccount.NewRequestDeleteHandler(deleteaccountS)
-	userR          = r_user.NewUserRepository(DB)
-	userS          = s_user.NewUserService(userR, JWT)
-	userH          = h_user.NewUserHandler(userS)
+
+	userR = r_user.NewUserRepository(DB)
+	userS = s_user.NewUserService(userR, JWT)
+	userH = h_user.NewUserHandler(userS)
 
 	pinR = r_pin.NewPinRepository(DB)
 	pinS = s_pin.NewPinService(pinR, JWT)
 	pinH = h_pin.NewPinHandler(pinS)
+
+	likeHandler = handler.NewLikeHandler(likeService)
+	likeRepo    = repository.NewLikeRepository(DB)
+	likeService = service.NewLikeService(likeRepo)
 )
 
 func New() *echo.Echo {
@@ -132,30 +101,6 @@ func New() *echo.Echo {
 	// e.POST("/menu/order", orderH.Order)
 	e.PUT("/user/update", userdetailH.LongLat)
 
-	sub := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		sub.GET("/subscribe/transaction/:order_id/status", subscribeH.CheckTransactionStatus)
-		sub.POST("/subscribe/midtrans/callback", subscribeH.MidtransCallback)
-		sub.POST("/subscribe/charge-bni", subscribeH.ChargeBni)
-		sub.POST("/subscribe/charge-permata", subscribeH.ChargePermata)
-		sub.POST("/subscribe/charge-mandiri", subscribeH.ChargeMandiri)
-		sub.POST("/subscribe/charge-bri", subscribeH.ChargeBri)
-		sub.POST("/subscribe/charge-cimb", subscribeH.ChargeCimb)
-		sub.POST("/subscribe/charge-qris", subscribeH.ChargeQris)
-		sub.POST("/subscribe/charge-gopay", subscribeH.ChargeGopay)
-		sub.POST("/subscribe/charge-shopeepay", subscribeH.ChargeShopeePay)
-		sub.POST("/subscribe/charge-gpay", subscribeH.ChargeGpay)
-		sub.GET("/subscribe/tokenize", subscribeH.TokenizeCardHandler)
-		sub.POST("/subscribe/charge-card", subscribeH.CardPayment)
-		sub.POST("/subscribe/cancel/:order_id", subscribeH.CancelPay)
-		sub.POST("/subscribe/paypal", subscribeH.PayPal)
-		sub.GET("/subscribe/paypal/capture/:order_id", subscribeH.CapturePaypalOrder)
-	}
-
-	packages := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		packages.POST("/packages/create", subscribeH.Create)
-	}
 	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		merchant.PUT("/update", userdetailH.Update)
@@ -171,11 +116,6 @@ func New() *echo.Echo {
 	{
 		web.GET("/web/get/content", contentsettingH.Get)
 		web.PUT("/web/update/content", contentsettingH.Update)
-	}
-
-	methode := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		methode.POST("/methode-pay/qris", transactionmethodeH.Create)
 	}
 
 	pin := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
@@ -228,25 +168,6 @@ func New() *echo.Echo {
 		roleuserpermission.DELETE("/roleuserpermission/bulk-delete", roleuserpermissionH.BulkDelete)
 	}
 
-	paymentmethod := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		paymentmethod.POST("/payment-method/create", paymentmethodH.Create)
-		paymentmethod.GET("/payment-method", paymentmethodH.Get)
-		paymentmethod.PUT("/payment-method/update/:id", paymentmethodH.Update)
-		paymentmethod.DELETE("/payment-method/:id", paymentmethodH.Delete)
-		paymentmethod.DELETE("/payment-method/bulk-delete", paymentmethodH.BulkDelete)
-
-	}
-	e.GET("/merchant/uploads/:file_name", productH.GetPicture)
-	e.GET("/merchant/payment-method/uploads/:file_name", paymentmethodH.GetPicture)
-
-	history := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
-	{
-		history.GET("/history/pagination", historyH.Get)
-		history.GET("/history/:id", historyH.GetById)
-		history.PUT("/history/expire/:order_id", historyH.CheckExpire)
-	}
-
 	user := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		user.POST("/user/create", userH.Create)
@@ -265,16 +186,13 @@ func New() *echo.Echo {
 		// deleteAccount.DELETE("/unit/bulk-delete", unitH.BulkDelete)
 	}
 
-	product := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	like := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{
-		product.POST("/product/create", productH.Create)
-		product.GET("/product/:id", productH.GetById)
-		product.DELETE("/product/:id", productH.Delete)
-		product.DELETE("/product/bulk-delete", productH.BulkDelete)
-		product.PUT("/product/bulk-edit", productH.BulkEdit)
-		product.PUT("/product/update/:id", productH.Update)
-		product.GET("/product/pagination", productH.Get)
-		product.PUT("/product/upload/:id", productH.UploadImage)
+		like.POST("/like", likeHandler.LikeUser)
+		// deleteAccount.GET("/unit/pagination", unitH.Get)
+		// deleteAccount.PUT("/unit/:id", unitH.Update)
+		// deleteAccount.DELETE("/unit/:id", unitH.Delete)
+		// deleteAccount.DELETE("/unit/bulk-delete", unitH.BulkDelete)
 	}
 
 	return e
