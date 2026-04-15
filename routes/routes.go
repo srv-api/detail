@@ -44,6 +44,10 @@ import (
 	repository "github.com/srv-api/detail/repositories/like"
 	service "github.com/srv-api/detail/services/like"
 
+	h_match "github.com/srv-api/detail/handlers/match"
+	r_match "github.com/srv-api/detail/repositories/match"
+	s_match "github.com/srv-api/detail/services/match"
+
 	"github.com/srv-api/middlewares/middlewares"
 )
 
@@ -90,9 +94,13 @@ var (
 	pinS = s_pin.NewPinService(pinR, JWT)
 	pinH = h_pin.NewPinHandler(pinS)
 
+	matchHandler = h_match.NewMatchHandler(matchService)
+	matchRepo    = r_match.NewMatchRepository(DB)
+	matchService = s_match.NewMatchService(matchRepo)
+
 	likeHandler = handler.NewLikeHandler(likeService)
 	likeRepo    = repository.NewLikeRepository(DB)
-	likeService = service.NewLikeService(likeRepo)
+	likeService = service.NewLikeService(likeRepo, matchService)
 )
 
 func New() *echo.Echo {
@@ -189,10 +197,10 @@ func New() *echo.Echo {
 	like := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{
 		like.POST("/like", likeHandler.LikeUser)
-		// deleteAccount.GET("/unit/pagination", unitH.Get)
-		// deleteAccount.PUT("/unit/:id", unitH.Update)
-		// deleteAccount.DELETE("/unit/:id", unitH.Delete)
-		// deleteAccount.DELETE("/unit/bulk-delete", unitH.BulkDelete)
+	}
+	match := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
+	{
+		match.GET("/matches", matchHandler.GetMatches)
 	}
 
 	return e

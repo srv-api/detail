@@ -5,6 +5,7 @@ import (
 
 	"github.com/srv-api/detail/dto"
 	repository "github.com/srv-api/detail/repositories/like"
+	matchService "github.com/srv-api/detail/services/match"
 )
 
 type LikeService interface {
@@ -12,11 +13,18 @@ type LikeService interface {
 }
 
 type likeService struct {
-	Repo repository.LikeRepository
+	Repo         repository.LikeRepository
+	MatchService matchService.MatchService
 }
 
-func NewLikeService(repo repository.LikeRepository) LikeService {
-	return &likeService{Repo: repo}
+func NewLikeService(
+	repo repository.LikeRepository,
+	matchService matchService.MatchService,
+) LikeService {
+	return &likeService{
+		Repo:         repo,
+		MatchService: matchService,
+	}
 }
 
 func (s *likeService) LikeUser(userID string, req dto.LikeRequest) (dto.LikeResponse, error) {
@@ -39,6 +47,11 @@ func (s *likeService) LikeUser(userID string, req dto.LikeRequest) (dto.LikeResp
 	}
 
 	if isMatch {
+		err := s.MatchService.CreateMatch(userID, req.TargetUserID)
+		if err != nil {
+			return dto.LikeResponse{}, err
+		}
+
 		return dto.LikeResponse{
 			IsMatch: true,
 			Message: "It's a match! 🎉",
