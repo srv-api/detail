@@ -27,7 +27,7 @@ func (s *merchantService) LikeUser(userID, targetUserID string, isSuperLike bool
 			return errors.New("no super like remaining")
 		}
 		// Proses super like
-		if err := s.userDetailRepo.DeductSuperLike(userID); err != nil {
+		if err := s.Repo.DeductSuperLike(userID); err != nil {
 			return err
 		}
 	} else {
@@ -35,7 +35,7 @@ func (s *merchantService) LikeUser(userID, targetUserID string, isSuperLike bool
 			return errors.New("daily swipe limit exceeded")
 		}
 		// Proses like biasa
-		if err := s.userDetailRepo.DeductSwipe(userID); err != nil {
+		if err := s.Repo.DeductSwipe(userID); err != nil {
 			return err
 		}
 	}
