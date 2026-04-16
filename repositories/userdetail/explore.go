@@ -1,8 +1,11 @@
 package userdetail
 
 import (
+	"errors"
+
 	"github.com/srv-api/auth/entity"
 	limit "github.com/srv-api/detail/entity"
+	"gorm.io/gorm"
 
 	dto "github.com/srv-api/detail/dto"
 )
@@ -94,4 +97,27 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 	}
 
 	return results, nil
+}
+
+func (r *userdetailRepository) GetUserLimit(userID string) (*limit.UserLimit, error) {
+	var userLimit limit.UserLimit
+	err := r.DB.Where("user_id = ?", userID).First(&userLimit).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			// Auto create jika belum ada (sama seperti di like service)
+			userLimit = limit.UserLimit{
+				UserID:             userID,
+				RemainingSwipe:     50,
+				RemainingSuperLike: 1,
+			}
+			if createErr := r.DB.Create(&userLimit).Error; createErr != nil {
+				return nil, createErr
+			}
+			return &userLimit, nil
+		}
+		return nil, err
+	}
+
+	return &userLimit, nil
 }
