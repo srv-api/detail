@@ -2,6 +2,7 @@ package dto
 
 type LikeRequest struct {
 	TargetUserID string `json:"target_user_id" validate:"required"`
+	IsSuperLike  bool   `json:"is_super_like"`
 }
 
 type LikeResponse struct {

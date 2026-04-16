@@ -29,18 +29,28 @@ func NewLikeService(
 
 func (s *likeService) LikeUser(userID string, req dto.LikeRequest) (dto.LikeResponse, error) {
 
-	// validasi diri sendiri
 	if userID == req.TargetUserID {
 		return dto.LikeResponse{}, errors.New("cannot like yourself")
 	}
 
-	// simpan like
+	// 🔥 1. Deduct limit dulu
+	if req.IsSuperLike {
+		if err := s.Repo.DeductSuperLike(userID); err != nil {
+			return dto.LikeResponse{}, err
+		}
+	} else {
+		if err := s.Repo.DeductSwipe(userID); err != nil {
+			return dto.LikeResponse{}, err
+		}
+	}
+
+	// 🔥 2. Insert like
 	err := s.Repo.CreateLike(userID, req.TargetUserID)
 	if err != nil {
 		return dto.LikeResponse{}, err
 	}
 
-	// cek match
+	// 🔥 3. Check match
 	isMatch, err := s.Repo.IsMatch(userID, req.TargetUserID)
 	if err != nil {
 		return dto.LikeResponse{}, err

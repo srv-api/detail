@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/srv-api/detail/entity"
 	"gorm.io/gorm"
 )
@@ -8,6 +10,8 @@ import (
 type LikeRepository interface {
 	CreateLike(userID, targetUserID string) error
 	IsMatch(userID, targetUserID string) (bool, error)
+	DeductSwipe(userID string) error
+	DeductSuperLike(userID string) error
 }
 
 type likeRepository struct {
@@ -47,4 +51,36 @@ func (r *likeRepository) IsMatch(userID, targetUserID string) (bool, error) {
 	}
 
 	return count > 0, nil
+}
+
+func (r *likeRepository) DeductSwipe(userID string) error {
+	result := r.DB.Model(&entity.UserLimit{}).
+		Where("user_id = ? AND remaining_swipe > 0", userID).
+		Update("remaining_swipe", gorm.Expr("remaining_swipe - 1"))
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("no swipe remaining")
+	}
+
+	return nil
+}
+
+func (r *likeRepository) DeductSuperLike(userID string) error {
+	result := r.DB.Model(&entity.UserLimit{}).
+		Where("user_id = ? AND remaining_super_like > 0", userID).
+		Update("remaining_super_like", gorm.Expr("remaining_super_like - 1"))
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("no super like remaining")
+	}
+
+	return nil
 }
