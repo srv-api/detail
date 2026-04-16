@@ -2,6 +2,7 @@ package userdetail
 
 import (
 	dto "github.com/srv-api/detail/dto"
+	explore "github.com/srv-api/detail/entity"
 
 	"gorm.io/gorm"
 )
@@ -12,6 +13,10 @@ type DomainRepository interface {
 	LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 	GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error)
 	Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
+	GetUserLimit(userID string) (*explore.UserLimit, error)
+	ResetDailySwipe() error
+	DeductSwipe(userID string) error
+	DeductSuperLike(userID string) error
 }
 
 type userdetailRepository struct {

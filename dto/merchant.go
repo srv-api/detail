@@ -41,6 +41,7 @@ type UserDetailRequest struct {
 	MinAge       int       `json:"min_age"`
 	MaxAge       int       `json:"max_age"`
 	GenderTarget string    `json:"gender_target"`
+	Limit        int       `json:"limit"`
 	UpdatedAt    time.Time `json:"updated_at"`
 }
 

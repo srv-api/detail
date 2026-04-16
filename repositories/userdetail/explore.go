@@ -1,12 +1,41 @@
 package userdetail
 
 import (
+	"errors"
+
 	"github.com/srv-api/auth/entity"
 	dto "github.com/srv-api/detail/dto"
+	explore "github.com/srv-api/detail/entity"
+	"gorm.io/gorm"
 )
 
 func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error) {
 	var results []dto.ExploreUserResponse
+
+	// Cek user limit terlebih dahulu
+	var userLimit explore.UserLimit
+	err := r.DB.Where("user_id = ?", req.UserID).First(&userLimit).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			// Buat user limit baru jika belum ada
+			userLimit = explore.UserLimit{
+				UserID:             req.UserID,
+				RemainingSwipe:     50,
+				RemainingSuperLike: 1,
+			}
+			if createErr := r.DB.Create(&userLimit).Error; createErr != nil {
+				return nil, createErr
+			}
+		} else {
+			return nil, err
+		}
+	}
+
+	// Cek apakah masih punya sisa swipe
+	if userLimit.RemainingSwipe <= 0 {
+		return nil, errors.New("daily swipe limit exceeded. Please try again tomorrow")
+	}
 
 	query := `
 		SELECT 
@@ -61,7 +90,7 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 		ORDER BY distance
 	`
 
-	err := r.DB.Raw(query, req.UserID).Scan(&results).Error
+	err = r.DB.Raw(query, req.UserID).Scan(&results).Error
 	if err != nil {
 		return nil, err
 	}
@@ -81,4 +110,58 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 	}
 
 	return results, nil
+}
+
+// DeductSwipe mengurangi remaining swipe user
+func (r *userdetailRepository) DeductSwipe(userID string) error {
+	result := r.DB.Model(&explore.UserLimit{}).
+		Where("user_id = ? AND remaining_swipe > 0", userID).
+		Update("remaining_swipe", gorm.Expr("remaining_swipe - ?", 1))
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("no remaining swipe available")
+	}
+
+	return nil
+}
+
+// DeductSuperLike mengurangi remaining super like user
+func (r *userdetailRepository) DeductSuperLike(userID string) error {
+	result := r.DB.Model(&explore.UserLimit{}).
+		Where("user_id = ? AND remaining_super_like > 0", userID).
+		Update("remaining_super_like", gorm.Expr("remaining_super_like - ?", 1))
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("no remaining super like available")
+	}
+
+	return nil
+}
+
+// ResetDailySwipe mereset swipe setiap hari (bisa dijalankan via cron job)
+func (r *userdetailRepository) ResetDailySwipe() error {
+	return r.DB.Model(&explore.UserLimit{}).
+		Where("updated_at < DATE_SUB(NOW(), INTERVAL 1 DAY)").
+		Updates(map[string]interface{}{
+			"remaining_swipe":      50,
+			"remaining_super_like": 1,
+		}).Error
+}
+
+// GetUserLimit mendapatkan informasi limit user
+func (r *userdetailRepository) GetUserLimit(userID string) (*explore.UserLimit, error) {
+	var userLimit explore.UserLimit
+	err := r.DB.Where("user_id = ?", userID).First(&userLimit).Error
+	if err != nil {
+		return nil, err
+	}
+	return &userLimit, nil
 }
