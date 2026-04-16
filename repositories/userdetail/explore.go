@@ -2,11 +2,24 @@ package userdetail
 
 import (
 	"github.com/srv-api/auth/entity"
+	limit "github.com/srv-api/detail/entity"
+
 	dto "github.com/srv-api/detail/dto"
 )
 
 func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error) {
 	var results []dto.ExploreUserResponse
+
+	// 🔥 1. Ambil user limit
+	var userLimit limit.UserLimit
+	r.DB.Where("user_id = ?", req.UserID).First(&userLimit)
+
+	// default fallback kalau belum ada record
+	limit := userLimit.RemainingSwipe
+	if limit <= 0 {
+		// kalau swipe habis → tidak kasih user
+		return []dto.ExploreUserResponse{}, nil
+	}
 
 	query := `
 		SELECT 
@@ -46,27 +59,27 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 					sin(radians(current.latitude)) * sin(radians(ud.latitude))
 				))
 			)) <= current.radius
-			-- Exclude users who have been liked by current user (table: likes)
 			AND NOT EXISTS (
 				SELECT 1 FROM likes l 
 				WHERE l.user_id = current.user_id 
 					AND l.target_user_id = ud.user_id
 			)
-			-- Exclude users who have matched with current user (table: matches)
 			AND NOT EXISTS (
 				SELECT 1 FROM matches m 
 				WHERE (m.user1_id = current.user_id AND m.user2_id = ud.user_id)
 					OR (m.user1_id = ud.user_id AND m.user2_id = current.user_id)
 			)
 		ORDER BY distance
+		LIMIT ?
 	`
 
-	err := r.DB.Raw(query, req.UserID).Scan(&results).Error
+	// 🔥 2. pakai LIMIT dari user_limit
+	err := r.DB.Raw(query, req.UserID, limit).Scan(&results).Error
 	if err != nil {
 		return nil, err
 	}
 
-	// Filter gender target jika tidak 'both'
+	// 🔥 3. Filter gender target (TETAP)
 	var currentUser entity.AccessDoor
 	r.DB.Where("id = ?", req.UserID).First(&currentUser)
 
