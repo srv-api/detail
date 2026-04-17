@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/srv-api/detail/configs"
+	"github.com/srv-api/detail/cron"
 
 	h_permission "github.com/srv-api/detail/handlers/dashboard/permission"
 	r_permission "github.com/srv-api/detail/repositories/dashboard/permission"
@@ -108,6 +109,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
 	e.PUT("/user/update", userdetailH.LongLat)
+	cron.StartDailyReset(DB)
 
 	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
