@@ -21,7 +21,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 	offset := (req.Page - 1) * req.Limit
 
 	// Ambil data sesuai limit, offset, dan urutan
-	find := r.DB.Preload("Verified").Preload("Merchant").Limit(req.Limit).Offset(offset).Order(req.Sort)
+	find := r.DB.Preload("Verified").Preload("Merchant").Preload("ProfilePicture").Limit(req.Limit).Offset(offset).Order(req.Sort)
 
 	// Generate where query untuk search
 	if req.Searchs != nil {

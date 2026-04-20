@@ -47,7 +47,7 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 		FROM user_details current
 		CROSS JOIN user_details ud
 		JOIN access_doors a ON a.id = ud.user_id
-		LEFT JOIN uploaded_files uf ON uf.user_id = ud.user_id 
+		LEFT JOIN profile_pictures uf ON uf.user_id = ud.user_id 
 			AND uf.deleted_at IS NULL
 		WHERE current.user_id = ?
 			AND ud.user_id != current.user_id
