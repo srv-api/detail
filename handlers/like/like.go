@@ -37,5 +37,15 @@ func (h *LikeHandler) LikeUser(c echo.Context) error {
 	println("Req IsSuperLike:", req.IsSuperLike)
 
 	res, err := h.Service.LikeUser(req)
-	// ... sisanya sama
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
+		})
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"status":  true,
+		"message": res.Message,
+		"data":    res,
+	})
 }
