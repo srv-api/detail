@@ -55,18 +55,43 @@ func (r *likeRepository) IsMatch(req dto.LikeRequest) (bool, error) {
 }
 
 func (r *likeRepository) DeductSwipe(req dto.LikeRequest) error {
+	// 🔥 LOG 1: Cek function terpanggil
+	println("=== DEDUCT SWIPE CALLED ===")
+	println("UserID:", req.UserID)
+	println("TargetUserID:", req.TargetUserID)
+	println("IsSuperLike:", req.IsSuperLike)
+
 	result := r.DB.Model(&entity.UserLimit{}).
 		Where("user_id = ? AND remaining_swipe > 0", req.UserID).
 		Update("remaining_swipe", gorm.Expr("remaining_swipe - 1"))
+
+	// 🔥 LOG 2: Cek result
+	println("RowsAffected:", result.RowsAffected)
+	println("Error:", result.Error)
 
 	if result.Error != nil {
 		return result.Error
 	}
 
 	if result.RowsAffected == 0 {
+		// 🔥 LOG 3: Cek apakah user_limit ada
+		var count int64
+		r.DB.Model(&entity.UserLimit{}).Where("user_id = ?", req.UserID).Count(&count)
+		println("UserLimit record exists:", count > 0)
+
+		if count == 0 {
+			println("USER LIMIT NOT FOUND FOR USER:", req.UserID)
+		} else {
+			// Cek nilai remaining_swipe
+			var userLimit entity.UserLimit
+			r.DB.Where("user_id = ?", req.UserID).First(&userLimit)
+			println("Current remaining_swipe:", userLimit.RemainingSwipe)
+		}
+
 		return errors.New("no swipe remaining")
 	}
 
+	println("✅ SWIPE DEDUCTED SUCCESSFULLY")
 	return nil
 }
 

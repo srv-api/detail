@@ -12,7 +12,6 @@ func (b *domainHandler) Explore(c echo.Context) error {
 		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
 	}
 
-	// Ambil user_id dari JWT
 	userId, ok := c.Get("UserId").(string)
 	if !ok {
 		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
