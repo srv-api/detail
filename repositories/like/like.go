@@ -3,15 +3,16 @@ package repository
 import (
 	"errors"
 
+	"github.com/srv-api/detail/dto"
 	"github.com/srv-api/detail/entity"
 	"gorm.io/gorm"
 )
 
 type LikeRepository interface {
-	CreateLike(userID, targetUserID string) error
-	IsMatch(userID, targetUserID string) (bool, error)
-	DeductSwipe(userID string) error
-	DeductSuperLike(userID string) error
+	CreateLike(req dto.LikeRequest) error
+	IsMatch(req dto.LikeRequest) (bool, error)
+	DeductSwipe(req dto.LikeRequest) error
+	DeductSuperLike(req dto.LikeRequest) error
 }
 
 type likeRepository struct {
@@ -23,10 +24,10 @@ func NewLikeRepository(db *gorm.DB) LikeRepository {
 }
 
 // insert like
-func (r *likeRepository) CreateLike(userID, targetUserID string) error {
+func (r *likeRepository) CreateLike(req dto.LikeRequest) error {
 	like := entity.Like{
-		UserID:       userID,
-		TargetUserID: targetUserID,
+		UserID:       req.UserID,
+		TargetUserID: req.TargetUserID,
 	}
 
 	// hindari duplicate
@@ -39,11 +40,11 @@ func (r *likeRepository) CreateLike(userID, targetUserID string) error {
 }
 
 // cek apakah match (mutual like)
-func (r *likeRepository) IsMatch(userID, targetUserID string) (bool, error) {
+func (r *likeRepository) IsMatch(req dto.LikeRequest) (bool, error) {
 	var count int64
 
 	err := r.DB.Model(&entity.Like{}).
-		Where("user_id = ? AND target_user_id = ?", targetUserID, userID).
+		Where("user_id = ? AND target_user_id = ?", req.TargetUserID, req.UserID).
 		Count(&count).Error
 
 	if err != nil {
@@ -53,9 +54,9 @@ func (r *likeRepository) IsMatch(userID, targetUserID string) (bool, error) {
 	return count > 0, nil
 }
 
-func (r *likeRepository) DeductSwipe(userID string) error {
+func (r *likeRepository) DeductSwipe(req dto.LikeRequest) error {
 	result := r.DB.Model(&entity.UserLimit{}).
-		Where("user_id = ? AND remaining_swipe > 0", userID).
+		Where("user_id = ? AND remaining_swipe > 0", req.UserID).
 		Update("remaining_swipe", gorm.Expr("remaining_swipe - 1"))
 
 	if result.Error != nil {
@@ -69,9 +70,9 @@ func (r *likeRepository) DeductSwipe(userID string) error {
 	return nil
 }
 
-func (r *likeRepository) DeductSuperLike(userID string) error {
+func (r *likeRepository) DeductSuperLike(req dto.LikeRequest) error {
 	result := r.DB.Model(&entity.UserLimit{}).
-		Where("user_id = ? AND remaining_super_like > 0", userID).
+		Where("user_id = ? AND remaining_super_like > 0", req.UserID).
 		Update("remaining_super_like", gorm.Expr("remaining_super_like - 1"))
 
 	if result.Error != nil {

@@ -29,8 +29,9 @@ func (h *LikeHandler) LikeUser(c echo.Context) error {
 
 	// ambil user dari JWT middleware
 	userID := c.Get("UserId").(string)
+	req.UserID = userID
 
-	res, err := h.Service.LikeUser(userID, req)
+	res, err := h.Service.LikeUser(req)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),

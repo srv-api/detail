@@ -9,7 +9,7 @@ import (
 )
 
 type LikeService interface {
-	LikeUser(userID string, req dto.LikeRequest) (dto.LikeResponse, error)
+	LikeUser(req dto.LikeRequest) (dto.LikeResponse, error)
 }
 
 type likeService struct {
@@ -27,37 +27,37 @@ func NewLikeService(
 	}
 }
 
-func (s *likeService) LikeUser(userID string, req dto.LikeRequest) (dto.LikeResponse, error) {
+func (s *likeService) LikeUser(req dto.LikeRequest) (dto.LikeResponse, error) {
 
-	if userID == req.TargetUserID {
+	if req.UserID == req.TargetUserID {
 		return dto.LikeResponse{}, errors.New("cannot like yourself")
 	}
 
 	// 🔥 1. Deduct limit dulu
 	if req.IsSuperLike {
-		if err := s.Repo.DeductSuperLike(userID); err != nil {
+		if err := s.Repo.DeductSuperLike(req); err != nil {
 			return dto.LikeResponse{}, err
 		}
 	} else {
-		if err := s.Repo.DeductSwipe(userID); err != nil {
+		if err := s.Repo.DeductSwipe(req); err != nil {
 			return dto.LikeResponse{}, err
 		}
 	}
 
 	// 🔥 2. Insert like
-	err := s.Repo.CreateLike(userID, req.TargetUserID)
+	err := s.Repo.CreateLike(req)
 	if err != nil {
 		return dto.LikeResponse{}, err
 	}
 
 	// 🔥 3. Check match
-	isMatch, err := s.Repo.IsMatch(userID, req.TargetUserID)
+	isMatch, err := s.Repo.IsMatch(req)
 	if err != nil {
 		return dto.LikeResponse{}, err
 	}
 
 	if isMatch {
-		err := s.MatchService.CreateMatch(userID, req.TargetUserID)
+		err := s.MatchService.CreateMatch(req.UserID, req.TargetUserID)
 		if err != nil {
 			return dto.LikeResponse{}, err
 		}
