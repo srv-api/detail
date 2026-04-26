@@ -20,21 +20,16 @@ func NewLikeHandler(s service.LikeService) *LikeHandler {
 func (h *LikeHandler) LikeUser(c echo.Context) error {
 	var req dto.LikeRequest
 
+	// bind request
 	if err := c.Bind(&req); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": "invalid request",
 		})
 	}
 
+	// ambil user dari JWT middleware
 	userID := c.Get("UserId").(string)
 	req.UserID = userID
-
-	// 🔥 LOG
-	println("=== HANDLER LIKE ===")
-	println("UserID from JWT:", userID)
-	println("Req UserID:", req.UserID)
-	println("Req TargetUserID:", req.TargetUserID)
-	println("Req IsSuperLike:", req.IsSuperLike)
 
 	res, err := h.Service.LikeUser(req)
 	if err != nil {

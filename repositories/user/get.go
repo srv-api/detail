@@ -41,6 +41,17 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 		}
 	}
 
+	// Filter berdasarkan tabel Match menggunakan UserID dari pagination
+	if req.UserID != "" {
+		find = find.Where(`
+			id IN (
+				SELECT user1_id FROM matches WHERE user2_id = ? 
+				UNION 
+				SELECT user2_id FROM matches WHERE user1_id = ?
+			)
+		`, req.UserID, req.UserID)
+	}
+
 	find = find.Find(&users)
 
 	// Periksa jika ada error saat pengambilan data
@@ -50,8 +61,18 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 
 	req.Rows = users
 
-	// Hitung total data
-	if errCount := r.DB.Model(&entity.AccessDoor{}).Count(&totalRows).Error; errCount != nil {
+	// Hitung total data dengan mempertimbangkan filter match
+	queryCount := r.DB.Model(&entity.AccessDoor{})
+	if req.UserID != "" {
+		queryCount = queryCount.Where(`
+			id IN (
+				SELECT user1_id FROM matches WHERE user2_id = ? 
+				UNION 
+				SELECT user2_id FROM matches WHERE user1_id = ?
+			)
+		`, req.UserID, req.UserID)
+	}
+	if errCount := queryCount.Count(&totalRows).Error; errCount != nil {
 		return dto.UserPaginationResponse{}, totalPages
 	}
 
@@ -64,6 +85,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 	// Hitung total halaman berdasarkan limit
 	totalPages = int(math.Ceil(float64(totalRows) / float64(req.Limit)))
 	req.TotalPages = totalPages
+
 	// Hitung `fromRow` dan `toRow` untuk page saat ini
 	if req.Page == 1 {
 		// Untuk halaman pertama
@@ -84,20 +106,20 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 	// Set hasil akhir
 	req.FromRow = fromRow
 	req.ToRow = toRow
+
 	var userResponses []dto.UserResponse
 	for _, u := range users {
 
 		decryptedWa, err := util.Decrypt(u.Whatsapp)
 		if err != nil {
 			return dto.UserPaginationResponse{}, totalPages
-
 		}
 
 		decryptedEmail, err := util.Decrypt(u.Email)
 		if err != nil {
 			return dto.UserPaginationResponse{}, totalPages
-
 		}
+
 		userResp := dto.UserResponse{
 			ID:       u.ID,
 			FullName: u.FullName,
@@ -128,6 +150,7 @@ func (r *userRepository) Get(req *dto.Pagination) (dto.UserPaginationResponse, i
 		}
 		userResponses = append(userResponses, userResp)
 	}
+
 	response := dto.UserPaginationResponse{
 		Limit:        req.Limit,
 		Page:         req.Page,

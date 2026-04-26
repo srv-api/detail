@@ -5,11 +5,9 @@ go 1.25.1
 require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.15.0
-	github.com/midtrans/midtrans-go v1.3.8
 	github.com/plutov/paypal/v4 v4.17.0
 	github.com/srv-api/auth v0.0.0-20260413114936-69cacd79fab6
 	github.com/srv-api/middlewares v0.0.0-20260413091150-3878b6563895
-	github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5
 	github.com/srv-api/util v0.0.0-20260413114728-4851b9a0c2f3
 	golang.org/x/crypto v0.46.0
 	gorm.io/driver/postgres v1.6.0

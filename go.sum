@@ -39,8 +39,6 @@ github.com/mattn/go-colorable v0.1.14 h1:9A9LHSqF/7dyVVX6g0U9cwm9pG3kP9gSzcuIPHP
 github.com/mattn/go-colorable v0.1.14/go.mod h1:6LmQG8QLFO4G5z1gPvYEzlUgJ2wF+stgPZH1UqBm1s8=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
-github.com/midtrans/midtrans-go v1.3.8 h1:r6eq51LJwbMQ05dBF3Twg99u45G3pLxP5INYoqOoNzU=
-github.com/midtrans/midtrans-go v1.3.8/go.mod h1:5hN2oiZDP3/SwSBxHPTg8eC/RVoRE9DXQOY1Ah9au10=
 github.com/olivere/elastic/v7 v7.0.32 h1:R7CXvbu8Eq+WlsLgxmKVKPox0oOwAE/2T9Si5BnvK6E=
 github.com/olivere/elastic/v7 v7.0.32/go.mod h1:c7PVmLe3Fxq77PIfY/bZmxY/TAamBhCzZ8xDOE09a9k=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
@@ -58,8 +56,6 @@ github.com/srv-api/auth v0.0.0-20260413114936-69cacd79fab6 h1:2e8FtyK5735htCtXky
 github.com/srv-api/auth v0.0.0-20260413114936-69cacd79fab6/go.mod h1:4uT/AqYvPQKX4IvxuuVUlXBNrnnkQp9eA1ZqZuoIBds=
 github.com/srv-api/middlewares v0.0.0-20260413091150-3878b6563895 h1:F5RxrDG6J5mKJ8U0eB9RLGjK32JaM6ykedr5LGcniJQ=
 github.com/srv-api/middlewares v0.0.0-20260413091150-3878b6563895/go.mod h1:1Tb4LYh5RHtsaEbchi8RYeiyx5fTQwhsPBo0c+v7tYs=
-github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5 h1:xxvDeslGXrZDLbzW262TijjM4NW62PTtpG8nzPAGG7g=
-github.com/srv-api/product v0.0.0-20260317020255-1aa49e1af5e5/go.mod h1:obMFBRpg8aD6uN8QHWa87IqT3YHArJGXLGemCKNcHpQ=
 github.com/srv-api/util v0.0.0-20260413114728-4851b9a0c2f3 h1:eShB9/0U4ACE2zW2SPLHvSAUIypsSq6wQvfZmfMSZzU=
 github.com/srv-api/util v0.0.0-20260413114728-4851b9a0c2f3/go.mod h1:NfebM4iHQ6lHgXEkUu2vK4SKmbk2SOnVf0RuEVkzo/M=
 github.com/streadway/amqp v1.1.0 h1:py12iX8XSyI7aN/3dUT8DFIDJazNJsVJdxNVEpnQTZM=
