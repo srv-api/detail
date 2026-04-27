@@ -123,7 +123,7 @@ func (r *likeRepository) Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error) {
 			access_doors.full_name,
 			profile_pictures.file_path as photo_url
 		`).
-		Joins("LEFT JOIN access_doors ON access_doors.user_id = likes.user_id").
+		Joins("LEFT JOIN access_doors ON access_doors.id = likes.user_id").
 		Joins("LEFT JOIN profile_pictures ON profile_pictures.user_id = likes.user_id AND profile_pictures.deleted_at IS NULL").
 		Joins("LEFT JOIN matches ON ("+
 			"(matches.user1_id = likes.user_id AND matches.user2_id = ?) OR "+
