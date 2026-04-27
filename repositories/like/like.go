@@ -116,13 +116,22 @@ func (r *likeRepository) Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error) {
 	var likeResponses []dto.LikeMeResponse
 
 	err := r.DB.Table("likes").
-		Select("likes.user_id, likes.is_super_like, likes.created_at").
+		Select(`
+			likes.user_id, 
+			likes.is_super_like, 
+			likes.created_at, 
+			access_doors.full_name,
+			profile_pictures.file_path as photo_url
+		`).
+		Joins("LEFT JOIN access_doors ON access_doors.user_id = likes.user_id").
+		Joins("LEFT JOIN profile_pictures ON profile_pictures.user_id = likes.user_id AND profile_pictures.deleted_at IS NULL").
 		Joins("LEFT JOIN matches ON ("+
 			"(matches.user1_id = likes.user_id AND matches.user2_id = ?) OR "+
 			"(matches.user1_id = ? AND matches.user2_id = likes.user_id)"+
 			")", req.UserID, req.UserID).
 		Where("likes.target_user_id = ?", req.UserID).
 		Where("matches.id IS NULL").
+		Group("likes.user_id, likes.is_super_like, likes.created_at, access_doors.full_name, profile_pictures.file_path").
 		Scan(&likeResponses).Error
 
 	if err != nil {
