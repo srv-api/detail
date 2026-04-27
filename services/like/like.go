@@ -10,6 +10,7 @@ import (
 
 type LikeService interface {
 	LikeUser(req dto.LikeRequest) (dto.LikeResponse, error)
+	Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error)
 }
 
 type likeService struct {
@@ -72,4 +73,13 @@ func (s *likeService) LikeUser(req dto.LikeRequest) (dto.LikeResponse, error) {
 		IsMatch: false,
 		Message: "Liked successfully",
 	}, nil
+}
+
+func (s *likeService) Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error) {
+	medsosResponses, err := s.Repo.Me(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return medsosResponses, nil
 }

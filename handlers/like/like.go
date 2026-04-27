@@ -44,3 +44,21 @@ func (h *LikeHandler) LikeUser(c echo.Context) error {
 		"data":    res,
 	})
 }
+func (h *LikeHandler) Me(c echo.Context) error {
+	var req dto.LikeRequest
+	if err := c.Bind(&req); err != nil {
+		return echo.NewHTTPError(400, "Invalid request")
+	}
+	userID := c.Get("UserId").(string)
+	req.UserID = userID
+
+	medsos, err := h.Service.Me(req)
+	if err != nil {
+		return echo.NewHTTPError(500, "Failed to get medsos")
+	}
+
+	return c.JSON(200, echo.Map{
+		"status": "success",
+		"data":   medsos,
+	})
+}

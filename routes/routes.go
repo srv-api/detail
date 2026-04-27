@@ -198,6 +198,7 @@ func New() *echo.Echo {
 	like := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{
 		like.POST("/like", likeHandler.LikeUser)
+		like.GET("/like/me", likeHandler.Me)
 	}
 	match := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{

@@ -13,6 +13,7 @@ type LikeRepository interface {
 	IsMatch(req dto.LikeRequest) (bool, error)
 	DeductSwipe(req dto.LikeRequest) error
 	DeductSuperLike(req dto.LikeRequest) error
+	Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error)
 }
 
 type likeRepository struct {
@@ -109,4 +110,26 @@ func (r *likeRepository) DeductSuperLike(req dto.LikeRequest) error {
 	}
 
 	return nil
+}
+
+func (r *likeRepository) Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error) {
+	var likes []entity.Like
+	var likeMe []dto.LikeMeResponse
+
+	// Find all likes where TargetUserID = current user ID
+	err := r.DB.Where("target_user_id = ?", req.UserID).Find(&likes).Error
+	if err != nil {
+		return nil, err
+	}
+
+	// Map to response DTO
+	for _, like := range likes {
+		likeMe = append(likeMe, dto.LikeMeResponse{
+			UserID:      like.UserID,
+			IsSuperLike: like.IsSuperLike,
+			CreatedAt:   like.CreatedAt,
+		})
+	}
+
+	return likeMe, nil
 }

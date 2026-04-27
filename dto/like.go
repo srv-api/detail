@@ -1,5 +1,7 @@
 package dto
 
+import "time"
+
 type LikeRequest struct {
 	UserID       string `json:"user_id"`
 	TargetUserID string `json:"target_user_id" validate:"required"`
@@ -9,4 +11,10 @@ type LikeRequest struct {
 type LikeResponse struct {
 	IsMatch bool   `json:"is_match"`
 	Message string `json:"message"`
+}
+
+type LikeMeResponse struct {
+	UserID      string    `json:"user_id"`
+	IsSuperLike bool      `json:"is_super_like"`
+	CreatedAt   time.Time `json:"created_at"`
 }
