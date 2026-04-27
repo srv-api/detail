@@ -113,23 +113,21 @@ func (r *likeRepository) DeductSuperLike(req dto.LikeRequest) error {
 }
 
 func (r *likeRepository) Me(req dto.LikeRequest) ([]dto.LikeMeResponse, error) {
-	var likes []entity.Like
-	var likeMe []dto.LikeMeResponse
+	var likeResponses []dto.LikeMeResponse
 
-	// Find all likes where TargetUserID = current user ID
-	err := r.DB.Where("target_user_id = ?", req.UserID).Find(&likes).Error
+	err := r.DB.Table("likes").
+		Select("likes.user_id, likes.is_super_like, likes.created_at").
+		Joins("LEFT JOIN matches ON ("+
+			"(matches.user1_id = likes.user_id AND matches.user2_id = ?) OR "+
+			"(matches.user1_id = ? AND matches.user2_id = likes.user_id)"+
+			")", req.UserID, req.UserID).
+		Where("likes.target_user_id = ?", req.UserID).
+		Where("matches.id IS NULL").
+		Scan(&likeResponses).Error
+
 	if err != nil {
 		return nil, err
 	}
 
-	// Map to response DTO
-	for _, like := range likes {
-		likeMe = append(likeMe, dto.LikeMeResponse{
-			UserID:      like.UserID,
-			IsSuperLike: like.IsSuperLike,
-			CreatedAt:   like.CreatedAt,
-		})
-	}
-
-	return likeMe, nil
+	return likeResponses, nil
 }
