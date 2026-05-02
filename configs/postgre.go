@@ -58,27 +58,23 @@ func InitDB() *gorm.DB {
 	// Migrate the schema
 	db.AutoMigrate(
 		&entity.Pin{},
-		&entity.Subscribe{},
-		&entity.Package{},
 		&entity.Type{},
 		&entity.Permission{},
 		&entity.UserDetail{},
 		&entity.Role{},
 		&entity.RoleUser{},
 		&entity.RoleUserPermission{},
-		&entity.PaymentMethod{},
 		&entity.UploadedPayment{},
 		&entity.ContentSetting{},
 		&entity.Message{},
-		&entity.Order{},
 		&entity.DeleteAccount{},
 		&entity.FCMToken{},
-		&entity.Qris{},
 		&entity.Like{},
 		&entity.Subscription{},
 		&entity.Boost{},
 		&entity.UserLimit{},
 		&entity.Match{},
+		&entity.PurchaseHistory{},
 	)
 
 	return db
