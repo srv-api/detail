@@ -28,8 +28,11 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreR
 	if limit <= 0 {
 		// kalau swipe habis → tidak kasih user
 		return &dto.ExploreResponse{
-			UserIsPremium: currentUserDetail.IsPremium,
-			Users:         []dto.ExploreUserResponse{},
+			UserIsPremium:  currentUserDetail.IsPremium,
+			UserIsBoosted:  currentUserDetail.IsBoosted,
+			UserIsStarLike: currentUserDetail.IsStarLike,
+			UserIsSee:      currentUserDetail.IsSee,
+			Users:          []dto.ExploreUserResponse{},
 		}, nil
 	}
 

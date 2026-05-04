@@ -60,6 +60,9 @@ type UserDetailResponse struct {
 
 type ExploreResponse struct {
 	UserIsPremium  bool                  `json:"user_is_premium"`
+	UserIsBoosted  bool                  `json:"user_is_boosted"`
+	UserIsStarLike bool                  `json:"user_is_star_like"`
+	UserIsSee      bool                  `json:"user_is_see"`
 	RemainingSwipe int                   `json:"remaining_swipe"` // tambahkan ini
 	Users          []ExploreUserResponse `json:"users"`
 }
