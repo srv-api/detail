@@ -36,6 +36,7 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 			ud.min_age,
 			ud.max_age,
 			ud.gender_target,
+			ud.is_premium,
 			a.age,
 			COALESCE(uf.file_path, '') as profile_picture,
 			(6371 * acos(
