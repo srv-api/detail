@@ -109,8 +109,12 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreR
 	}
 
 	return &dto.ExploreResponse{
-		UserIsPremium: currentUserDetail.IsPremium,
-		Users:         results,
+		UserIsPremium:  currentUserDetail.IsPremium,
+		UserIsBoosted:  currentUserDetail.IsBoosted,
+		UserIsStarLike: currentUserDetail.IsStarLike,
+		UserIsSee:      currentUserDetail.IsSee,
+
+		Users: results,
 	}, nil
 }
 
