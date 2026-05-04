@@ -9,6 +9,10 @@ import (
 type UserDetail struct {
 	ID           string         `gorm:"primary_key" json:"id"`
 	UserID       string         `gorm:"type:varchar(36);index" json:"user_id"`
+	IsPremium    bool           `gorm:"is_premium" json:"is_premium"`
+	IsBoosted    bool           `gorm:"is_boosted" json:"is_boosted"`
+	IsStarLike   bool           `gorm:"is_star_like" json:"is_star_like"`
+	IsSee        bool           `gorm:"is_see" json:"is_see"`
 	Bio          string         `gorm:"type:varchar(255);index" json:"bio"`
 	Longitude    float64        `gorm:"type:decimal(11,8);index" json:"longitude"`
 	Latitude     float64        `gorm:"type:decimal(11,8);index" json:"latitude"`

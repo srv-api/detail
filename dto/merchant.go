@@ -80,6 +80,8 @@ type ExploreUserResponse struct {
 	HasLikedMe         bool    `json:"has_liked_me"`
 	IsPremium          bool    `json:"is_premium"`
 	IsBoosted          bool    `json:"is_boosted"`
+	IsStarLike         bool    `json:"is_star_like"`
+	IsSee              bool    `json:"is_see"`
 	RemainingSwipe     int     `json:"remaining_swipe"`
 	RemainingSuperLike int     `json:"remaining_super_like"`
 	LastActive         string  `json:"last_active"`
