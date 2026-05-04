@@ -7,5 +7,6 @@ type Like struct {
 	UserID       string    `gorm:"type:varchar(50);not null;index:idx_user_target,unique"`
 	TargetUserID string    `gorm:"type:varchar(50);not null;index:idx_user_target,unique"`
 	IsSuperLike  bool      `gorm:"default:false"`
+	is_premium   bool      `gorm:"default:false"`
 	CreatedAt    time.Time `gorm:"autoCreateTime"`
 }

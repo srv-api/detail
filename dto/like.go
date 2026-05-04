@@ -15,6 +15,7 @@ type LikeResponse struct {
 
 type LikeMeResponse struct {
 	UserID      string    `json:"user_id"`
+	IsPremium   bool      `json:"is_premium"`
 	FullName    string    `json:"full_name"`
 	PhotoURL    string    `json:"photo_url"`
 	IsSuperLike bool      `json:"is_super_like"`
