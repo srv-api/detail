@@ -9,7 +9,7 @@ import (
 
 type UserDetailService interface {
 	Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
-	Explore(req dto.UserDetailRequest) (dto.ExploreResponse, error)
+	Explore(req dto.UserDetailRequest) (*dto.ExploreResponse, error)
 	Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 	LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 }

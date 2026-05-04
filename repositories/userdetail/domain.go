@@ -9,7 +9,7 @@ import (
 
 type DomainRepository interface {
 	Get(req dto.UserDetailRequest) (dto.UserDetailResponse, error)
-	Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error)
+	Explore(req dto.UserDetailRequest) (*dto.ExploreResponse, error)
 	LongLat(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)
 	GetById(req dto.GetUserDetailByIdRequest) (*dto.UserDetailRequest, error)
 	Update(req dto.UpdateUserDetailRequest) (dto.UpdateUserDetailResponse, error)

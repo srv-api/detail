@@ -6,27 +6,27 @@ import (
 	dto "github.com/srv-api/detail/dto"
 )
 
-func (s *merchantService) Explore(req dto.UserDetailRequest) (dto.ExploreResponse, error) {
+func (s *merchantService) Explore(req dto.UserDetailRequest) (*dto.ExploreResponse, error) {
 	// 🔵 AMBIL DATA LIMIT USER DARI DATABASE
 	userLimit, err := s.Repo.GetUserLimit(req.UserID)
 	if err != nil {
-		return dto.ExploreResponse{}, err
+		return nil, err
 	}
 
 	// 🟢 CEK: Apakah masih ada swipe?
 	if userLimit.RemainingSwipe <= 0 {
-		// Kembalikan error kalau limit habis
-		return dto.ExploreResponse{}, errors.New("daily swipe limit exceeded")
+		return nil, errors.New("daily swipe limit exceeded")
 	}
 
 	// 📋 Kalau masih ada swipe, lanjut ambil data explore
-	users, err := s.Repo.Explore(req)
+	response, err := s.Repo.Explore(req)
 	if err != nil {
-		return dto.ExploreResponse{}, err
+		return nil, err
 	}
 
-	// ✅ Kembalikan data user + sisa swipe (TANPA mengurangi)
-	return dto.ExploreResponse{
-		Users: users,
-	}, nil
+	// ✅ Tambahkan sisa swipe ke response
+	response.RemainingSwipe = userLimit.RemainingSwipe
+
+	return response, nil
+
 }

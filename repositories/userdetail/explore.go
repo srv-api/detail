@@ -10,8 +10,14 @@ import (
 	dto "github.com/srv-api/detail/dto"
 )
 
-func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.ExploreUserResponse, error) {
+func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreResponse, error) {
 	var results []dto.ExploreUserResponse
+
+	var currentUserDetail limit.UserDetail
+	err := r.DB.Where("user_id = ?", req.UserID).First(&currentUserDetail).Error
+	if err != nil {
+		return nil, err
+	}
 
 	// 🔥 1. Ambil user limit
 	var userLimit limit.UserLimit
@@ -21,7 +27,10 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 	limit := userLimit.RemainingSwipe
 	if limit <= 0 {
 		// kalau swipe habis → tidak kasih user
-		return []dto.ExploreUserResponse{}, nil
+		return &dto.ExploreResponse{
+			UserIsPremium: currentUserDetail.IsPremium,
+			Users:         []dto.ExploreUserResponse{},
+		}, nil
 	}
 
 	query := `
@@ -36,7 +45,6 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 			ud.min_age,
 			ud.max_age,
 			ud.gender_target,
-			ud.is_premium,
 			a.age,
 			COALESCE(uf.file_path, '') as profile_picture,
 			(6371 * acos(
@@ -78,7 +86,7 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 	`
 
 	// 🔥 2. pakai LIMIT dari user_limit
-	err := r.DB.Raw(query, req.UserID, limit).Scan(&results).Error
+	err = r.DB.Raw(query, req.UserID, limit).Scan(&results).Error
 	if err != nil {
 		return nil, err
 	}
@@ -97,7 +105,10 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) ([]dto.Explore
 		results = filtered
 	}
 
-	return results, nil
+	return &dto.ExploreResponse{
+		UserIsPremium: currentUserDetail.IsPremium,
+		Users:         results,
+	}, nil
 }
 
 func (r *userdetailRepository) GetUserLimit(userID string) (*limit.UserLimit, error) {
