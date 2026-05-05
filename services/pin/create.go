@@ -7,7 +7,6 @@ import (
 )
 
 func (s *pinService) Create(req dto.PinRequest) (dto.PinResponse, error) {
-	// Hash the PIN
 	hashedPin, err := bcrypt.GenerateFromPassword([]byte(req.Pin), bcrypt.DefaultCost)
 	if err != nil {
 		return dto.PinResponse{}, err

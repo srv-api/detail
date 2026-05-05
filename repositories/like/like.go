@@ -3,6 +3,8 @@ package repository
 import (
 	"errors"
 
+	res "github.com/srv-api/util/s/response"
+
 	"github.com/srv-api/detail/dto"
 	"github.com/srv-api/detail/entity"
 	"gorm.io/gorm"
@@ -89,10 +91,10 @@ func (r *likeRepository) DeductSwipe(req dto.LikeRequest) error {
 			println("Current remaining_swipe:", userLimit.RemainingSwipe)
 		}
 
-		return errors.New("no swipe remaining")
+		return res.ErrorBuilder(&res.ErrorConstant.SwipeLike, nil)
+
 	}
 
-	println("✅ SWIPE DEDUCTED SUCCESSFULLY")
 	return nil
 }
 
