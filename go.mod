@@ -6,16 +6,15 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.15.0
 	github.com/plutov/paypal/v4 v4.17.0
-	github.com/srv-api/auth v0.0.0-20260413114936-69cacd79fab6
+	github.com/srv-api/auth v0.0.0-20260420072756-e0ab5a243ce4
 	github.com/srv-api/middlewares v0.0.0-20260413091150-3878b6563895
-	github.com/srv-api/util v0.0.0-20260413114728-4851b9a0c2f3
+	github.com/srv-api/util v0.0.0-20260505065052-f56daad96159
 	golang.org/x/crypto v0.46.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.25.12
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/h2non/filetype v1.1.3 // indirect
@@ -33,7 +32,6 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/olivere/elastic/v7 v7.0.32 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e // indirect
 	github.com/streadway/amqp v1.1.0 // indirect

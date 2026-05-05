@@ -1,7 +1,7 @@
 package userdetail
 
 import (
-	"errors"
+	res "github.com/srv-api/util/s/response"
 
 	dto "github.com/srv-api/detail/dto"
 )
@@ -15,7 +15,8 @@ func (s *merchantService) Explore(req dto.UserDetailRequest) (*dto.ExploreRespon
 
 	// 🟢 CEK: Apakah masih ada swipe?
 	if userLimit.RemainingSwipe <= 0 {
-		return nil, errors.New("daily swipe limit exceeded")
+		// return nil, errors.New("daily swipe limit exceeded")
+		res.ErrorBuilder(&res.ErrorConstant.SwipeLike, nil)
 	}
 
 	// 📋 Kalau masih ada swipe, lanjut ambil data explore
