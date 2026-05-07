@@ -5,8 +5,9 @@ import (
 	util "github.com/srv-api/util/s"
 )
 
-func (s *premiumPurchase) Create(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error) {
+const UNLIMITED = -1
 
+func (s *premiumPurchase) Create(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error) {
 	// Proses pembuatan data Pin
 	create := dto.PremiumPurchaseRequest{
 		ID:        util.GenerateRandomString(),
@@ -15,17 +16,12 @@ func (s *premiumPurchase) Create(req dto.PremiumPurchaseRequest) (dto.PremiumPur
 		CreatedBy: req.CreatedBy,
 	}
 
-	created, err := s.Repo.Create(create)
+	// Create purchase record AND update user limit to unlimited
+	// Semua logic transaction sudah di handle di repository
+	created, err := s.Repo.CreateWithPremium(create)
 	if err != nil {
 		return dto.PremiumPurchaseResponse{}, err
 	}
 
-	response := dto.PremiumPurchaseResponse{
-		ID:        created.ID,
-		DetailID:  created.DetailID,
-		UserID:    created.UserID,
-		CreatedBy: created.CreatedBy,
-	}
-
-	return response, nil
+	return created, nil
 }

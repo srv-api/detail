@@ -8,6 +8,7 @@ import (
 
 type DomainRepository interface {
 	Create(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error)
+	CreateWithPremium(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error)
 }
 
 type purchaseRepository struct {
