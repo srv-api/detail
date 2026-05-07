@@ -63,7 +63,9 @@ type ExploreResponse struct {
 	UserIsBoosted  bool                  `json:"user_is_boosted"`
 	UserIsStarLike bool                  `json:"user_is_star_like"`
 	UserIsSee      bool                  `json:"user_is_see"`
-	RemainingSwipe int                   `json:"remaining_swipe"` // tambahkan ini
+	RemainingSwipe int                   `json:"remaining_swipe"`
+	RemainingStar  int                   `json:"remaining_star"`  // tambahkan ini
+	RemainingBoost int                   `json:"remaining_boost"` // tambahkan ini
 	Users          []ExploreUserResponse `json:"users"`
 }
 
