@@ -25,8 +25,6 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreR
 
 	// default fallback kalau belum ada record
 	limit := userLimit.RemainingSwipe
-	remainingStar := userLimit.RemainingSuperLike
-	remainingBoost := userLimit.RemainingBoost
 	if limit <= 0 {
 		// kalau swipe habis → tidak kasih user
 		return &dto.ExploreResponse{
@@ -34,9 +32,8 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreR
 			UserIsBoosted:  currentUserDetail.IsBoosted,
 			UserIsStarLike: currentUserDetail.IsStarLike,
 			UserIsSee:      currentUserDetail.IsSee,
-			RemainingStar:  remainingStar,
-			RemainingBoost: remainingBoost,
-			Users:          []dto.ExploreUserResponse{},
+
+			Users: []dto.ExploreUserResponse{},
 		}, nil
 	}
 
