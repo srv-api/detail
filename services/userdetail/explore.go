@@ -28,6 +28,7 @@ func (s *merchantService) Explore(req dto.UserDetailRequest) (*dto.ExploreRespon
 	// ✅ Tambahkan sisa swipe ke response
 	response.RemainingSwipe = userLimit.RemainingSwipe
 	response.RemainingBoost = userLimit.RemainingBoost
+	response.RemainingStar = userLimit.RemainingSuperLike
 
 	return response, nil
 
