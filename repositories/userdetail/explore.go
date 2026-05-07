@@ -33,6 +33,8 @@ func (r *userdetailRepository) Explore(req dto.UserDetailRequest) (*dto.ExploreR
 			UserIsBoosted:  currentUserDetail.IsBoosted,
 			UserIsStarLike: currentUserDetail.IsStarLike,
 			UserIsSee:      currentUserDetail.IsSee,
+			RemainingStar:  userLimit.RemainingSuperLike,
+			RemainingBoost: userLimit.RemainingBoost,
 			Users:          []dto.ExploreUserResponse{},
 		}, nil
 	}
