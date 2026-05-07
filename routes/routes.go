@@ -48,6 +48,10 @@ import (
 	r_match "github.com/srv-api/detail/repositories/match"
 	s_match "github.com/srv-api/detail/services/match"
 
+	h_purchase "github.com/srv-api/detail/handlers/purchase/premium"
+	r_purchase "github.com/srv-api/detail/repositories/purchase/premium"
+	s_purchase "github.com/srv-api/detail/services/purchase/premium"
+
 	"github.com/srv-api/middlewares/middlewares"
 )
 
@@ -97,6 +101,10 @@ var (
 	matchHandler = h_match.NewMatchHandler(matchService)
 	matchRepo    = r_match.NewMatchRepository(DB)
 	matchService = s_match.NewMatchService(matchRepo)
+
+	purchaseHandler = h_purchase.NewPurchaseHandler(purchaseService)
+	purchaseRepo    = r_purchase.NewPurchaseRepository(DB)
+	purchaseService = s_purchase.NewPurchaseService(purchaseRepo, JWT)
 
 	likeHandler = handler.NewLikeHandler(likeService)
 	likeRepo    = repository.NewLikeRepository(DB)
@@ -184,6 +192,11 @@ func New() *echo.Echo {
 		user.PUT("/user/update/:id", userH.Update)
 		user.DELETE("/user/:id", userH.Delete)
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
+	}
+	premiumGroup := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	{
+		premiumGroup.POST("/purchase", purchaseHandler.Create)
+
 	}
 
 	deleteAccount := e.Group("api/account", middlewares.AuthorizeJWT(JWT))

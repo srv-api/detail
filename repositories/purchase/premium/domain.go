@@ -15,7 +15,7 @@ type purchaseRepository struct {
 	DB *gorm.DB
 }
 
-func NewPinRepository(DB *gorm.DB) DomainRepository {
+func NewPurchaseRepository(DB *gorm.DB) DomainRepository {
 	return &purchaseRepository{
 		DB: DB,
 	}

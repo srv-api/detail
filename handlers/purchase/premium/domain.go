@@ -14,7 +14,7 @@ type domainHandler struct {
 	PremiumPurchase s.PurchaseService
 }
 
-func NewPinHandler(service s.PurchaseService) DomainHandler {
+func NewPurchaseHandler(service s.PurchaseService) DomainHandler {
 	return &domainHandler{
 		PremiumPurchase: service,
 	}
