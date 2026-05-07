@@ -31,5 +31,4 @@ func (s *merchantService) Explore(req dto.UserDetailRequest) (*dto.ExploreRespon
 	response.RemainingStar = userLimit.RemainingSuperLike
 
 	return response, nil
-
 }

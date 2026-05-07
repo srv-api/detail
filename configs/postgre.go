@@ -74,7 +74,7 @@ func InitDB() *gorm.DB {
 		&entity.Boost{},
 		&entity.UserLimit{},
 		&entity.Match{},
-		&entity.PurchaseHistory{},
+		&entity.PurchasePremium{},
 	)
 
 	return db
