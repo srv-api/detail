@@ -13,6 +13,7 @@ type UserDetail struct {
 	IsBoosted    bool           `gorm:"is_boosted" json:"is_boosted"`
 	IsStarLike   bool           `gorm:"is_star_like" json:"is_star_like"`
 	IsSee        bool           `gorm:"is_see" json:"is_see"`
+	IsRewind     bool           `gorm:"is_rewind" json:"is_rewind"`
 	Bio          string         `gorm:"type:varchar(255);index" json:"bio"`
 	Longitude    float64        `gorm:"type:decimal(11,8);index" json:"longitude"`
 	Latitude     float64        `gorm:"type:decimal(11,8);index" json:"latitude"`

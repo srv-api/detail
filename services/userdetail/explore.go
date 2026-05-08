@@ -29,6 +29,7 @@ func (s *merchantService) Explore(req dto.UserDetailRequest) (*dto.ExploreRespon
 	response.RemainingSwipe = userLimit.RemainingSwipe
 	response.RemainingBoost = userLimit.RemainingBoost
 	response.RemainingStar = userLimit.RemainingSuperLike
+	response.RemainingSwipe = userLimit.RemainingSwipe
 
 	return response, nil
 }
