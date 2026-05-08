@@ -90,10 +90,46 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				// Create new record
 				userLimit = entity.UserLimit{
+					UserID:          req.UserID,
+					RemainingSwipe:  UNLIMITED,
+					RemainingRewind: UNLIMITED,
+					UpdatedAt:       now,
+				}
+				if err := tx.Create(&userLimit).Error; err != nil {
+					tx.Rollback()
+					return dto.PremiumPurchaseResponse{}, err
+				}
+			} else {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, result.Error
+			}
+		} else {
+			// Update existing record
+			if err := tx.Model(&entity.UserLimit{}).
+				Where("user_id = ?", req.UserID).
+				Updates(map[string]interface{}{
+					"remaining_swipe":  UNLIMITED,
+					"remaining_rewind": UNLIMITED,
+					"updated_at":       now,
+				}).Error; err != nil {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, err
+			}
+		}
+	}
+
+	// ==================== PRODUCT P2 ====================
+	// +5 swipe, +1 super like, +1 boost
+	if req.ProductID == "p2" {
+		if result.Error != nil {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				// Create new record
+				userLimit = entity.UserLimit{
 					UserID:             req.UserID,
 					RemainingSwipe:     UNLIMITED,
-					RemainingBoost:     UNLIMITED,
-					RemainingSuperLike: UNLIMITED,
+					RemainingBoost:     1,
+					RemainingSuperLike: 5,
+					RemainingRewind:    UNLIMITED,
 					UpdatedAt:          now,
 				}
 				if err := tx.Create(&userLimit).Error; err != nil {
@@ -110,45 +146,9 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 				Where("user_id = ?", req.UserID).
 				Updates(map[string]interface{}{
 					"remaining_swipe":      UNLIMITED,
-					"remaining_boost":      UNLIMITED,
-					"remaining_super_like": UNLIMITED,
-					"updated_at":           now,
-				}).Error; err != nil {
-				tx.Rollback()
-				return dto.PremiumPurchaseResponse{}, err
-			}
-		}
-	}
-
-	// ==================== PRODUCT P2 ====================
-	// +5 swipe, +1 super like, +1 boost
-	if req.ProductID == "p2" {
-		if result.Error != nil {
-			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-				// Create new record
-				userLimit = entity.UserLimit{
-					UserID:             req.UserID,
-					RemainingSwipe:     5,
-					RemainingBoost:     1,
-					RemainingSuperLike: 1,
-					UpdatedAt:          now,
-				}
-				if err := tx.Create(&userLimit).Error; err != nil {
-					tx.Rollback()
-					return dto.PremiumPurchaseResponse{}, err
-				}
-			} else {
-				tx.Rollback()
-				return dto.PremiumPurchaseResponse{}, result.Error
-			}
-		} else {
-			// Update existing record
-			if err := tx.Model(&entity.UserLimit{}).
-				Where("user_id = ?", req.UserID).
-				Updates(map[string]interface{}{
-					"remaining_swipe":      gorm.Expr("remaining_swipe + ?", 5),
 					"remaining_boost":      gorm.Expr("remaining_boost + ?", 1),
-					"remaining_super_like": gorm.Expr("remaining_super_like + ?", 1),
+					"remaining_super_like": gorm.Expr("remaining_super_like + ?", 5),
+					"remaining_rewind":     UNLIMITED,
 					"updated_at":           now,
 				}).Error; err != nil {
 				tx.Rollback()
@@ -165,7 +165,7 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 				// Create new record
 				userLimit = entity.UserLimit{
 					UserID:             req.UserID,
-					RemainingSwipe:     10,
+					RemainingSwipe:     UNLIMITED,
 					RemainingBoost:     2,
 					RemainingSuperLike: 2,
 					UpdatedAt:          now,
@@ -183,7 +183,7 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 			if err := tx.Model(&entity.UserLimit{}).
 				Where("user_id = ?", req.UserID).
 				Updates(map[string]interface{}{
-					"remaining_swipe":      gorm.Expr("remaining_swipe + ?", 10),
+					"remaining_swipe":      UNLIMITED,
 					"remaining_boost":      gorm.Expr("remaining_boost + ?", 2),
 					"remaining_super_like": gorm.Expr("remaining_super_like + ?", 2),
 					"updated_at":           now,
