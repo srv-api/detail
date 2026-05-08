@@ -12,12 +12,17 @@ import (
 func (r *purchaseRepository) Create(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error) {
 	now := time.Now()
 	create := entity.PurchasePremium{
-		ID:        req.ID,
-		UserID:    req.UserID,
-		DetailID:  req.DetailID,
-		CreatedBy: req.CreatedBy,
-		CreatedAt: now,
-		UpdatedAt: now,
+		ID:            req.ID,
+		UserID:        req.UserID,
+		DetailID:      req.DetailID,
+		ProductID:     req.ProductID,
+		TransactionID: req.TransactionID,
+		PurchaseToken: req.PurchaseToken,
+		ReceiptData:   req.ReceiptData,
+		Signature:     req.Signature,
+		CreatedBy:     req.CreatedBy,
+		CreatedAt:     now,
+		UpdatedAt:     now,
 	}
 
 	if err := r.DB.Create(&create).Error; err != nil {
@@ -25,10 +30,15 @@ func (r *purchaseRepository) Create(req dto.PremiumPurchaseRequest) (dto.Premium
 	}
 
 	return dto.PremiumPurchaseResponse{
-		ID:        create.ID,
-		DetailID:  create.DetailID,
-		UserID:    create.UserID,
-		CreatedBy: create.CreatedBy,
+		ID:            create.ID,
+		DetailID:      create.DetailID,
+		UserID:        create.UserID,
+		ProductID:     create.ProductID,
+		TransactionID: create.TransactionID,
+		PurchaseToken: create.PurchaseToken,
+		ReceiptData:   create.ReceiptData,
+		Signature:     create.Signature,
+		CreatedBy:     create.CreatedBy,
 	}, nil
 }
 
@@ -52,12 +62,17 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	// 1. Create purchase record
 	now := time.Now()
 	create := entity.PurchasePremium{
-		ID:        req.ID,
-		UserID:    req.UserID,
-		DetailID:  req.DetailID,
-		CreatedBy: req.CreatedBy,
-		CreatedAt: now,
-		UpdatedAt: now,
+		ID:            req.ID,
+		UserID:        req.UserID,
+		DetailID:      req.DetailID,
+		CreatedBy:     req.CreatedBy,
+		ProductID:     req.ProductID,
+		TransactionID: req.TransactionID,
+		PurchaseToken: req.PurchaseToken,
+		ReceiptData:   req.ReceiptData,
+		Signature:     req.Signature,
+		CreatedAt:     now,
+		UpdatedAt:     now,
 	}
 
 	if err := tx.Create(&create).Error; err != nil {
@@ -109,9 +124,14 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 
 	// Return response
 	return dto.PremiumPurchaseResponse{
-		ID:        create.ID,
-		DetailID:  create.DetailID,
-		UserID:    create.UserID,
-		CreatedBy: create.CreatedBy,
+		ID:            create.ID,
+		DetailID:      create.DetailID,
+		UserID:        create.UserID,
+		ProductID:     create.ProductID,
+		TransactionID: create.TransactionID,
+		PurchaseToken: create.PurchaseToken,
+		ReceiptData:   create.ReceiptData,
+		Signature:     create.Signature,
+		CreatedBy:     create.CreatedBy,
 	}, nil
 }

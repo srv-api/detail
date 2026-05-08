@@ -10,10 +10,15 @@ const UNLIMITED = -1
 func (s *premiumPurchase) Create(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error) {
 	// Proses pembuatan data Pin
 	create := dto.PremiumPurchaseRequest{
-		ID:        util.GenerateRandomString(),
-		UserID:    req.UserID,
-		DetailID:  req.DetailID,
-		CreatedBy: req.CreatedBy,
+		ID:            util.GenerateRandomString(),
+		UserID:        req.UserID,
+		DetailID:      req.DetailID,
+		ProductID:     req.ProductID,
+		TransactionID: req.TransactionID,
+		PurchaseToken: req.PurchaseToken,
+		ReceiptData:   req.ReceiptData,
+		Signature:     req.Signature,
+		CreatedBy:     req.CreatedBy,
 	}
 
 	// Create purchase record AND update user limit to unlimited

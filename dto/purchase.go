@@ -22,6 +22,9 @@ type PremiumPurchaseResponse struct {
 	TransactionID string    `json:"transaction_id"`
 	IsPremium     bool      `json:"is_premium"`
 	ExpiredAt     time.Time `json:"expired_at"`
+	PurchaseToken string    `json:"purchase_token"`
+	ReceiptData   string    `json:"receipt_data"`
+	Signature     string    `json:"signature"`
 	CreatedBy     string    `json:"created_by"`
 }
 
