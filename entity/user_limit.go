@@ -9,5 +9,3 @@ type UserLimit struct {
 	RemainingSuperLike int       `gorm:"default:1"`
 	UpdatedAt          time.Time `gorm:"autoUpdateTime"`
 }
-
-const UNLIMITED = -1

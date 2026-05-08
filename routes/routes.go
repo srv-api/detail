@@ -196,7 +196,6 @@ func New() *echo.Echo {
 	premiumGroup := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		premiumGroup.POST("/purchase", purchaseHandler.Create)
-
 	}
 
 	deleteAccount := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
