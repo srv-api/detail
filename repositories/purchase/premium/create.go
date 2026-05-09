@@ -174,7 +174,8 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	if req.ProductID == "p3" {
 		if err := tx.Model(&entity.UserDetail{}).
 			Where("user_id = ?", req.UserID).
-			Update("is_premium", true).Error; err != nil {
+			Update("is_premium", true).
+			Update("is_boosted", true).Error; err != nil {
 			tx.Rollback()
 			return dto.PremiumPurchaseResponse{}, err
 		}
