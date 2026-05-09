@@ -127,6 +127,12 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	// ==================== PRODUCT P2 ====================
 	// +5 swipe, +1 super like, +1 boost
 	if req.ProductID == "p2" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_premium", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
 		if result.Error != nil {
 			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				// Create new record
@@ -166,6 +172,12 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	// ==================== PRODUCT P3 ====================
 	// +10 swipe, +2 super like, +2 boost
 	if req.ProductID == "p3" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_premium", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
 		if result.Error != nil {
 			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				// Create new record
@@ -203,6 +215,12 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	// ==================== PRODUCT SL1 ====================
 	// +6 super like
 	if req.ProductID == "star_like_1" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_star_like", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
 		if result.Error != nil {
 			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				// Create new record
@@ -236,6 +254,12 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 	// ==================== PRODUCT SL2 ====================
 	// +13 super like
 	if req.ProductID == "star_like_2" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_star_like", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
 		if result.Error != nil {
 			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 				// Create new record
