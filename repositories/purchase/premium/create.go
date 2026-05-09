@@ -44,7 +44,7 @@ func (r *purchaseRepository) Create(req dto.PremiumPurchaseRequest) (dto.Premium
 
 // Method: create purchase dan update user limit berdasarkan produk
 func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (dto.PremiumPurchaseResponse, error) {
-	const UNLIMITED = -1
+	const UNLIMITED = 9999
 
 	// Start transaction
 	tx := r.DB.Begin()
@@ -282,6 +282,165 @@ func (r *purchaseRepository) CreateWithPremium(req dto.PremiumPurchaseRequest) (
 				Where("user_id = ?", req.UserID).
 				Updates(map[string]interface{}{
 					"remaining_super_like": gorm.Expr("remaining_super_like + ?", 13),
+					"updated_at":           now,
+				}).Error; err != nil {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, err
+			}
+		}
+	}
+
+	// ==================== PRODUCT Boost1 ====================
+	// +1 boost
+	if req.ProductID == "boost_1" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_boosted", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
+		if result.Error != nil {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				// Create new record
+				userLimit = entity.UserLimit{
+					UserID:         req.UserID,
+					RemainingBoost: 1,
+					UpdatedAt:      now,
+				}
+				if err := tx.Create(&userLimit).Error; err != nil {
+					tx.Rollback()
+					return dto.PremiumPurchaseResponse{}, err
+				}
+			} else {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, result.Error
+			}
+		} else {
+			// Update existing record
+			if err := tx.Model(&entity.UserLimit{}).
+				Where("user_id = ?", req.UserID).
+				Updates(map[string]interface{}{
+					"remaining_boost": gorm.Expr("remaining_boost + ?", 1),
+					"updated_at":      now,
+				}).Error; err != nil {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, err
+			}
+		}
+	}
+	// ==================== PRODUCT Boost2 ====================
+	// +5 boost
+	if req.ProductID == "boost_2" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_boosted", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
+		if result.Error != nil {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				// Create new record
+				userLimit = entity.UserLimit{
+					UserID:         req.UserID,
+					RemainingBoost: 5,
+					UpdatedAt:      now,
+				}
+				if err := tx.Create(&userLimit).Error; err != nil {
+					tx.Rollback()
+					return dto.PremiumPurchaseResponse{}, err
+				}
+			} else {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, result.Error
+			}
+		} else {
+			// Update existing record
+			if err := tx.Model(&entity.UserLimit{}).
+				Where("user_id = ?", req.UserID).
+				Updates(map[string]interface{}{
+					"remaining_boost": gorm.Expr("remaining_boost + ?", 5),
+					"updated_at":      now,
+				}).Error; err != nil {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, err
+			}
+		}
+	}
+	// ==================== PRODUCT Boost3====================
+	// +10 boost
+	if req.ProductID == "boost_3" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_boosted", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
+		if result.Error != nil {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				// Create new record
+				userLimit = entity.UserLimit{
+					UserID:         req.UserID,
+					RemainingBoost: 10,
+					UpdatedAt:      now,
+				}
+				if err := tx.Create(&userLimit).Error; err != nil {
+					tx.Rollback()
+					return dto.PremiumPurchaseResponse{}, err
+				}
+			} else {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, result.Error
+			}
+		} else {
+			// Update existing record
+			if err := tx.Model(&entity.UserLimit{}).
+				Where("user_id = ?", req.UserID).
+				Updates(map[string]interface{}{
+					"remaining_boost": gorm.Expr("remaining_boost + ?", 10),
+					"updated_at":      now,
+				}).Error; err != nil {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, err
+			}
+		}
+	}
+	// ==================== PRODUCT Gold Like 1====================
+	// +1 week
+	if req.ProductID == "gold_like_1" {
+		if err := tx.Model(&entity.UserDetail{}).
+			Where("user_id = ?", req.UserID).
+			Update("is_premium", true).Error; err != nil {
+			tx.Rollback()
+			return dto.PremiumPurchaseResponse{}, err
+		}
+		if result.Error != nil {
+			if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+				// Create new record
+				userLimit = entity.UserLimit{
+					UserID:             req.UserID,
+					RemainingSwipe:     UNLIMITED,
+					RemainingBoost:     1,
+					RemainingSuperLike: 5,
+					RemainingRewind:    UNLIMITED,
+					UpdatedAt:          now,
+				}
+				if err := tx.Create(&userLimit).Error; err != nil {
+					tx.Rollback()
+					return dto.PremiumPurchaseResponse{}, err
+				}
+			} else {
+				tx.Rollback()
+				return dto.PremiumPurchaseResponse{}, result.Error
+			}
+		} else {
+			// Update existing record
+			if err := tx.Model(&entity.UserLimit{}).
+				Where("user_id = ?", req.UserID).
+				Updates(map[string]interface{}{
+					"remaining_swipe":      UNLIMITED,
+					"remaining_boost":      gorm.Expr("remaining_boost + ?", 1),
+					"remaining_super_like": gorm.Expr("remaining_super_like + ?", 5),
+					"remaining_rewind":     UNLIMITED,
 					"updated_at":           now,
 				}).Error; err != nil {
 				tx.Rollback()
