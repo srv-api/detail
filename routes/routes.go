@@ -136,7 +136,6 @@ func New() *echo.Echo {
 	{
 		boost.POST("/create", boostHandler.Create)
 	}
-
 	contentsetting := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		contentsetting.PUT("/contentsetting/update", contentsettingH.Update)
