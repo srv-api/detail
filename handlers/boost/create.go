@@ -1,0 +1,38 @@
+package premium
+
+import (
+	"github.com/labstack/echo/v4"
+	dto "github.com/srv-api/detail/dto"
+	res "github.com/srv-api/util/s/response"
+)
+
+func (h *domainHandler) Create(c echo.Context) error {
+	var req dto.BoostRequest
+	var resp dto.BoostResponse
+
+	userid, ok := c.Get("UserId").(string)
+	if !ok {
+		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
+	}
+
+	DetailID, ok := c.Get("DetailId").(string)
+	if !ok {
+		return res.ErrorBuilder(&res.ErrorConstant.InternalServerError, nil).Send(c)
+	}
+
+	req.UserID = userid
+	req.DetailID = DetailID
+
+	err := c.Bind(&req)
+	if err != nil {
+		return res.ErrorBuilder(&res.ErrorConstant.BadRequest, err).Send(c)
+	}
+
+	resp, err = h.serviceBoost.Create(req)
+	if err != nil {
+		return res.ErrorResponse(err).Send(c)
+	}
+
+	return res.SuccessResponse(resp).Send(c)
+
+}
