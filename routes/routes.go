@@ -52,6 +52,10 @@ import (
 	r_purchase "github.com/srv-api/detail/repositories/purchase/premium"
 	s_purchase "github.com/srv-api/detail/services/purchase/premium"
 
+	h_boost "github.com/srv-api/detail/handlers/boost"
+	r_boost "github.com/srv-api/detail/repositories/boost"
+	s_boost "github.com/srv-api/detail/services/boost"
+
 	"github.com/srv-api/middlewares/middlewares"
 )
 
@@ -109,6 +113,10 @@ var (
 	likeHandler = handler.NewLikeHandler(likeService)
 	likeRepo    = repository.NewLikeRepository(DB)
 	likeService = service.NewLikeService(likeRepo, matchService)
+
+	boostHandler = h_boost.NewBoostHandler(boostService)
+	boostRepo    = r_boost.NewBoostRepository(DB)
+	boostService = s_boost.NewBoostService(boostRepo, JWT)
 )
 
 func New() *echo.Echo {
@@ -124,6 +132,11 @@ func New() *echo.Echo {
 		merchant.GET("/get", userdetailH.Get)
 		merchant.GET("/explore", userdetailH.Explore)
 	}
+	boost := e.Group("/boost", middlewares.AuthorizeJWT(JWT))
+	{
+		boost.POST("/create", boostHandler.Create)
+	}
+
 	contentsetting := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		contentsetting.PUT("/contentsetting/update", contentsettingH.Update)
@@ -201,10 +214,6 @@ func New() *echo.Echo {
 	deleteAccount := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{
 		deleteAccount.POST("/request-delete", deleteaccountH.Create)
-		// deleteAccount.GET("/unit/pagination", unitH.Get)
-		// deleteAccount.PUT("/unit/:id", unitH.Update)
-		// deleteAccount.DELETE("/unit/:id", unitH.Delete)
-		// deleteAccount.DELETE("/unit/bulk-delete", unitH.BulkDelete)
 	}
 
 	like := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
