@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/srv-api/detail/configs"
+	"github.com/srv-api/detail/cron"
 
 	h_permission "github.com/srv-api/detail/handlers/dashboard/permission"
 	r_permission "github.com/srv-api/detail/repositories/dashboard/permission"
@@ -124,7 +125,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
 	e.PUT("/user/update", userdetailH.LongLat)
-	// cron.StartDailyReset(DB)
+	cron.StartTenMinutesJob(DB)
 
 	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
@@ -132,15 +133,18 @@ func New() *echo.Echo {
 		merchant.GET("/get", userdetailH.Get)
 		merchant.GET("/explore", userdetailH.Explore)
 	}
+
 	boost := e.Group("/boost", middlewares.AuthorizeJWT(JWT))
 	{
 		boost.POST("/create", boostHandler.Create)
 	}
+
 	contentsetting := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		contentsetting.PUT("/contentsetting/update", contentsettingH.Update)
 		contentsetting.GET("/contentsetting/get", contentsettingH.Get)
 	}
+
 	web := e.Group("/merchant")
 	{
 		web.GET("/web/get/content", contentsettingH.Get)
@@ -159,6 +163,7 @@ func New() *echo.Echo {
 		pin.GET("/pin/status", pinH.GetPinStatus)
 
 	}
+
 	permission := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		permission.POST("/permission/create", permissionH.Create)
@@ -168,6 +173,7 @@ func New() *echo.Echo {
 		permission.DELETE("/permission/:id", permissionH.Delete)
 		permission.DELETE("/permission/bulk-delete", permissionH.BulkDelete)
 	}
+
 	role := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		role.POST("/role/create", roleH.Create)
@@ -178,6 +184,7 @@ func New() *echo.Echo {
 		role.DELETE("/role/:id", roleH.Delete)
 		role.DELETE("/role/bulk-delete", roleH.BulkDelete)
 	}
+
 	roleuser := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		roleuser.POST("/roleuser/create", roleuserH.Create)
@@ -187,6 +194,7 @@ func New() *echo.Echo {
 		roleuser.DELETE("/roleuser/:id", roleuserH.Delete)
 		roleuser.DELETE("/roleuser/bulk-delete", roleuserH.BulkDelete)
 	}
+
 	roleuserpermission := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		roleuserpermission.POST("/roleuserpermission/create", roleuserpermissionH.Create)
@@ -205,6 +213,7 @@ func New() *echo.Echo {
 		user.DELETE("/user/:id", userH.Delete)
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
 	}
+
 	premiumGroup := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		premiumGroup.POST("/purchase", purchaseHandler.Create)
@@ -220,6 +229,7 @@ func New() *echo.Echo {
 		like.POST("/like", likeHandler.LikeUser)
 		like.GET("/like/me", likeHandler.Me)
 	}
+
 	match := e.Group("api/account", middlewares.AuthorizeJWT(JWT))
 	{
 		match.GET("/matches", matchHandler.GetMatches)

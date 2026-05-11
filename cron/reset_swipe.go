@@ -36,3 +36,30 @@ func StartDailyReset(db *gorm.DB) {
 		}
 	}()
 }
+
+func StartTenMinutesJob(db *gorm.DB) {
+	// Hitung 10 menit dari sekarang
+	delay := 10 * time.Minute
+
+	log.Printf("Cronjob akan berjalan dalam 10 menit pada: %v", time.Now().Add(delay))
+
+	time.AfterFunc(delay, func() {
+		// Eksekusi task setelah 10 menit
+		log.Println("Menjalankan cronjob setelah 10 menit...")
+
+		// Contoh task: reset atau update data
+		result := db.Model(&entity.UserLimit{}).
+			Where("updated_at < ?", time.Now().Add(-24*time.Hour)).
+			Updates(map[string]interface{}{
+				"remaining_swipe":      50,
+				"remaining_super_like": 1,
+				"updated_at":           time.Now(),
+			})
+
+		if result.Error != nil {
+			log.Printf("Error: %v", result.Error)
+		} else {
+			log.Printf("Berhasil menjalankan task, affected rows: %d", result.RowsAffected)
+		}
+	})
+}
