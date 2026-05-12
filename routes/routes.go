@@ -125,8 +125,7 @@ func New() *echo.Echo {
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
 	e.PUT("/user/update", userdetailH.LongLat)
-	cron.StartTenMinutesJob(DB)
-
+	cron.StartDailyReset(DB)
 	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
 	{
 		merchant.PUT("/update", userdetailH.Update)
