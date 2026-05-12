@@ -19,19 +19,21 @@ func StartDailyReset(db *gorm.DB) {
 			next := time.Date(now.Year(), now.Month(), now.Day()+1, 0, 0, 0, 0, now.Location())
 			time.Sleep(time.Until(next))
 
-			// Reset swipe semua user
-			result := db.Model(&entity.UserLimit{}).
-				Where("updated_at < ?", time.Now().Add(-24*time.Hour)).
+			// Reset swipe untuk user NON-premium saja menggunakan JOIN
+			result := db.Table("user_limits").
+				Joins("JOIN user_details ON user_limits.user_id = user_details.user_id").
+				Where("user_details.is_premium = ?", false).
+				Where("user_limits.updated_at < ?", time.Now().Add(-24*time.Hour)).
 				Updates(map[string]interface{}{
-					"remaining_swipe":      50,
-					"remaining_super_like": 1,
-					"updated_at":           time.Now(),
+					"user_limits.remaining_swipe":      50,
+					"user_limits.remaining_super_like": 1,
+					"user_limits.updated_at":           time.Now(),
 				})
 
 			if result.Error != nil {
 				log.Printf("Failed to reset daily swipe: %v", result.Error)
 			} else {
-				log.Printf("Reset daily swipe for %d users", result.RowsAffected)
+				log.Printf("Reset daily swipe for %d non-premium users", result.RowsAffected)
 			}
 		}
 	}()
