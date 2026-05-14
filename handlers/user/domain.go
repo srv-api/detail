@@ -9,6 +9,7 @@ import (
 type DomainHandler interface {
 	Create(c echo.Context) error
 	Get(c echo.Context) error
+	GetAll(c echo.Context) error
 	Delete(c echo.Context) error
 	BulkDelete(c echo.Context) error
 	GetById(c echo.Context) error

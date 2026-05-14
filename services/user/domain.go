@@ -11,6 +11,7 @@ import (
 type UserService interface {
 	Create(req dto.UserRequest) (dto.UserResponse, error)
 	Get(context echo.Context, req *dto.Pagination) dto.Response
+	GetAll(context echo.Context, req *dto.Pagination) dto.Response
 	GetById(req dto.GetByIdRequest) (*dto.UserResponse, error)
 	Delete(req dto.DeleteRequest) (dto.DeleteResponse, error)
 	BulkDelete(req dto.BulkDeleteRequest) (dto.BulkDeleteResponse, error)

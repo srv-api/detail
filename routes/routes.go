@@ -208,6 +208,7 @@ func New() *echo.Echo {
 	{
 		user.POST("/user/create", userH.Create)
 		user.GET("/user/pagination", userH.Get)
+		user.GET("/user/all", userH.GetAll)
 		user.PUT("/user/update/:id", userH.Update)
 		user.DELETE("/user/:id", userH.Delete)
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
