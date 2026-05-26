@@ -124,33 +124,33 @@ func New() *echo.Echo {
 
 	e := echo.New()
 	// e.POST("/menu/order", orderH.Order)
-	e.PUT("/user/update", userdetailH.LongLat)
+	e.PUT("/detail/user/update", userdetailH.LongLat)
 	cron.StartDailyReset(DB)
-	merchant := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	detail := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
-		merchant.PUT("/update", userdetailH.Update)
-		merchant.GET("/get", userdetailH.Get)
-		merchant.GET("/explore", userdetailH.Explore)
+		detail.PUT("/update", userdetailH.Update)
+		detail.GET("/get", userdetailH.Get)
+		detail.GET("/explore", userdetailH.Explore)
 	}
 
-	boost := e.Group("/boost", middlewares.AuthorizeJWT(JWT))
+	boost := e.Group("/detail/boost", middlewares.AuthorizeJWT(JWT))
 	{
 		boost.POST("/create", boostHandler.Create)
 	}
 
-	contentsetting := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	contentsetting := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		contentsetting.PUT("/contentsetting/update", contentsettingH.Update)
 		contentsetting.GET("/contentsetting/get", contentsettingH.Get)
 	}
 
-	web := e.Group("/merchant")
+	web := e.Group("/detail")
 	{
 		web.GET("/web/get/content", contentsettingH.Get)
 		web.PUT("/web/update/content", contentsettingH.Update)
 	}
 
-	pin := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	pin := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		pin.POST("/pin/create", pinH.Create)
 		pin.GET("/pin/pagination", pinH.Get)
@@ -163,7 +163,7 @@ func New() *echo.Echo {
 
 	}
 
-	permission := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	permission := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		permission.POST("/permission/create", permissionH.Create)
 		permission.GET("/permission", permissionH.Get)
@@ -173,7 +173,7 @@ func New() *echo.Echo {
 		permission.DELETE("/permission/bulk-delete", permissionH.BulkDelete)
 	}
 
-	role := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	role := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		role.POST("/role/create", roleH.Create)
 		permission.GET("/role", permissionH.Get)
@@ -184,7 +184,7 @@ func New() *echo.Echo {
 		role.DELETE("/role/bulk-delete", roleH.BulkDelete)
 	}
 
-	roleuser := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	roleuser := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		roleuser.POST("/roleuser/create", roleuserH.Create)
 		roleuser.GET("/roleuser", roleuserH.Get)
@@ -194,7 +194,7 @@ func New() *echo.Echo {
 		roleuser.DELETE("/roleuser/bulk-delete", roleuserH.BulkDelete)
 	}
 
-	roleuserpermission := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	roleuserpermission := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		roleuserpermission.POST("/roleuserpermission/create", roleuserpermissionH.Create)
 		roleuserpermission.GET("/roleuserpermission", roleuserpermissionH.Get)
@@ -204,7 +204,7 @@ func New() *echo.Echo {
 		roleuserpermission.DELETE("/roleuserpermission/bulk-delete", roleuserpermissionH.BulkDelete)
 	}
 
-	user := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	user := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		user.POST("/user/create", userH.Create)
 		user.GET("/user/pagination", userH.Get)
@@ -214,7 +214,7 @@ func New() *echo.Echo {
 		user.DELETE("/user/bulk-delete", userH.BulkDelete)
 	}
 
-	premiumGroup := e.Group("/merchant", middlewares.AuthorizeJWT(JWT))
+	premiumGroup := e.Group("/detail", middlewares.AuthorizeJWT(JWT))
 	{
 		premiumGroup.POST("/purchase", purchaseHandler.Create)
 	}
